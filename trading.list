@@ -5,23 +5,59 @@ DOMAIN-SUFFIX,coinank.com
 
 # CEXes
 DOMAIN-SUFFIX,coinbase.com
+DOMAIN-KEYWORD,coinbase
+
 DOMAIN-SUFFIX,binance.com
+DOMAIN-KEYWORD,binance
+
 DOMAIN-SUFFIX,bybit.com
+DOMAIN-KEYWORD,bybit
+
 DOMAIN-SUFFIX,upbit.com
+DOMAIN-KEYWORD,upbit
+
 DOMAIN-SUFFIX,okx.com
+DOMAIN-KEYWORD,okx
+
 DOMAIN-SUFFIX,kraken.com
+DOMAIN-KEYWORD,kraken
+
 DOMAIN-SUFFIX,gate.io
+DOMAIN-KEYWORD,gate
+
 DOMAIN-SUFFIX,htx.com
+DOMAIN-KEYWORD,htx
+
 DOMAIN-SUFFIX,bitfinex.com
+DOMAIN-KEYWORD,bitfinex
+
 DOMAIN-SUFFIX,kucoin.com
+DOMAIN-KEYWORD,kucoin
+
 DOMAIN-SUFFIX,mexc.com
+DOMAIN-KEYWORD,mexc
+
 DOMAIN-SUFFIX,bitget.com
+DOMAIN-KEYWORD,bitget
+
 DOMAIN-SUFFIX,crypto.com
+DOMAIN-KEYWORD,crypto
+
 DOMAIN-SUFFIX,bingx.com
+DOMAIN-KEYWORD,bingx
+
 DOMAIN-SUFFIX,bitstamp.com
+DOMAIN-KEYWORD,bitstamp
+
 DOMAIN-SUFFIX,bitmart.com
+DOMAIN-KEYWORD,bitmart
+
 DOMAIN-SUFFIX,bithumb.com
+DOMAIN-KEYWORD,bithumb
+
 DOMAIN-SUFFIX,gemini.com
+DOMAIN-KEYWORD,gemini
+
 
 # DEXes
 DOMAIN-SUFFIX,uniswap.org
@@ -29,7 +65,6 @@ DOMAIN-SUFFIX,pendle.finance
 DOMAIN-SUFFIX,blitz.exchange
 DOMAIN-SUFFIX,hyperliquid.xyz
 DOMAIN-SUFFIX,dydx.exchange
-
 
 # Infra/SDK
 DOMAIN-SUFFIX,vertexprotocol.com
@@ -39,8 +74,6 @@ DOMAIN-SUFFIX,phantom.app
 DOMAIN-SUFFIX,defisaver.com
 DOMAIN-SUFFIX,walletconnect.com
 DOMAIN-SUFFIX,spindl.link
-
-
 
 
 
