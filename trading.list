@@ -1,12 +1,7 @@
-# 内容：国外媒体列表
-# 更新：2024-06-30 11:02:56
-# 数量：367条
-
 # TradingView
 DOMAIN-SUFFIX,tradingview.com
 DOMAIN-SUFFIX,coinglass.com
 DOMAIN-SUFFIX,coinank.com
-
 
 # CEXes
 DOMAIN-SUFFIX,coinbase.com
@@ -28,6 +23,12 @@ DOMAIN-SUFFIX,bitmart.com
 DOMAIN-SUFFIX,bithumb.com
 DOMAIN-SUFFIX,gemini.com
 
+# DEXes
+DOMAIN-SUFFIX,uniswap.org
+DOMAIN-SUFFIX,pendle.finance
+DOMAIN-SUFFIX,blitz.exchange
+DOMAIN-SUFFIX,hyperliquid.xyz
+DOMAIN-SUFFIX,dydx.exchange
 
 
 
