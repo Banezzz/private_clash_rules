@@ -148,6 +148,10 @@ DOMAIN, s3-app-release.s3.ap-northeast-1.amazonaws.com
 DOMAIN, molor-app-logs-default.ap-southeast-1.log.aliyuncs.com
 DOMAIN, molor-app-performance-project.ap-southeast-1.log.aliyuncs.com
 DOMAIN, mxc-ios-app-logs-default.ap-southeast-1.log.aliyuncs.com
+DOMAIN, mxc-ios-app-logs-default.ap-southeast-1.log.aliyuncs.com
+DOMAIN, c0.jdbstatic.com
+DOMAIN-SUFFIX, c0.jdbstatic.com
+
 
 # Forum & Community
 DOMAIN-SUFFIX, bitcointalk.org
