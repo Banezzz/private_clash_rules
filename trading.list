@@ -3,8 +3,11 @@
 DOMAIN-SUFFIX, tradingview.com
 DOMAIN-SUFFIX, coinglass.com
 DOMAIN-SUFFIX, coinank.com
-DOMAIN-SUFFIX, curvlabs.xyz
+DOMAIN-SUFFIX, vol.curvlabs.xyz
 DOMAIN-SUFFIX, morty.is
+
+# Orionterminal
+DOMAIN-SUFFIX, orionterminal.com
 
 
 # CEXes (中心化交易所)
