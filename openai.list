@@ -78,3 +78,6 @@ DOMAIN-SUFFIX,geller-pa.googleapis.com
 DOMAIN,alkalicore-pa.clients6.google.com
 DOMAIN,play.google.com
 DOMAIN-SUFFIX,clients6.google.com
+DOMAIN-SUFFIX,aistudio.google.com
+DOMAIN-SUFFIX,gemini.google
+
