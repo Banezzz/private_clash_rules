@@ -1,83 +1,68 @@
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,pay.openai.com
-DOMAIN-SUFFIX,chat.openai.com
-DOMAIN-SUFFIX,challenges.cloudflare.com
-DOMAIN-SUFFIX,auth0.com
-DOMAIN-SUFFIX,auth0.openai.com
-DOMAIN-SUFFIX,platform.openai.com
-DOMAIN-SUFFIX,chatgpt.com
-
+# OpenAI / ChatGPT
 DOMAIN-KEYWORD,openai
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
+DOMAIN-SUFFIX,ai.com
+
+# OpenAI Authentication & Security
 DOMAIN-SUFFIX,auth0.com
 DOMAIN-SUFFIX,challenges.cloudflare.com
-DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,client-api.arkoselabs.com
+DOMAIN-SUFFIX,hcaptcha.com
+DOMAIN-SUFFIX,recaptcha.net
+
+# OpenAI Analytics & Services
 DOMAIN-SUFFIX,events.statsigapi.net
 DOMAIN-SUFFIX,featuregates.org
 DOMAIN-SUFFIX,identrust.com
 DOMAIN-SUFFIX,intercom.io
 DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN-SUFFIX,oaistatic.com
-DOMAIN-SUFFIX,oaiusercontent.com
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,sentry.io
+
+# Payment
 DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,invoice.stripe.com
 
-DOMAIN-SUFFIX,hcaptcha.com
-DOMAIN-SUFFIX,recaptcha.net
-
+# Microsoft (Copilot, etc)
 DOMAIN-SUFFIX,sfx.ms
 DOMAIN-SUFFIX,microsoft.com
-DOMAIN-SUFFIX,oaistatic.com
-DOMAIN-SUFFIX,oaiusercontent.com
-
-# Add ai.com
-DOMAIN-SUFFIX,ai.com
-# Add stripe.com
-DOMAIN-SUFFIX,invoice.stripe.com
-DOMAIN-SUFFIX,stripe.com
-
-# Add Bing and Bard
-DOMAIN,bard.google.com
 DOMAIN-SUFFIX,bing.com
 
-DOMAIN-SUFFIX,sentry.io
-DOMAIN-SUFFIX,identrust.com
-DOMAIN,openaiapi-site.azureedge.net
-
-# Add poe.com
-DOMAIN-SUFFIX,poe.com
-
-# Add Anthropic
+# Anthropic / Claude
 DOMAIN,servd-anthropic-website.b-cdn.net
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claudeusercontent.com
 DOMAIN,cdn.usefathom.com
 
-# Add Grok  
+# xAI / Grok
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,grok.com
 
-# Add Gemini
+# Poe
+DOMAIN-SUFFIX,poe.com
+
+# Google Gemini / Bard / AI Studio
 DOMAIN,ai.google.dev
+DOMAIN,alkalicore-pa.clients6.google.com
 DOMAIN,alkalimakersuite-pa.clients6.google.com
 DOMAIN,makersuite.google.com
+DOMAIN,play.google.com
+DOMAIN,bard.google.com
+DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,bard.google.com
+DOMAIN-SUFFIX,clients6.google.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,gemini.google
 DOMAIN-SUFFIX,generativeai.google
 DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
 DOMAIN-SUFFIX,apis.google.com
+DOMAIN-SUFFIX,geller-pa.googleapis.com
 DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
-DOMAIN-SUFFIX,geller-pa.googleapis.com 
-DOMAIN,alkalicore-pa.clients6.google.com
-DOMAIN,play.google.com
-DOMAIN-SUFFIX,clients6.google.com
-DOMAIN-SUFFIX,aistudio.google.com
-DOMAIN-SUFFIX,gemini.google
-
