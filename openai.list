@@ -81,3 +81,10 @@ DOMAIN-SUFFIX,clients6.google.com
 DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,gemini.google
 
+# Add Google Antigravity (Claude Code)
+DOMAIN-SUFFIX,googleapis.com
+DOMAIN-SUFFIX,googleusercontent.com
+DOMAIN-SUFFIX,goog
+DOMAIN-SUFFIX,run.app
+DOMAIN-SUFFIX,open-vsx.org
+DOMAIN-SUFFIX,gvt1.com
