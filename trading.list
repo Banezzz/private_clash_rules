@@ -78,6 +78,30 @@ DOMAIN-SUFFIX, blitz.exchange
 DOMAIN-SUFFIX, hyperliquid.xyz
 DOMAIN-SUFFIX, dydx.exchange
 
+# PERP DEXes (永续合约去中心化交易所)
+DOMAIN-SUFFIX, variational.io
+DOMAIN-SUFFIX, lighter.xyz
+DOMAIN-SUFFIX, asterdex.com
+DOMAIN-SUFFIX, edgex.exchange
+DOMAIN-KEYWORD, edgex
+DOMAIN-SUFFIX, extended.exchange
+DOMAIN-SUFFIX, grvt.io
+DOMAIN-KEYWORD, grvt
+DOMAIN-SUFFIX, apex.exchange
+DOMAIN-SUFFIX, trade.xyz
+DOMAIN-SUFFIX, nado.xyz
+DOMAIN-SUFFIX, pacificadex.com
+DOMAIN-SUFFIX, pacifica.fi
+DOMAIN-SUFFIX, jup.ag
+DOMAIN-KEYWORD, standx
+DOMAIN-SUFFIX, standx.com
+DOMAIN-SUFFIX, ostium.io
+DOMAIN-KEYWORD, ostium
+DOMAIN-SUFFIX, gmx.io
+DOMAIN-SUFFIX, antarctic.exchange
+DOMAIN-SUFFIX, paradex.trade
+DOMAIN-KEYWORD, paradex
+
 # Infra/SDK (基础设施/开发工具)
 DOMAIN-SUFFIX, vertexprotocol.com
 DOMAIN-SUFFIX, ankr.com
