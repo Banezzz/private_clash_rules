@@ -3,12 +3,18 @@
 # OKX
 PROCESS-NAME, OKX
 PROCESS-NAME, OKX.exe
+PROCESS-NAME, okx
+PROCESS-NAME, okx.exe
 # Binance
 PROCESS-NAME, Binance
 PROCESS-NAME, Binance.exe
+PROCESS-NAME, binance
+PROCESS-NAME, binance.exe
 # Bybit
 PROCESS-NAME, Bybit
 PROCESS-NAME, Bybit.exe
+PROCESS-NAME, bybit
+PROCESS-NAME, bybit.exe
 
 # TradingView
 DOMAIN-SUFFIX, tradingview.com
