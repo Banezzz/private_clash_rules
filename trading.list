@@ -1,4 +1,15 @@
 
+# Process Rules (进程规则)
+# OKX
+PROCESS-NAME, OKX
+PROCESS-NAME, OKX.exe
+# Binance
+PROCESS-NAME, Binance
+PROCESS-NAME, Binance.exe
+# Bybit
+PROCESS-NAME, Bybit
+PROCESS-NAME, Bybit.exe
+
 # TradingView
 DOMAIN-SUFFIX, tradingview.com
 DOMAIN-SUFFIX, coinglass.com
