@@ -279,8 +279,6 @@ DOMAIN, molor-app-logs-default.ap-southeast-1.log.aliyuncs.com
 DOMAIN, molor-app-performance-project.ap-southeast-1.log.aliyuncs.com
 DOMAIN, mxc-ios-app-logs-default.ap-southeast-1.log.aliyuncs.com
 DOMAIN, mxc-ios-app-logs-default.ap-southeast-1.log.aliyuncs.com
-DOMAIN, c0.jdbstatic.com
-DOMAIN-SUFFIX, c0.jdbstatic.com
 
 
 # Forum & Community
