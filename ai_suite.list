@@ -1,87 +1,66 @@
+# OpenAI
 DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,pay.openai.com
-DOMAIN-SUFFIX,chat.openai.com
-DOMAIN-SUFFIX,challenges.cloudflare.com
-DOMAIN-SUFFIX,auth0.com
-DOMAIN-SUFFIX,auth0.openai.com
-DOMAIN-SUFFIX,platform.openai.com
 DOMAIN-SUFFIX,chatgpt.com
-
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-KEYWORD,openai
-DOMAIN-SUFFIX,auth0.com
-DOMAIN-SUFFIX,challenges.cloudflare.com
-DOMAIN-SUFFIX,chatgpt.com
 DOMAIN-SUFFIX,client-api.arkoselabs.com
 DOMAIN-SUFFIX,events.statsigapi.net
 DOMAIN-SUFFIX,featuregates.org
 DOMAIN-SUFFIX,identrust.com
 DOMAIN-SUFFIX,intercom.io
 DOMAIN-SUFFIX,intercomcdn.com
-DOMAIN-SUFFIX,oaistatic.com
-DOMAIN-SUFFIX,oaiusercontent.com
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,openaiapi-site.azureedge.net
 DOMAIN-SUFFIX,sentry.io
-DOMAIN-SUFFIX,stripe.com
 
+# Captcha
 DOMAIN-SUFFIX,hcaptcha.com
 DOMAIN-SUFFIX,recaptcha.net
+DOMAIN-SUFFIX,challenges.cloudflare.com
 
+# Microsoft (OpenAI-related)
 DOMAIN-SUFFIX,sfx.ms
-DOMAIN-SUFFIX,microsoft.com
-DOMAIN-SUFFIX,oaistatic.com
-DOMAIN-SUFFIX,oaiusercontent.com
 
-# Add ai.com
-DOMAIN-SUFFIX,ai.com
-# Add stripe.com
-DOMAIN-SUFFIX,invoice.stripe.com
+# Payment & Auth
 DOMAIN-SUFFIX,stripe.com
+DOMAIN-SUFFIX,auth0.com
 
-# Add Bing and Bard
-DOMAIN,bard.google.com
-DOMAIN-SUFFIX,bing.com
+# ai.com
+DOMAIN-SUFFIX,ai.com
 
-DOMAIN-SUFFIX,sentry.io
-DOMAIN-SUFFIX,identrust.com
-DOMAIN,openaiapi-site.azureedge.net
-
-# Add poe.com
+# Poe
 DOMAIN-SUFFIX,poe.com
 
-# Add Anthropic
+# Anthropic
 DOMAIN,servd-anthropic-website.b-cdn.net
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claudeusercontent.com
 DOMAIN,cdn.usefathom.com
 
-# Add Grok  
+# Grok
 DOMAIN-SUFFIX,x.ai
 DOMAIN-SUFFIX,grok.com
 
-# Add Gemini
-DOMAIN,ai.google.dev
-DOMAIN,alkalimakersuite-pa.clients6.google.com
+# Gemini
 DOMAIN,makersuite.google.com
+DOMAIN,play.google.com
 DOMAIN-SUFFIX,bard.google.com
 DOMAIN-SUFFIX,deepmind.com
 DOMAIN-SUFFIX,deepmind.google
 DOMAIN-SUFFIX,gemini.google.com
+DOMAIN-SUFFIX,gemini.google
 DOMAIN-SUFFIX,generativeai.google
-DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,aistudio.google.com
 DOMAIN-SUFFIX,apis.google.com
+DOMAIN-SUFFIX,clients6.google.com
+DOMAIN-SUFFIX,proactivebackend-pa.googleapis.com
+DOMAIN-SUFFIX,geller-pa.googleapis.com
 DOMAIN-KEYWORD,colab
 DOMAIN-KEYWORD,developerprofiles
 DOMAIN-KEYWORD,generativelanguage
-DOMAIN-SUFFIX,geller-pa.googleapis.com 
-DOMAIN,alkalicore-pa.clients6.google.com
-DOMAIN,play.google.com
-DOMAIN-SUFFIX,clients6.google.com
-DOMAIN-SUFFIX,aistudio.google.com
-DOMAIN-SUFFIX,gemini.google
 
-# Add Google Antigravity (Claude Code)
+# Google Antigravity (Claude Code)
 DOMAIN-SUFFIX,googleapis.com
 DOMAIN-SUFFIX,googleusercontent.com
 DOMAIN-SUFFIX,goog

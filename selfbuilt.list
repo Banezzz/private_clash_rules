@@ -1,3 +1,2 @@
 # Rules routed through selfbuilt node
-DOMAIN, c0.jdbstatic.com
-DOMAIN-SUFFIX, c0.jdbstatic.com
+DOMAIN-SUFFIX,c0.jdbstatic.com
