@@ -67,3 +67,7 @@ DOMAIN-SUFFIX,goog
 DOMAIN-SUFFIX,run.app
 DOMAIN-SUFFIX,open-vsx.org
 DOMAIN-SUFFIX,gvt1.com
+
+# Cursor
+DOMAIN-SUFFIX,cursor.sh
+DOMAIN-SUFFIX,cursor.com
