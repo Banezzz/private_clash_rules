@@ -35,9 +35,11 @@ DOMAIN-SUFFIX,poe.com
 # Anthropic
 DOMAIN,servd-anthropic-website.b-cdn.net
 DOMAIN-SUFFIX,anthropic.com
+DOMAIN-KEYWORD,anthropic
 DOMAIN-SUFFIX,claude.ai
 DOMAIN-SUFFIX,claude.com
 DOMAIN-SUFFIX,claudeusercontent.com
+DOMAIN-KEYWORD,claude
 DOMAIN,cdn.usefathom.com
 
 # Grok
