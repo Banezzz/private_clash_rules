@@ -11,11 +11,18 @@ PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
 PROCESS-NAME,binance
 PROCESS-NAME,binance.exe
+# Binance (Android package name) - forces ALL app traffic through proxy,
+# including raw-IP connections to CN acceleration nodes that bypass domain rules
+PROCESS-NAME,com.binance.dev
 # Bybit
 PROCESS-NAME,Bybit
 PROCESS-NAME,Bybit.exe
 PROCESS-NAME,bybit
 PROCESS-NAME,bybit.exe
+PROCESS-NAME,com.bybit.app
+# OKX (Android package names)
+PROCESS-NAME,com.okinc.okex.gp
+PROCESS-NAME,com.okinc.okex
 
 # TradingView
 DOMAIN-SUFFIX,tradingview.com
@@ -239,6 +246,13 @@ IP-CIDR,35.77.148.188/32
 IP-CIDR,54.150.106.1/32
 IP-CIDR,13.248.135.87/32
 IP-CIDR,47.107.32.31/32
+# Binance Android CN acceleration nodes (observed leaking to DIRECT)
+# NOTE: these rotate often; the PROCESS-NAME,com.binance.dev rule above is
+# the comprehensive fix. Listed here as an immediate belt-and-suspenders measure.
+IP-CIDR,106.15.179.166/32
+IP-CIDR,120.77.173.49/32
+IP-CIDR,119.23.63.226/32
+IP-CIDR,114.132.46.122/32
 
 # OKX
 DOMAIN-SUFFIX,okex.com
