@@ -1,2 +1,4 @@
-# Rules routed through selfbuilt node
+# Overlay hook for 🫡 自建节点, the exit selector (defaults to dual-entry LB).
+# This list only pins rare domains that must use that exit.
+# Empty/minimal is expected; add a DOMAIN-SUFFIX line when needed.
 DOMAIN-SUFFIX,c0.jdbstatic.com
