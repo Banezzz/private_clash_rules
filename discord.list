@@ -1,0 +1,48 @@
+# Discord (first-party domains and clients)
+# gateway.discord.gg / cdn.discordapp.com / media.discordapp.net are covered by the suffixes below.
+# Whole cloudflare.com is omitted.
+
+# Core
+DOMAIN-SUFFIX,discord.com
+DOMAIN-SUFFIX,discordapp.com
+DOMAIN-SUFFIX,discordapp.net
+DOMAIN-SUFFIX,discord.gg
+DOMAIN-SUFFIX,discord.media
+DOMAIN-SUFFIX,discord.gift
+DOMAIN-SUFFIX,discord.gifts
+DOMAIN-SUFFIX,discordstatus.com
+DOMAIN-SUFFIX,discord.co
+DOMAIN-SUFFIX,discord.design
+DOMAIN-SUFFIX,discord.dev
+DOMAIN-SUFFIX,discord.new
+DOMAIN-SUFFIX,discord.store
+DOMAIN-SUFFIX,discord.tools
+DOMAIN-SUFFIX,dis.gd
+
+# CDN / activities / merch
+DOMAIN-SUFFIX,discordcdn.com
+DOMAIN-SUFFIX,discordactivities.com
+DOMAIN-SUFFIX,discord-activities.com
+DOMAIN-SUFFIX,discordapp.io
+DOMAIN-SUFFIX,discordmerch.com
+DOMAIN-SUFFIX,discordpartygames.com
+DOMAIN-SUFFIX,discordsays.com
+DOMAIN,discord-attachments-uploads-prd.storage.googleapis.com
+DOMAIN,discordapp.page.link
+
+# Other first-party Discord properties
+DOMAIN-SUFFIX,airhorn.solutions
+DOMAIN-SUFFIX,airhornbot.com
+DOMAIN-SUFFIX,bigbeans.solutions
+DOMAIN-SUFFIX,watchanimeattheoffice.com
+DOMAIN,hammerandchisel.ssl.zendesk.com
+
+# Discord clients
+PROCESS-NAME,Discord.exe
+PROCESS-NAME,Discord
+PROCESS-NAME,DiscordCanary.exe
+PROCESS-NAME,DiscordCanary
+PROCESS-NAME,DiscordPTB.exe
+PROCESS-NAME,DiscordPTB
+PROCESS-NAME,com.discord
+PROCESS-NAME,com.hammerandchisel.discord

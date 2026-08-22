@@ -1,112 +1,141 @@
 # Private Clash Rules
 
-个人 Clash/Surge 分流规则集合，配合 ACL4SSR 主配置使用。
+Personal Clash / Surge rule lists used with a customized ACL4SSR `main.ini` (subconverter). Rules are **first-match-wins**: earlier `ruleset=` lines take priority.
 
-## 规则文件
+Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/`
 
-| 文件 | 对应策略组 | 说明 |
-|------|-----------|------|
-| `trading.list` | 📈 交易相关 | 加密货币交易所及相关服务 |
-| `ai_suite.list` | 🤖 AI Suite | 各类 AI 服务（OpenAI、Anthropic、Gemini、Cursor 等） |
-| `Netflix.list` | 🎥 奈飞视频 | Netflix 流媒体服务 |
-| `steam.list` | 🎮 游戏平台 | Steam 游戏平台 |
-| `selfbuilt.list` | 🫡 自建节点 | 走自建节点的特定域名 |
-| `ChinaDomain.list` | 🎯 全球直连 | 中国域名直连规则 |
-| `ACL4SSR_Online_Full_MultiMode.ini` | - | 主配置，定义规则加载顺序和策略组 |
+## Files
 
----
+| File | Policy group | Notes |
+|------|----------------|-------|
+| `main.ini` | — | Subconverter config: ruleset order + strategy groups |
+| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, and related AI hosts |
+| `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated, not a wholesale dump) |
+| `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
+| `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts |
+| `selfbuilt.list` | 🫡 自建节点 | Overlay hook only — see below |
+| `discord.list` | 💬 Discord | Discord hosts |
+| `github.list` | 🛠️ GitHub | GitHub / git-related hosts |
+| `spotify.list` | 🎵 Spotify | Spotify hosts |
 
-## 规则覆盖机制（重要）
+There is **no** `ai_suite.list`, **no** `ACL4SSR_Online_Full_MultiMode.ini`, and **no** local `ChinaDomain.list`. China domains come from upstream ACL4SSR.
 
-### 加载顺序即优先级
+Local lists are referenced as:
 
-`ACL4SSR_Online_Full_MultiMode.ini` 中的 `ruleset=` 按顺序加载，**先加载的规则优先匹配（first-match-wins）**。
+`https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/<file>`
 
-当前加载顺序（简化）：
+## Load order
 
+`main.ini` `ruleset=` lines are applied top to bottom.
+
+1. 🎯 LocalAreaNetwork
+2. 🎯 UnBan
+3. 🛑 BanAD
+4. 🫡 `selfbuilt.list` (local overlay)
+5. 📈 `trading.list` (local)
+6. 🍃 BanProgramAD
+7. 📢 GoogleFCM
+8. 🎯 GoogleCN
+9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
+10. Ⓜ️ Bing / OneDrive / Microsoft
+11. 🍎 Apple
+12. 📲 Telegram
+13. 💬 `discord.list` (local)
+14. 🤖 `ai.list` (local)
+15. 🛠️ `github.list` (local)
+16. 🎶 NetEaseMusic
+17. 🎮 Epic / Origin / Sony / `steam.list` / Nintendo
+18. 📹 YouTube
+19. 🎥 `Netflix.list` (local)
+20. 🎵 `spotify.list` (local)
+21. 📺 Bahamut / BilibiliHMT / Bilibili
+22. 🌏 ChinaMedia
+23. 🌍 ProxyMedia
+24. 🚀 ProxyGFWlist
+25. 🎯 ChinaIp (enabled)
+26. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
+27. 🎯 ChinaCompanyIp / Download
+28. 🎯 `[]GEOIP,LAN`
+29. 🎯 `[]GEOIP,CN`
+30. 🐟 `[]FINAL`
+
+Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets.
+
+## Default exits
+
+The **first** item of each `select` group is the Clash default.
+
+| Group | Default (first item) |
+|-------|----------------------|
+| 🚀 节点选择 | 🚀 手动切换 |
+| 📈 交易相关 | 💸 交易节点 |
+| 🎥 奈飞视频 | 🎥 奈飞节点 |
+| 🤖 AI Suite | 🫡 自建节点 |
+| 📹 油管视频 | 🫡 自建节点 |
+| 🌍 国外媒体 | 🫡 自建节点 |
+| 🛠️ GitHub | 🫡 自建节点 |
+| 🎵 Spotify | 🫡 自建节点 |
+| 📲 电报消息 | 🚀 节点选择 |
+| 💬 Discord | 🚀 节点选择 |
+| Ⓜ️ 微软云盘 / 微软服务 / 微软Bing | 🚀 节点选择 |
+| 📢 谷歌FCM | 🚀 节点选择 |
+| 🎮 游戏平台 | 🚀 节点选择 |
+| 🐟 漏网之鱼 | 🚀 节点选择 |
+| 🫡 自建节点 | 🔀 双入口LB |
+| 📺 巴哈姆特 | 🇨🇳 台湾节点 |
+| 📺 哔哩哔哩 | 🎯 全球直连 |
+| 🌏 国内媒体 | DIRECT |
+| 🎶 网易音乐 | DIRECT (unlock-name filter kept) |
+| 🍎 苹果服务 | DIRECT |
+| 🎯 全球直连 | DIRECT |
+| 🛑 广告拦截 / 🍃 应用净化 | REJECT |
+
+Function groups use short menus (自建 / 节点选择 / 手动切换 / DIRECT) instead of repeating every region group.
+
+Helper groups:
+
+- 🤖 AI 自动 / 💸 交易自动 — `url-test` over all nodes
+- 🎥 奈飞节点 — name filter `(NF|奈飞|解锁|Netflix|NETFLIX|Media)`, not `.*`
+- 💸 交易节点 — `select` `.*`
+- 🔀 双入口LB — `load-balance` on `腾讯云内网`, **round-robin**
+- 🔮 负载均衡 — full-set `load-balance`, **consistent-hashing** (same destination sticks)
+
+## `selfbuilt.list` is an overlay hook
+
+🫡 自建节点 is the **exit selector** (default: 🔀 双入口LB over Tencent 内网 nodes). `selfbuilt.list` is **not** a catalog. It only pins rare domains that must use that exit. Empty / one-line is expected; add a `DOMAIN-SUFFIX` when a host truly needs that path.
+
+## Region name tokens
+
+| Group | Notes |
+|-------|--------|
+| 🇭🇰 香港节点 | Official-style `(港\|HK\|hk\|Hong Kong\|HongKong\|hongkong)`. **Do not** match `pis` / `sak`. |
+| 🇺🇲 美国节点 | Existing US tokens plus `bwh` / `BDWH` / `bdwh` (Bandwagon-style names). |
+| 🇲🇾 马来西亚节点 | `MY` / `my` is **intentional** (owner naming). |
+| 🇯🇵 🇹🇼 🇸🇬 🇰🇷 | Unchanged. |
+
+## Do-not list
+
+Do **not** add these (too broad or they fight the intended exit):
+
+- `DOMAIN-SUFFIX,googleapis.com` (and similarly `googleusercontent.com` / `goog`)
+- Netflix AWS `IP-CIDR` `/12`–`/16` blocks
+- Enabling ACL4SSR `SteamCN.list` (that would DIRECT Steam downloads)
+- Wholesale blackmatrix7 Crypto dumps into `trading.list`
+
+## Rule format
+
+- `DOMAIN` — exact host
+- `DOMAIN-SUFFIX` — host and all subdomains
+- `DOMAIN-KEYWORD` — substring match (easy to over-capture)
+- `IP-CIDR` / `IP-CIDR6` — always append `,no-resolve`
+- `PROCESS-NAME` — desktop / Android package name (not DNS)
+
+## `scripts/check_rules.py`
+
+Python 3, no extra deps. From the repo root:
+
+```bash
+python3 scripts/check_rules.py
 ```
-1.  🎯 全球直连   ← LocalAreaNetwork, UnBan
-2.  🛑 广告拦截   ← BanAD
-3.  🫡 自建节点   ← selfbuilt.list          [本仓库]
-4.  📈 交易相关   ← trading.list             [本仓库]
-5.  🍃 应用净化   ← BanProgramAD
-6.  📢 谷歌FCM   ← GoogleFCM
-7.  🎯 全球直连   ← GoogleCN
-8.  Ⓜ️ 微软系列  ← Bing / OneDrive / Microsoft
-9.  🍎 苹果服务   ← Apple
-10. 📲 电报消息   ← Telegram
-11. 🤖 AI Suite  ← ai_suite.list            [本仓库]  ← 关键覆盖点
-12. 🎶 网易音乐   ← NetEaseMusic
-13. 🎮 游戏平台   ← Epic / Origin / Sony / steam.list / Nintendo
-14. 📹 油管视频   ← YouTube
-15. 🎥 奈飞视频   ← Netflix.list             [本仓库]
-16. 📺 哔哩哔哩   ← BilibiliHMT / Bilibili
-17. 🌏 国内媒体   ← ChinaMedia
-18. 🌍 国外媒体   ← ProxyMedia.list          [外部 ACL4SSR]
-19. 🚀 节点选择   ← ProxyGFWlist.list        [外部 ACL4SSR]
-20. 🎯 全球直连   ← ChinaIp / ChinaDomain.list / ChinaCompanyIp / Download
-21. 🐟 漏网之鱼   ← FINAL
-```
 
-### 外部规则与本地覆盖
-
-外部 ACL4SSR 规则（第 18、19 项）包含大量通用规则，其中部分与本仓库管理的服务有重叠。由于本仓库的规则加载在前，**相同域名/关键字会被本仓库规则优先命中，外部规则中的重复条目不生效**。
-
-#### 已知覆盖项
-
-| 服务 | 外部规则中的条目 | 本仓库覆盖位置 | 覆盖原因 |
-|------|----------------|--------------|---------|
-| Anthropic/Claude | `DOMAIN-KEYWORD,anthropic`（ProxyMedia → 国外媒体） | `ai_suite.list` | 归入 AI Suite，而非国外媒体 |
-| Anthropic/Claude | `DOMAIN-KEYWORD,claude`（ProxyMedia → 国外媒体） | `ai_suite.list` | 同上 |
-| Anthropic/Claude | `DOMAIN-SUFFIX,claude.ai/claude.com/claudeusercontent.com`（ProxyMedia + ProxyGFWlist） | `ai_suite.list` | 同上 |
-| Cursor | `DOMAIN-SUFFIX,cursor.sh/cursor.com`（ProxyMedia → 国外媒体） | `ai_suite.list` | 归入 AI Suite |
-| OpenAI | `DOMAIN-KEYWORD,openai`（ProxyMedia → 国外媒体） | `ai_suite.list` | 归入 AI Suite |
-
-> **维护提示**：如果某个 AI 或交易服务被发现路由到了国外媒体/节点选择，原因通常是外部规则包含了该域名/关键字，而本仓库还没有对应的覆盖条目。解决方法：在 `ai_suite.list` 或 `trading.list` 中加入对应规则即可（加载顺序已保证优先命中）。
-
----
-
-## ai_suite.list 覆盖范围
-
-| 服务商 | 覆盖内容 |
-|-------|---------|
-| OpenAI | openai.com, chatgpt.com, sora.com, oaistatic.com, oaiusercontent.com + `DOMAIN-KEYWORD,openai` |
-| Anthropic | anthropic.com, claude.ai, claude.com, claudeusercontent.com + `DOMAIN-KEYWORD,anthropic` + `DOMAIN-KEYWORD,claude` |
-| Grok | x.ai, grok.com |
-| Gemini | gemini.google.com, bard.google.com, deepmind.com, generativeai.google, aistudio.google.com 等 |
-| Cursor | cursor.sh, cursor.com |
-| Poe | poe.com |
-| 公共依赖 | stripe.com, auth0.com, hcaptcha.com, recaptcha.net, sentry.io, intercom.io 等 |
-| Google Antigravity (Claude Code) | googleapis.com, googleusercontent.com, run.app, open-vsx.org 等 |
-
----
-
-## trading.list 覆盖范围
-
-### 中心化交易所 (CEX)
-- **Binance**：主域名、API、CDN、yingwangtech 系列、IP-CIDR（7条）
-- **Bybit**：主域名 + bycsi/bytick/byapis 等相关域名
-- **OKX / MEXC / Coinbase / Kraken / Gate.io / HTX / Bitfinex / KuCoin / Bitget** 等
-
-### 去中心化交易所 (DEX / PERP DEX)
-- Uniswap, Pendle, Hyperliquid, dYdX, GMX
-- Variational, Lighter, AsterDex, EdgeX, GRVT, Paradex, Ostium 等
-
-### 行情 & 数据分析
-- TradingView, Coinglass, CoinGecko, CoinMarketCap
-- Glassnode, DefiLlama, DexTools, CryptoQuant
-- **RootData**（Web3 项目数据）等
-
-### 区块链基础设施
-- Etherscan, BscScan, BaseScan, Solscan
-- WalletConnect, Phantom, Ankr
-
----
-
-## 规则格式参考
-
-- `DOMAIN` — 精确域名匹配
-- `DOMAIN-SUFFIX` — 域名后缀匹配（含所有子域名）
-- `DOMAIN-KEYWORD` — 域名关键字匹配（最宽泛，注意误杀风险）
-- `IP-CIDR` — IP 地址段匹配
-- `PROCESS-NAME` — 进程名匹配（仅桌面端）
+It scans every `*.list` in the repo root for duplicate rules, `IP-CIDR`/`IP-CIDR6` missing `,no-resolve`, a dangerous `DOMAIN-SUFFIX` blacklist, and whether `README.md` mentions each existing list plus `main.ini`. Exit code `1` on findings, `0` when clean.
