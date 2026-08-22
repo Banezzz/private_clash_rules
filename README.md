@@ -95,7 +95,7 @@ Function groups use short menus (自建 / 节点选择 / 手动切换 / DIRECT) 
 Helper groups:
 
 - 🤖 AI 自动 / 💸 交易自动 — `url-test` over all nodes
-- 🎥 奈飞节点 — name filter `(NF|奈飞|解锁|Netflix|NETFLIX|Media)`, not `.*`
+- 🎥 奈飞节点 — `select` `.*` (same as 手动切换: every available node)
 - 💸 交易节点 — `select` `.*`
 - 🔀 双入口LB — `load-balance` on `腾讯云内网`, **round-robin**
 - 🔮 负载均衡 — full-set `load-balance`, **consistent-hashing** (same destination sticks)
