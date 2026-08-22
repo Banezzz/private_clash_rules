@@ -1,204 +1,96 @@
-# Process Rules (进程规则)
+# Trading rule set (CEX / DEX / PERP / terminals)
+# Process → CEX → PERP/DEX → Terminals/prediction → Market data → RPC → Wallets → Explorers
+
+# -----------------------------------------------------------------------------
+# Process
+# Desktop binary + Windows .exe + Android package. PROCESS-NAME is the reliable
+# fix for apps that dial raw IPs (e.g. Binance CN acceleration nodes).
+# -----------------------------------------------------------------------------
 # OKX
 PROCESS-NAME,OKX
 PROCESS-NAME,OKX.exe
-PROCESS-NAME,Okx
-PROCESS-NAME,Okx.exe
-PROCESS-NAME,okx
-PROCESS-NAME,okx.exe
+PROCESS-NAME,com.okinc.okex.gp
+PROCESS-NAME,com.okinc.okex
 # Binance
 PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
-PROCESS-NAME,binance
-PROCESS-NAME,binance.exe
-# Binance (Android package name) - forces ALL app traffic through proxy,
-# including raw-IP connections to CN acceleration nodes that bypass domain rules
 PROCESS-NAME,com.binance.dev
 # Bybit
 PROCESS-NAME,Bybit
 PROCESS-NAME,Bybit.exe
-PROCESS-NAME,bybit
-PROCESS-NAME,bybit.exe
 PROCESS-NAME,com.bybit.app
-# OKX (Android package names)
-PROCESS-NAME,com.okinc.okex.gp
-PROCESS-NAME,com.okinc.okex
-
+# MEXC
+PROCESS-NAME,MEXC
+PROCESS-NAME,MEXC.exe
+PROCESS-NAME,com.mexcpro.client
+# Bitget
+PROCESS-NAME,Bitget
+PROCESS-NAME,Bitget.exe
+PROCESS-NAME,com.bitget.exchange
+# Gate
+PROCESS-NAME,Gate
+PROCESS-NAME,Gate.exe
+PROCESS-NAME,com.gateio.gateio
 # TradingView
-DOMAIN-SUFFIX,tradingview.com
-DOMAIN-SUFFIX,coinglass.com
-DOMAIN-SUFFIX,coinank.com
-DOMAIN-SUFFIX,vol.curvlabs.xyz
-DOMAIN-SUFFIX,morty.is
+PROCESS-NAME,TradingView
+PROCESS-NAME,TradingView.exe
 
-# Orionterminal
-DOMAIN-SUFFIX,orionterminal.com
-
-# CEXes (中心化交易所)
-DOMAIN-SUFFIX,coinbase.com
-DOMAIN-KEYWORD,coinbase
+# -----------------------------------------------------------------------------
+# CEX
+# Brand-unique keywords kept only for binance / okx. Others are suffix-only.
+# DOMAIN-KEYWORD,gemini stays commented — conflicts with Google Gemini.
+# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,binance.com
 DOMAIN-KEYWORD,binance
-DOMAIN-SUFFIX,bybit.com
-DOMAIN-KEYWORD,bybit
-DOMAIN-SUFFIX,upbit.com
-DOMAIN-KEYWORD,upbit
 DOMAIN-SUFFIX,okx.com
 DOMAIN-KEYWORD,okx
+DOMAIN-SUFFIX,okex.com
+DOMAIN-SUFFIX,oklink.com
+DOMAIN-SUFFIX,ouxyi.cash
+DOMAIN-SUFFIX,coinbase.com
+DOMAIN-SUFFIX,bybit.com
+DOMAIN-SUFFIX,upbit.com
 DOMAIN-SUFFIX,kraken.com
-DOMAIN-KEYWORD,kraken
 DOMAIN-SUFFIX,gate.io
 DOMAIN-SUFFIX,htx.com
-DOMAIN-KEYWORD,htx
 DOMAIN-SUFFIX,bitfinex.com
-DOMAIN-KEYWORD,bitfinex
 DOMAIN-SUFFIX,kucoin.com
-DOMAIN-KEYWORD,kucoin
 DOMAIN-SUFFIX,mexc.com
-DOMAIN-KEYWORD,mexc
 DOMAIN-SUFFIX,bitget.com
-DOMAIN-KEYWORD,bitget
 DOMAIN-SUFFIX,crypto.com
 DOMAIN-SUFFIX,bingx.com
-DOMAIN-KEYWORD,bingx
 DOMAIN-SUFFIX,bitstamp.com
-DOMAIN-KEYWORD,bitstamp
+DOMAIN-SUFFIX,bitstamp.net
 DOMAIN-SUFFIX,bitmart.com
-DOMAIN-KEYWORD,bitmart
 DOMAIN-SUFFIX,bithumb.com
-DOMAIN-KEYWORD,bithumb
 DOMAIN-SUFFIX,gemini.com
 # DOMAIN-KEYWORD,gemini
 DOMAIN-SUFFIX,woox.io
-DOMAIN-KEYWORD,woox
+DOMAIN-SUFFIX,blofin.com
+DOMAIN-SUFFIX,backpack.exchange
+DOMAIN-SUFFIX,aex.com
+DOMAIN-SUFFIX,bibox.com
+DOMAIN-SUFFIX,bitmex.com
+DOMAIN-SUFFIX,bittrex.com
+DOMAIN-SUFFIX,coincheck.com
+DOMAIN-SUFFIX,coinone.co.kr
+DOMAIN-SUFFIX,korbit.co.kr
+DOMAIN-SUFFIX,liquid.com
+DOMAIN-SUFFIX,poloniex.com
+DOMAIN-SUFFIX,bitbank.cc
+DOMAIN-SUFFIX,bitquick.co
+DOMAIN-SUFFIX,btcbox.co.jp
+DOMAIN-SUFFIX,cex.io
+DOMAIN-SUFFIX,paxful.com
+DOMAIN-SUFFIX,chippay.com
 
-# DEXes (去中心化交易所)
-DOMAIN-SUFFIX,uniswap.org
-DOMAIN-SUFFIX,pendle.finance
-DOMAIN-SUFFIX,blitz.exchange
-DOMAIN-SUFFIX,hyperliquid.xyz
-DOMAIN-SUFFIX,dydx.exchange
-DOMAIN-SUFFIX,four.meme
-
-# PERP DEXes (永续合约去中心化交易所)
-DOMAIN-SUFFIX,variational.io
-DOMAIN-SUFFIX,lighter.xyz
-DOMAIN-SUFFIX,asterdex.com
-DOMAIN-SUFFIX,edgex.exchange
-DOMAIN-KEYWORD,edgex
-DOMAIN-SUFFIX,extended.exchange
-DOMAIN-SUFFIX,grvt.io
-DOMAIN-KEYWORD,grvt
-DOMAIN-SUFFIX,apex.exchange
-DOMAIN-SUFFIX,trade.xyz
-DOMAIN-SUFFIX,nado.xyz
-DOMAIN-SUFFIX,pacificadex.com
-DOMAIN-SUFFIX,pacifica.fi
-DOMAIN-SUFFIX,jup.ag
-DOMAIN-KEYWORD,standx
-DOMAIN-SUFFIX,standx.com
-DOMAIN-SUFFIX,ostium.io
-DOMAIN-KEYWORD,ostium
-DOMAIN-SUFFIX,gmx.io
-DOMAIN-SUFFIX,antarctic.exchange
-DOMAIN-SUFFIX,paradex.trade
-DOMAIN-KEYWORD,paradex
-
-# Infra/SDK (基础设施/开发工具)
-DOMAIN-SUFFIX,vertexprotocol.com
-DOMAIN-SUFFIX,ankr.com
-DOMAIN-SUFFIX,ouxyi.cash
-DOMAIN-SUFFIX,phantom.app
-DOMAIN-SUFFIX,defisaver.com
-DOMAIN-SUFFIX,walletconnect.com
-DOMAIN-SUFFIX,spindl.link
-
-# Additional Bybit Domains
-DOMAIN,bybit-exchange.github.io
-DOMAIN,bybit.ada.support
-DOMAIN-SUFFIX,bycsi.com
-DOMAIN-SUFFIX,bytick.com
-DOMAIN-SUFFIX,byapis.com
-DOMAIN-SUFFIX,bycbe.com
-DOMAIN-SUFFIX,byabcde.com
-DOMAIN-SUFFIX,byapps.net
-DOMAIN-SUFFIX,byd3c3.com
-DOMAIN-SUFFIX,bybit.biz
-DOMAIN-SUFFIX,bybdc6.com
-DOMAIN-SUFFIX,bybit-global.com
-DOMAIN-SUFFIX,bybit.cloud
-
-# Additional Binance Domains - Updated 2025.01.27
-
-# Binance Main Domains
-DOMAIN,www.binance.com
-DOMAIN,api.binance.com
-DOMAIN,fapibak.binance.com
-DOMAIN,accounts.binance.com
-DOMAIN,native.binance.com
-DOMAIN,stream.binance.com
-DOMAIN,dstream.binance.com
-DOMAIN,fstream.binance.com
-DOMAIN,nbstream.binance.com
-DOMAIN,sfstream.binance.com
-DOMAIN,themis.binance.com
-DOMAIN,www.binance.click
-DOMAIN,report.binance.im
-DOMAIN,www.binance.info
-DOMAIN,accounts.binance.info
-DOMAIN,accounts.binance.me
-DOMAIN,stream.binance.info
-DOMAIN,fstream.binance.info
-DOMAIN,dstream.binance.info
-DOMAIN,nbstream.binance.info
-DOMAIN,native.binance.info
-DOMAIN,www.binancecnt.com
-
-# Binance API & CDN
-DOMAIN,api.saasexch.cc
-DOMAIN,api.saasexch.co
-DOMAIN,api.saasexch.io
-DOMAIN,api.saasexch.com
-DOMAIN,edge-api.saasexch.com
-DOMAIN,reslove.saasexch.com
-DOMAIN,log.bntrace.com
-DOMAIN,public.nftstatic.com
-DOMAIN,bin.bnbstatic.com
-DOMAIN,public.bnbstatic.com
-
-# Binance Yingwangtech
-DOMAIN,www.yingwangtech.cloud
-DOMAIN,sdstream.yingwangtech.net
-DOMAIN,nbstream.yingwangtech.net
-DOMAIN,stream.yingwangtech.net
-DOMAIN,sfstream.yingwangtech.net
-DOMAIN,fstream.yingwangtech.net
-DOMAIN,www.yingwangtech.net
-DOMAIN,www.yingwangtech.mobi
-DOMAIN,www.yingwangtech.club
-DOMAIN,www.yingwangtech.cc
-
-# Binance Related Domains
-DOMAIN,m.api.forter.com
-DOMAIN,addfd325e6e3.cdn4.forter.com
-DOMAIN,crt.r2m01.amazontrust.com
-DOMAIN,crt.rootca1.amazontrust.com
-DOMAIN,crt.rootg2.amazontrust.com
-DOMAIN,d3sknckuh1o9tg.cloudfront.net
-DOMAIN,public-1306379396.file.myqcloud.com
-DOMAIN,static-file-1306379396.file.myqcloud.com
-DOMAIN,domain-config-1306379396.file.myqcloud.com
-DOMAIN,b2d8207c-e08a-45cd-bc97-268da85016d2-addfd325e6e3.cdn.forter.com
-DOMAIN,bin-prod-new-websocket-alb-1463526464.ap-northeast-1.elb.amazonaws.com
-DOMAIN,aad90d5c0e88c4b4285bd912f64d970d-1403944741.ap-northeast-1.elb.amazonaws.com
-
-# Binance Domain Suffixes
+# Binance exclusive suffixes / leftover hosts (not covered by binance.com)
 DOMAIN-SUFFIX,appsflayer.com
 DOMAIN-SUFFIX,binance.cc
 DOMAIN-SUFFIX,binance.charity
+DOMAIN-SUFFIX,binance.click
 DOMAIN-SUFFIX,binance.cloud
 DOMAIN-SUFFIX,binance.co
-DOMAIN-SUFFIX,binance.com
 DOMAIN-SUFFIX,binance.info
 DOMAIN-SUFFIX,binance.me
 DOMAIN-SUFFIX,binance.im
@@ -228,6 +120,7 @@ DOMAIN-SUFFIX,bnappzh.co
 DOMAIN-SUFFIX,bnbstatic.com
 DOMAIN-SUFFIX,bnbzh.ac
 DOMAIN-SUFFIX,bntrace.com
+DOMAIN-SUFFIX,nftstatic.com
 DOMAIN-SUFFIX,saasexch.cc
 DOMAIN-SUFFIX,saasexch.co
 DOMAIN-SUFFIX,saasexch.io
@@ -237,91 +130,112 @@ DOMAIN-SUFFIX,yingwangtech.net
 DOMAIN-SUFFIX,yingwangtech.mobi
 DOMAIN-SUFFIX,yingwangtech.club
 DOMAIN-SUFFIX,yingwangtech.cc
+DOMAIN,d3sknckuh1o9tg.cloudfront.net
+DOMAIN,public-1306379396.file.myqcloud.com
+DOMAIN,static-file-1306379396.file.myqcloud.com
+DOMAIN,domain-config-1306379396.file.myqcloud.com
+DOMAIN,bin-prod-new-websocket-alb-1463526464.ap-northeast-1.elb.amazonaws.com
+DOMAIN,aad90d5c0e88c4b4285bd912f64d970d-1403944741.ap-northeast-1.elb.amazonaws.com
 
-# Binance IP-CIDR
-IP-CIDR,47.107.98.27/32
-IP-CIDR,47.107.127.135/32
-IP-CIDR,52.68.117.1/32
-IP-CIDR,35.77.148.188/32
-IP-CIDR,54.150.106.1/32
-IP-CIDR,13.248.135.87/32
-IP-CIDR,47.107.32.31/32
-# Binance Android CN acceleration nodes (observed leaking to DIRECT)
-# NOTE: these rotate often; the PROCESS-NAME,com.binance.dev rule above is
-# the comprehensive fix. Listed here as an immediate belt-and-suspenders measure.
-IP-CIDR,106.15.179.166/32
-IP-CIDR,120.77.173.49/32
-IP-CIDR,119.23.63.226/32
-IP-CIDR,114.132.46.122/32
+# Binance IPs (stable). Rotating CN acceleration /32s are omitted on purpose;
+# PROCESS-NAME,com.binance.dev is the real fix for those.
+IP-CIDR,47.107.98.27/32,no-resolve
+IP-CIDR,47.107.127.135/32,no-resolve
+IP-CIDR,52.68.117.1/32,no-resolve
+IP-CIDR,35.77.148.188/32,no-resolve
+IP-CIDR,54.150.106.1/32,no-resolve
+IP-CIDR,13.248.135.87/32,no-resolve
+IP-CIDR,47.107.32.31/32,no-resolve
 
-# OKX
-DOMAIN-SUFFIX,okex.com
-DOMAIN-SUFFIX,oklink.com
-DOMAIN-SUFFIX,okx.com
+# Bybit extra domains
+DOMAIN,bybit-exchange.github.io
+DOMAIN,bybit.ada.support
+DOMAIN-SUFFIX,bycsi.com
+DOMAIN-SUFFIX,bytick.com
+DOMAIN-SUFFIX,byapis.com
+DOMAIN-SUFFIX,bycbe.com
+DOMAIN-SUFFIX,byabcde.com
+DOMAIN-SUFFIX,byapps.net
+DOMAIN-SUFFIX,byd3c3.com
+DOMAIN-SUFFIX,bybit.biz
+DOMAIN-SUFFIX,bybdc6.com
+DOMAIN-SUFFIX,bybit-global.com
+DOMAIN-SUFFIX,bybit.cloud
 
-# MEXC
-DOMAIN,www.mexc.com
-DOMAIN,m.mexc.com
-DOMAIN,wbs.mexc.com
-DOMAIN,futures.mexc.com
-DOMAIN,jpush.mexc.com
-DOMAIN,www.365huo.xyz
-DOMAIN,www.flytogarden.com
-DOMAIN,wbs.flytogarden.com
-DOMAIN,futures.flytogarden.com
-DOMAIN,www.mexcsensors.com
-DOMAIN,ab.mexcsensors.com
-DOMAIN,www.greentreeone.com
-DOMAIN,futures.greentreeone.com
-DOMAIN,wbs.greentreeone.com
-DOMAIN,pushstat.api.engagelab.cc
-DOMAIN,opt.mocortech.com
-DOMAIN,static.mocortech.com
-DOMAIN,appconfig.mocortech.com
-DOMAIN,public.mocortech.com
-DOMAIN,sis.push.engage7.com
-DOMAIN,sis.push.engageforce.net
-DOMAIN,sis.push.theengagelab.com
-DOMAIN,trochilus-web.gotoda.co
-DOMAIN,trochi.gotoda.co
-DOMAIN,sentry.gotoda.co
-DOMAIN,s3-app-release.s3.ap-northeast-1.amazonaws.com
+# MEXC mirror / exclusive hosts (not covered by mexc.com)
+DOMAIN-SUFFIX,365huo.xyz
+DOMAIN-SUFFIX,flytogarden.com
+DOMAIN-SUFFIX,mexcsensors.com
+DOMAIN-SUFFIX,greentreeone.com
+DOMAIN-SUFFIX,mocortech.com
 DOMAIN,molor-app-logs-default.ap-southeast-1.log.aliyuncs.com
 DOMAIN,molor-app-performance-project.ap-southeast-1.log.aliyuncs.com
 DOMAIN,mxc-ios-app-logs-default.ap-southeast-1.log.aliyuncs.com
 
-# Forum & Community
+# -----------------------------------------------------------------------------
+# PERP / DEX
+# -----------------------------------------------------------------------------
+DOMAIN-SUFFIX,uniswap.org
+DOMAIN-SUFFIX,pendle.finance
+DOMAIN-SUFFIX,blitz.exchange
+DOMAIN-SUFFIX,hyperliquid.xyz
+DOMAIN-SUFFIX,hyperfoundation.org
+DOMAIN-SUFFIX,dydx.exchange
+DOMAIN-SUFFIX,four.meme
+DOMAIN-SUFFIX,variational.io
+DOMAIN-SUFFIX,lighter.xyz
+DOMAIN-SUFFIX,asterdex.com
+DOMAIN-SUFFIX,edgex.exchange
+DOMAIN-SUFFIX,extended.exchange
+DOMAIN-SUFFIX,grvt.io
+DOMAIN-SUFFIX,apex.exchange
+DOMAIN-SUFFIX,trade.xyz
+DOMAIN-SUFFIX,nado.xyz
+DOMAIN-SUFFIX,pacificadex.com
+DOMAIN-SUFFIX,pacifica.fi
+DOMAIN-SUFFIX,jup.ag
+DOMAIN-SUFFIX,standx.com
+DOMAIN-SUFFIX,ostium.io
+DOMAIN-SUFFIX,gmx.io
+DOMAIN-SUFFIX,antarctic.exchange
+DOMAIN-SUFFIX,paradex.trade
+DOMAIN-SUFFIX,vertexprotocol.com
+DOMAIN-SUFFIX,drift.trade
+DOMAIN-SUFFIX,axiom.trade
+DOMAIN-SUFFIX,tinyastro.io
+DOMAIN-SUFFIX,bullx.io
+DOMAIN-SUFFIX,gmgn.ai
+DOMAIN-SUFFIX,pump.fun
+DOMAIN-SUFFIX,sushi.com
+DOMAIN-SUFFIX,sunswap.com
+DOMAIN-SUFFIX,traderjoexyz.com
+DOMAIN-SUFFIX,raydium.io
+DOMAIN-SUFFIX,synthetix.io
+DOMAIN-SUFFIX,aave.com
+DOMAIN-SUFFIX,compound.finance
+DOMAIN-SUFFIX,makerdao.com
+DOMAIN-SUFFIX,wbtc.network
+DOMAIN-SUFFIX,pancakeswap.finance
+DOMAIN-SUFFIX,mdex.co
+DOMAIN-SUFFIX,1inch.io
+DOMAIN-SUFFIX,defisaver.com
+
+# -----------------------------------------------------------------------------
+# Terminals / prediction
+# -----------------------------------------------------------------------------
+DOMAIN-SUFFIX,tradingview.com
+DOMAIN-SUFFIX,coinglass.com
+DOMAIN-SUFFIX,coinank.com
+DOMAIN-SUFFIX,vol.curvlabs.xyz
+DOMAIN-SUFFIX,morty.is
+DOMAIN-SUFFIX,orionterminal.com
+DOMAIN-SUFFIX,polymarket.com
+DOMAIN-SUFFIX,kalshi.com
+
+# -----------------------------------------------------------------------------
+# Market data
+# -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,bitcointalk.org
-
-# Exchange (其他交易所)
-DOMAIN-SUFFIX,aex.com
-DOMAIN-SUFFIX,bibox.com
-DOMAIN-SUFFIX,bitmex.com
-DOMAIN-SUFFIX,bitstamp.net
-DOMAIN-SUFFIX,bittrex.com
-DOMAIN-SUFFIX,coincheck.com
-DOMAIN-SUFFIX,coinone.co.kr
-DOMAIN-SUFFIX,korbit.co.kr
-DOMAIN-SUFFIX,liquid.com
-DOMAIN-SUFFIX,poloniex.com
-DOMAIN-SUFFIX,bitbank.cc
-DOMAIN-SUFFIX,bitcoin.org
-DOMAIN-SUFFIX,bitquick.co
-DOMAIN-SUFFIX,btcbox.co.jp
-DOMAIN-SUFFIX,cex.io
-DOMAIN-SUFFIX,dogecoin.com
-DOMAIN-SUFFIX,paxful.com
-DOMAIN-SUFFIX,tether.to
-DOMAIN-SUFFIX,solana.com
-DOMAIN-SUFFIX,avax.network
-DOMAIN-SUFFIX,optimism.io
-DOMAIN-SUFFIX,arbitrum.io
-DOMAIN-SUFFIX,poly.network
-DOMAIN-SUFFIX,zkscan.io
-DOMAIN-SUFFIX,zksync.io
-DOMAIN-SUFFIX,boba.network
-
-# Analysis (分析工具)
 DOMAIN-SUFFIX,rootdata.com
 DOMAIN-SUFFIX,aicoin.com
 DOMAIN-SUFFIX,aimoon.com
@@ -336,11 +250,11 @@ DOMAIN-SUFFIX,bytetree.com
 DOMAIN-SUFFIX,coin.dance
 DOMAIN-SUFFIX,defieye.io
 DOMAIN-SUFFIX,duneanalytics.com
+DOMAIN-SUFFIX,dune.com
 DOMAIN-SUFFIX,tokenterminal.com
 DOMAIN-SUFFIX,dapp.review
 DOMAIN-SUFFIX,dappradar.com
 DOMAIN-SUFFIX,stateofthedapps.com
-DOMAIN-SUFFIX,thegraph.com
 DOMAIN-SUFFIX,debank.com
 DOMAIN-SUFFIX,vfat.tools
 DOMAIN-SUFFIX,loanscan.io
@@ -348,6 +262,11 @@ DOMAIN-SUFFIX,defirate.com
 DOMAIN-SUFFIX,defipulse.com
 DOMAIN-SUFFIX,apy999.com
 DOMAIN-SUFFIX,dextools.io
+DOMAIN-SUFFIX,dexscreener.com
+DOMAIN-SUFFIX,geckoterminal.com
+DOMAIN-SUFFIX,defined.fi
+DOMAIN-SUFFIX,birdeye.so
+DOMAIN-SUFFIX,nansen.ai
 DOMAIN-SUFFIX,dcabtc.com
 DOMAIN-SUFFIX,chainalysis.com
 DOMAIN-SUFFIX,cryptoquant.com
@@ -364,16 +283,13 @@ DOMAIN-SUFFIX,nyctale.io
 DOMAIN-SUFFIX,dovemetrics.com
 DOMAIN-SUFFIX,icodrops.com
 DOMAIN-SUFFIX,chainbroker.io
-DOMAIN-SUFFIX,crunchbase.com
 DOMAIN-SUFFIX,defillama.com
 DOMAIN-SUFFIX,earni.fi
 DOMAIN-SUFFIX,dropsearn.com
-DOMAIN-SUFFIX,bitcoin.it
-DOMAIN-SUFFIX,bitcoinmagazine.com
 DOMAIN-SUFFIX,blockchain.com
-DOMAIN-SUFFIX,tronscan.org
+DOMAIN-SUFFIX,spindl.link
 
-# POOL (矿池相关)
+# Mining / hashrate (kept from existing coverage)
 DOMAIN-SUFFIX,btc.com
 DOMAIN-SUFFIX,f2pool.com
 DOMAIN-SUFFIX,cbeci.org
@@ -387,7 +303,7 @@ DOMAIN-SUFFIX,poolin.com
 DOMAIN-SUFFIX,ethermine.org
 DOMAIN-SUFFIX,ewapool.net
 
-# NFT (非同质化代币)
+# NFT marketplaces
 DOMAIN-SUFFIX,opensea.io
 DOMAIN-SUFFIX,nftscan.com
 DOMAIN-SUFFIX,makersplace.com
@@ -396,41 +312,48 @@ DOMAIN-SUFFIX,cryptoslam.io
 DOMAIN-SUFFIX,cryptoart.io
 DOMAIN-SUFFIX,nftcalendar.io
 DOMAIN-SUFFIX,nftgo.io
+DOMAIN-SUFFIX,tensor.trade
+DOMAIN-SUFFIX,magiceden.io
 
-# IPFS
+# -----------------------------------------------------------------------------
+# RPC (first-party / trading-critical only; skip alchemy/infura/quicknode)
+# -----------------------------------------------------------------------------
+DOMAIN-SUFFIX,helius.dev
+DOMAIN-SUFFIX,helius-rpc.com
+DOMAIN-SUFFIX,jito.wtf
+DOMAIN-SUFFIX,jito.network
+DOMAIN-SUFFIX,bloxroute.com
+DOMAIN-SUFFIX,ankr.com
+DOMAIN-SUFFIX,thegraph.com
+DOMAIN-SUFFIX,ipfs.io
 DOMAIN-SUFFIX,filecoin.io
 DOMAIN-SUFFIX,docs.lotu.sh
-DOMAIN-SUFFIX,ipfs.io
 DOMAIN-SUFFIX,discuss.ipfs.io
 
-# Token Wallets (钱包相关)
+# -----------------------------------------------------------------------------
+# Wallets
+# -----------------------------------------------------------------------------
+DOMAIN-SUFFIX,phantom.app
+DOMAIN-SUFFIX,phantom.com
 DOMAIN-SUFFIX,tokenpocket.pro
 DOMAIN-SUFFIX,token.im
-DOMAIN-SUFFIX,phantom.app
 DOMAIN-SUFFIX,tronlink.org
 DOMAIN-SUFFIX,myetherwallet.com
 DOMAIN-SUFFIX,jaxx.io
 DOMAIN-SUFFIX,trustwalletapp.com
+DOMAIN-SUFFIX,walletconnect.com
 
-# Dapp (去中心化应用)
-DOMAIN-SUFFIX,sushi.com
-DOMAIN-SUFFIX,sunswap.com
-DOMAIN-SUFFIX,traderjoexyz.com
-DOMAIN-SUFFIX,raydium.io
-DOMAIN-SUFFIX,synthetix.io
-DOMAIN-SUFFIX,aave.com
-DOMAIN-SUFFIX,compound.finance
-DOMAIN-SUFFIX,makerdao.com
-DOMAIN-SUFFIX,wbtc.network
-DOMAIN-SUFFIX,pancakeswap.finance
-DOMAIN-SUFFIX,mdex.co
-DOMAIN-SUFFIX,1inch.io
-
-# Miscellaneous
-DOMAIN-SUFFIX,chippay.com
-
-# Scan
+# -----------------------------------------------------------------------------
+# Explorers
+# -----------------------------------------------------------------------------
+DOMAIN-SUFFIX,etherscan.io
 DOMAIN-SUFFIX,etherscan.com
 DOMAIN-SUFFIX,bscscan.com
 DOMAIN-SUFFIX,basescan.org
+DOMAIN-SUFFIX,arbiscan.io
 DOMAIN-SUFFIX,solscan.io
+DOMAIN-SUFFIX,tronscan.org
+DOMAIN-SUFFIX,zkscan.io
+DOMAIN-SUFFIX,zksync.io
+DOMAIN-SUFFIX,tether.to
+DOMAIN-SUFFIX,poly.network
