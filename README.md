@@ -9,7 +9,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | File | Policy group | Notes |
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
-| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, and related AI hosts |
+| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated, not a wholesale dump) |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
 | `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts |

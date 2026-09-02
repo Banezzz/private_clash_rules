@@ -1,7 +1,9 @@
 # International AI services (first-party only)
 # Shared SaaS (Stripe / Auth0 / Sentry / Intercom / captcha / whole googleapis.com) is intentionally omitted.
 # GitHub Copilot hosts live in github.list. Discord / Spotify are separate lists.
-# Domestic-China AI (DeepSeek / Moonshot / Kimi / Qwen / MiniMax / Zhipu / Doubao / Tongyi) omitted.
+# Domestic-China AI (DeepSeek / Moonshot / Kimi / Qwen / MiniMax / Zhipu / Doubao / Tongyi / Cici / Dola) omitted.
+# Microsoft Copilot on *.microsoft.com stays with 微软服务 (that ruleset loads before AI Suite).
+# Not synced from geosite:category-ai-chat-!cn: Envato / ThemeForest, LivePerson, CN brands, ads/telemetry, githubcopilot (github.list).
 
 # OpenAI / ChatGPT / Sora
 DOMAIN-SUFFIX,openai.com
@@ -108,12 +110,19 @@ DOMAIN-SUFFIX,perplexity.ai
 DOMAIN-SUFFIX,perplexity.com
 DOMAIN-SUFFIX,pplx.ai
 DOMAIN,ppl-ai-file-upload.s3.amazonaws.com
+DOMAIN,pplx-res.cloudinary.com
 
 # Character.AI
 DOMAIN-SUFFIX,character.ai
 
-# Meta AI
+# Meta AI / Llama / Muse / Imagine (first-party only; not facebook.com / instagram.com / meta.com / fbcdn)
 DOMAIN-SUFFIX,meta.ai
+DOMAIN-SUFFIX,llama.com
+DOMAIN-SUFFIX,muse.ai
+DOMAIN-SUFFIX,developer.meta.com
+DOMAIN-SUFFIX,ai.meta.com
+DOMAIN-SUFFIX,llama.meta.com
+DOMAIN-SUFFIX,imagine.meta.com
 
 # Groq
 DOMAIN-SUFFIX,groq.com
@@ -165,6 +174,7 @@ DOMAIN-SUFFIX,deepwiki.org
 
 # Manus
 DOMAIN-SUFFIX,manus.im
+DOMAIN-SUFFIX,manuscdn.com
 
 # Midjourney
 DOMAIN-SUFFIX,midjourney.com
@@ -185,6 +195,20 @@ DOMAIN-SUFFIX,youmind.site
 # Azure OpenAI (resource / studio hosts only)
 DOMAIN-SUFFIX,ai.azure.com
 DOMAIN-SUFFIX,openai.azure.com
+
+# Microsoft Copilot (standalone hosts; copilot.microsoft.com is claimed by 微软服务)
+DOMAIN-SUFFIX,copilot.com
+DOMAIN-SUFFIX,copilot-stg.com
+
+# Comfy
+DOMAIN-SUFFIX,comfy.org
+DOMAIN-SUFFIX,comfyci.org
+DOMAIN-SUFFIX,comfyregistry.org
+
+# ByteDance international AI tools (Trae / Coze; not Doubao / Cici)
+DOMAIN-SUFFIX,trae.ai
+DOMAIN-SUFFIX,coze.com
+DOMAIN-SUFFIX,marscode.com
 
 # Other international AI platforms
 DOMAIN-SUFFIX,cohere.com
@@ -231,6 +255,7 @@ DOMAIN-SUFFIX,lmstudio.ai
 DOMAIN-SUFFIX,novelai.net
 DOMAIN-SUFFIX,anythingllm.com
 DOMAIN-SUFFIX,coderabbit.ai
+DOMAIN,coderabbit.gallery.vsassets.io
 DOMAIN-SUFFIX,tabnine.com
 DOMAIN-SUFFIX,supermaven.com
 DOMAIN-SUFFIX,continue.dev
@@ -263,3 +288,5 @@ DOMAIN-SUFFIX,talkai.info
 DOMAIN-SUFFIX,tapnow.ai
 DOMAIN-SUFFIX,plannotator.ai
 DOMAIN-SUFFIX,clawhub.ai
+DOMAIN-SUFFIX,qoder.com
+DOMAIN-SUFFIX,spicywriter.com
