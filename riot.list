@@ -1,0 +1,76 @@
+# Riot Games client and first-party web (LoL / TFT / Valorant / Wild Rift / 2XKO)
+# International hosts only. Tencent CN LoL (leagueoflegends.cn, lpl.com.cn) is
+# omitted so later ChinaDomain / GEOIP,CN can DIRECT those.
+# Vanguard / vgk / vgc anti-cheat processes are omitted on purpose.
+
+# Process — desktop binary + Windows .exe + Android package
+PROCESS-NAME,RiotClientServices
+PROCESS-NAME,RiotClientServices.exe
+PROCESS-NAME,RiotClientUx
+PROCESS-NAME,RiotClientUx.exe
+PROCESS-NAME,RiotClientUxRender.exe
+PROCESS-NAME,RiotClientCrashHandler.exe
+PROCESS-NAME,LeagueClient
+PROCESS-NAME,LeagueClient.exe
+PROCESS-NAME,LeagueClientUx.exe
+PROCESS-NAME,LeagueClientUxRender.exe
+PROCESS-NAME,League of Legends.exe
+PROCESS-NAME,VALORANT
+PROCESS-NAME,VALORANT.exe
+PROCESS-NAME,VALORANT-Win64-Shipping.exe
+PROCESS-NAME,2XKO
+PROCESS-NAME,2XKO.exe
+PROCESS-NAME,2XKO-Win64-Shipping.exe
+PROCESS-NAME,com.riotgames.league.wildrift
+PROCESS-NAME,com.riotgames.leagueoflegends
+PROCESS-NAME,com.riotgames.league.teamfighttactics
+
+# Riot identity / client / CDN / auth
+DOMAIN-SUFFIX,riotgames.com
+DOMAIN-SUFFIX,riotgames.net
+DOMAIN-SUFFIX,riotgames.jp
+DOMAIN-SUFFIX,riotgames.co.kr
+DOMAIN-SUFFIX,riotgames.info
+DOMAIN-SUFFIX,riotgames.tv
+DOMAIN-SUFFIX,riot-games.com
+DOMAIN-SUFFIX,riot.com
+DOMAIN-SUFFIX,riot.net
+DOMAIN-SUFFIX,riotcdn.net
+DOMAIN-SUFFIX,riotcdn.com
+DOMAIN-SUFFIX,rgpub.io
+DOMAIN-SUFFIX,rstatic.net
+DOMAIN-SUFFIX,riotpin.com
+DOMAIN-SUFFIX,riotpoints.com
+DOMAIN-SUFFIX,pvp.net
+DOMAIN-SUFFIX,pvp.tv
+DOMAIN,riotgames.zendesk.com
+
+# League of Legends / TFT / esports (international)
+DOMAIN-SUFFIX,leagueoflegends.com
+DOMAIN-SUFFIX,leagueoflegends.ca
+DOMAIN-SUFFIX,leagueoflegends.co.kr
+DOMAIN-SUFFIX,leagueoflegends.kr
+DOMAIN-SUFFIX,leagueoflegends.net
+DOMAIN-SUFFIX,leagueoflegends.org
+DOMAIN-SUFFIX,leagueoflegends.info
+DOMAIN-SUFFIX,lolstatic.com
+DOMAIN-SUFFIX,lolusercontent.com
+DOMAIN-SUFFIX,lolesports.com
+DOMAIN-SUFFIX,lolespor.com
+DOMAIN-SUFFIX,learnwithleague.com
+DOMAIN-SUFFIX,lol-europe.com
+DOMAIN-SUFFIX,ulol.com
+DOMAIN-SUFFIX,championshipseriesleague.com
+DOMAIN-SUFFIX,lcsmerch.com
+DOMAIN-SUFFIX,leaguehighschool.com
+DOMAIN-SUFFIX,lolshop.co.kr
+DOMAIN-SUFFIX,instituteofwar.org
+DOMAIN,lolstatic-a.akamaihd.net
+
+# Valorant / Wild Rift / 2XKO / Riot Forge
+DOMAIN-SUFFIX,playvalorant.com
+DOMAIN-SUFFIX,valorantesports.com
+DOMAIN-SUFFIX,2xko.com
+DOMAIN-SUFFIX,riotforgegames.com
+DOMAIN-SUFFIX,ruinedking.com
+DOMAIN-SUFFIX,convrgencegame.com

@@ -13,6 +13,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated, not a wholesale dump) |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
 | `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts |
+| `riot.list` | 🎮 游戏平台 | Riot Client plus first-party web (LoL / TFT / Valorant / Wild Rift / 2XKO). Tencent CN LoL omitted |
 | `selfbuilt.list` | 🫡 自建节点 | Overlay hook only — see below |
 | `discord.list` | 💬 Discord | Discord hosts |
 | `github.list` | 🛠️ GitHub | GitHub / git-related hosts |
@@ -44,7 +45,7 @@ Local lists are referenced as:
 14. 🤖 `ai.list` (local)
 15. 🛠️ `github.list` (local)
 16. 🎶 NetEaseMusic
-17. 🎮 Epic / Origin / Sony / `steam.list` / Nintendo
+17. 🎮 Epic / Origin / Sony / `steam.list` / `riot.list` / Nintendo
 18. 📹 YouTube
 19. 🎥 `Netflix.list` (local)
 20. 🎵 `spotify.list` (local)
