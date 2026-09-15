@@ -1,0 +1,86 @@
+# TikTok (international app and web)
+# ByteDance CN (douyin.com, toutiao.com, ixigua.com, bytedance.com, pstatp.com,
+# byteimg.com) is omitted so later ChinaDomain / GEOIP,CN can DIRECT those.
+# CapCut / Trae / Marscode are omitted (Trae / Marscode live in ai.list).
+# AppsFlyer and other shared attribution hosts are omitted.
+#
+# Why this list exists:
+# ACL4SSR ProxyMedia only has a short TikTok block and loads late as 🌍 国外媒体,
+# whose default exit is 🫡 自建节点 (Tencent 内网). TikTok treats that as CN.
+# Android also dials snssdk.com / isnssdk.com and raw IPs; snssdk.com sits in
+# ChinaDomain (DIRECT) and raw IPs hit GEOIP,CN — same class of leak as Binance.
+# PROCESS-NAME forces the Play Store / Trill packages through this group.
+
+# -----------------------------------------------------------------------------
+# Process
+# Desktop binary + Windows .exe + Android package. PROCESS-NAME is the reliable
+# fix for apps that dial raw IPs that would otherwise match GEOIP,CN / ChinaIp.
+# Douyin (com.ss.android.ugc.aweme) is omitted on purpose.
+# -----------------------------------------------------------------------------
+PROCESS-NAME,TikTok
+PROCESS-NAME,TikTok.exe
+PROCESS-NAME,com.zhiliaoapp.musically
+PROCESS-NAME,com.zhiliaoapp.musically.go
+PROCESS-NAME,com.ss.android.ugc.trill
+
+# Keywords (Akamai / Fastly hosts like p16-tiktokcdn-com.akamaized.net)
+DOMAIN-KEYWORD,tiktokcdn
+DOMAIN-KEYWORD,tiktok
+DOMAIN-KEYWORD,musical.ly
+
+# Core first-party
+DOMAIN-SUFFIX,tiktok.com
+DOMAIN-SUFFIX,tiktokv.com
+DOMAIN-SUFFIX,tiktokv.us
+DOMAIN-SUFFIX,tiktokv.eu
+DOMAIN-SUFFIX,tiktokw.us
+DOMAIN-SUFFIX,tiktokw.eu
+DOMAIN-SUFFIX,tiktokcdn.com
+DOMAIN-SUFFIX,tiktokcdn-us.com
+DOMAIN-SUFFIX,tiktokcdn-eu.com
+DOMAIN-SUFFIX,tiktokcdn-in.com
+DOMAIN-SUFFIX,tiktokrow-cdn.com
+DOMAIN-SUFFIX,tiktokeu-cdn.com
+DOMAIN-SUFFIX,ttcdn-us.com
+DOMAIN-SUFFIX,tiktokd.net
+DOMAIN-SUFFIX,tiktokd.org
+DOMAIN-SUFFIX,tik-tokapi.com
+DOMAIN-SUFFIX,tiktok-row.net
+DOMAIN-SUFFIX,tiktok-minis.com
+DOMAIN-SUFFIX,tiktokminis.us
+DOMAIN-SUFFIX,tiktokmusic.app
+DOMAIN-SUFFIX,tiktokglobalshopv.com
+DOMAIN-SUFFIX,musical.ly
+DOMAIN-SUFFIX,muscdn.com
+
+# ByteDance international (not the CN snssdk / pstatp / byteimg siblings)
+# snssdk.com is shared with Douyin; it must still win over ChinaDomain DIRECT
+# or the Android app cannot reach the API.
+DOMAIN-SUFFIX,byteoversea.com
+DOMAIN-SUFFIX,byteoversea.net
+DOMAIN-SUFFIX,ibytedtos.com
+DOMAIN-SUFFIX,ibyteimg.com
+DOMAIN-SUFFIX,ipstatp.com
+DOMAIN-SUFFIX,sgpstatp.com
+DOMAIN-SUFFIX,isnssdk.com
+DOMAIN-SUFFIX,sgsnssdk.com
+DOMAIN-SUFFIX,snssdk.com
+DOMAIN-SUFFIX,byteintlapi.com
+DOMAIN-SUFFIX,byteintl.net
+DOMAIN-SUFFIX,bytegecko-i18n.com
+DOMAIN-SUFFIX,bytedapm.com
+DOMAIN-SUFFIX,ttwebview.com
+DOMAIN-SUFFIX,ttwstatic.com
+DOMAIN-SUFFIX,ttlivecdn.com
+DOMAIN-SUFFIX,ttoversea.net
+DOMAIN-SUFFIX,ttoverseaus.net
+
+# CDN edge hostnames whose parent suffix is too broad to list
+DOMAIN,p16-tiktokcdn-com.akamaized.net
+DOMAIN,lf16-effectcdn.byteeffecttos-g.com
+DOMAIN,lf16-pkgcdn.pitaya-clientai.com
+DOMAIN-SUFFIX,tiktokcdn.com.akamaized.net
+DOMAIN-SUFFIX,tiktokcdn.com.edgesuite.net
+DOMAIN-SUFFIX,tiktokcdn-us.com.edgesuite.net
+DOMAIN-SUFFIX,tiktokv.com.edgekey.net
+DOMAIN-SUFFIX,tiktokv.com.edgesuite.net
