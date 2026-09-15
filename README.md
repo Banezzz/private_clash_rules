@@ -18,6 +18,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | `discord.list` | 💬 Discord | Discord hosts |
 | `github.list` | 🛠️ GitHub | GitHub / git-related hosts |
 | `spotify.list` | 🎵 Spotify | Spotify hosts |
+| `tiktok.list` | 📱 TikTok | International TikTok + Android packages. ByteDance CN (Douyin / Toutiao) omitted. Defaults to 🚀 节点选择, not 🫡 自建节点 |
 
 There is **no** `ai_suite.list`, **no** `ACL4SSR_Online_Full_MultiMode.ini`, and **no** local `ChinaDomain.list`. China domains come from upstream ACL4SSR.
 
@@ -49,16 +50,17 @@ Local lists are referenced as:
 18. 📹 YouTube
 19. 🎥 `Netflix.list` (local)
 20. 🎵 `spotify.list` (local)
-21. 📺 Bahamut / BilibiliHMT / Bilibili
-22. 🌏 ChinaMedia
-23. 🌍 ProxyMedia
-24. 🚀 ProxyGFWlist
-25. 🎯 ChinaIp (enabled)
-26. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
-27. 🎯 ChinaCompanyIp / Download
-28. 🎯 `[]GEOIP,LAN`
-29. 🎯 `[]GEOIP,CN`
-30. 🐟 `[]FINAL`
+21. 📱 `tiktok.list` (local) — before ChinaMedia / ChinaDomain so `snssdk.com` is not DIRECT
+22. 📺 Bahamut / BilibiliHMT / Bilibili
+23. 🌏 ChinaMedia
+24. 🌍 ProxyMedia
+25. 🚀 ProxyGFWlist
+26. 🎯 ChinaIp (enabled)
+27. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
+28. 🎯 ChinaCompanyIp / Download
+29. 🎯 `[]GEOIP,LAN`
+30. 🎯 `[]GEOIP,CN`
+31. 🐟 `[]FINAL`
 
 Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets.
 
@@ -76,6 +78,7 @@ The **first** item of each `select` group is the Clash default.
 | 🌍 国外媒体 | 🫡 自建节点 |
 | 🛠️ GitHub | 🫡 自建节点 |
 | 🎵 Spotify | 🫡 自建节点 |
+| 📱 TikTok | 🚀 节点选择 |
 | 📲 电报消息 | 🚀 节点选择 |
 | 💬 Discord | 🚀 节点选择 |
 | Ⓜ️ 微软云盘 / 微软服务 / 微软Bing | 🚀 节点选择 |
@@ -121,6 +124,8 @@ Do **not** add these (too broad or they fight the intended exit):
 - Netflix AWS `IP-CIDR` `/12`–`/16` blocks
 - Enabling ACL4SSR `SteamCN.list` (that would DIRECT Steam downloads)
 - Wholesale blackmatrix7 Crypto dumps into `trading.list`
+- ByteDance CN suffixes (`bytedance.com`, `pstatp.com`, `byteimg.com`, `douyin.com`) into `tiktok.list`
+- Defaulting 📱 TikTok to 🫡 自建节点 (Tencent 内网 is treated as CN)
 
 ## Rule format
 
