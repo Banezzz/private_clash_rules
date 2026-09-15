@@ -18,7 +18,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | `discord.list` | 💬 Discord | Discord hosts |
 | `github.list` | 🛠️ GitHub | GitHub / git-related hosts |
 | `spotify.list` | 🎵 Spotify | Spotify hosts |
-| `tiktok.list` | 📱 TikTok | International TikTok + Android packages. ByteDance CN (Douyin / Toutiao) omitted. Defaults to 🚀 节点选择, not 🫡 自建节点 |
+| `tiktok.list` | 📱 TikTok | International TikTok + Android packages. ByteDance CN (Douyin / Toutiao) omitted |
 
 There is **no** `ai_suite.list`, **no** `ACL4SSR_Online_Full_MultiMode.ini`, and **no** local `ChinaDomain.list`. China domains come from upstream ACL4SSR.
 
@@ -78,7 +78,7 @@ The **first** item of each `select` group is the Clash default.
 | 🌍 国外媒体 | 🫡 自建节点 |
 | 🛠️ GitHub | 🫡 自建节点 |
 | 🎵 Spotify | 🫡 自建节点 |
-| 📱 TikTok | 🚀 节点选择 |
+| 📱 TikTok | 🫡 自建节点 |
 | 📲 电报消息 | 🚀 节点选择 |
 | 💬 Discord | 🚀 节点选择 |
 | Ⓜ️ 微软云盘 / 微软服务 / 微软Bing | 🚀 节点选择 |
@@ -125,7 +125,6 @@ Do **not** add these (too broad or they fight the intended exit):
 - Enabling ACL4SSR `SteamCN.list` (that would DIRECT Steam downloads)
 - Wholesale blackmatrix7 Crypto dumps into `trading.list`
 - ByteDance CN suffixes (`bytedance.com`, `pstatp.com`, `byteimg.com`, `douyin.com`) into `tiktok.list`
-- Defaulting 📱 TikTok to 🫡 自建节点 (Tencent 内网 is treated as CN)
 
 ## Rule format
 
