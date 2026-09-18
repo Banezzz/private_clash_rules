@@ -211,11 +211,18 @@ DOMAIN-SUFFIX,blitz.exchange
 DOMAIN-SUFFIX,hyperliquid.xyz
 DOMAIN-SUFFIX,hyperfoundation.org
 DOMAIN-SUFFIX,dydx.exchange
+DOMAIN-SUFFIX,dydx.xyz
+DOMAIN-SUFFIX,dydx.trade
 DOMAIN-SUFFIX,four.meme
 DOMAIN-SUFFIX,variational.io
 DOMAIN-SUFFIX,variational.cloud
 DOMAIN-SUFFIX,lighter.xyz
+# Lighter matching/API is on elliot.ai, not lighter.xyz
+DOMAIN-SUFFIX,zklighter.elliot.ai
+DOMAIN,explorer.elliot.ai
 DOMAIN-SUFFIX,asterdex.com
+DOMAIN-SUFFIX,aster.finance
+DOMAIN-SUFFIX,astherus.com
 DOMAIN-SUFFIX,edgex.exchange
 DOMAIN-SUFFIX,extended.exchange
 DOMAIN-SUFFIX,grvt.io
@@ -228,6 +235,14 @@ DOMAIN-SUFFIX,jup.ag
 DOMAIN-SUFFIX,standx.com
 DOMAIN-SUFFIX,ostium.io
 DOMAIN-SUFFIX,gmx.io
+DOMAIN-SUFFIX,gmxapi.io
+DOMAIN-SUFFIX,gmxapi.ai
+DOMAIN-SUFFIX,gmxinfra.io
+DOMAIN-SUFFIX,aevo.xyz
+DOMAIN-SUFFIX,orderly.network
+DOMAIN-SUFFIX,gains.trade
+DOMAIN-SUFFIX,gainsnetwork.io
+DOMAIN-SUFFIX,derive.xyz
 DOMAIN-SUFFIX,antarctic.exchange
 DOMAIN-SUFFIX,paradex.trade
 DOMAIN-SUFFIX,vertexprotocol.com
