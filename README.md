@@ -10,7 +10,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
 | `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
-| `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated, not a wholesale dump) |
+| `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
 | `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts |
 | `riot.list` | 🎮 游戏平台 | Riot Client plus first-party web (LoL / TFT / Valorant / Wild Rift / 2XKO). Tencent CN LoL omitted |
@@ -32,9 +32,9 @@ Local lists are referenced as:
 
 1. 🎯 LocalAreaNetwork
 2. 🎯 UnBan
-3. 🛑 BanAD
-4. 🫡 `selfbuilt.list` (local overlay)
-5. 📈 `trading.list` (local)
+3. 📈 `trading.list` (local) — **before BanAD** so exchange Android `PROCESS-NAME` and first-party hosts win over AppsFlyer / push REJECT
+4. 🛑 BanAD
+5. 🫡 `selfbuilt.list` (local overlay)
 6. 🍃 BanProgramAD
 7. 📢 GoogleFCM
 8. 🎯 GoogleCN
@@ -62,7 +62,7 @@ Local lists are referenced as:
 30. 🎯 `[]GEOIP,CN`
 31. 🐟 `[]FINAL`
 
-Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets.
+Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets. `trading.list` also sits above `BanAD`: otherwise Binance / OKX Android init (AppsFlyer tenant, vendor push) is REJECT and the app never wakes those services.
 
 ## Default exits
 
@@ -132,7 +132,7 @@ Do **not** add these (too broad or they fight the intended exit):
 - `DOMAIN-SUFFIX` — host and all subdomains
 - `DOMAIN-KEYWORD` — substring match (easy to over-capture)
 - `IP-CIDR` / `IP-CIDR6` — always append `,no-resolve`
-- `PROCESS-NAME` — desktop / Android package name (not DNS)
+- `PROCESS-NAME` — desktop binary or Android package name (not DNS). On Clash Meta / Mihomo Android this matches the app UID, so every subprocess is covered. TUN + process matching must be enabled on the client.
 
 ## `scripts/check_rules.py`
 

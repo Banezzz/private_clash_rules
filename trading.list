@@ -3,18 +3,22 @@
 
 # -----------------------------------------------------------------------------
 # Process
-# Desktop binary + Windows .exe + Android package. PROCESS-NAME is the reliable
-# fix for apps that dial raw IPs (e.g. Binance CN acceleration nodes).
+# Desktop binary + Windows .exe + Android package. On Mihomo / Clash Meta
+# Android, PROCESS-NAME matches the Play Store package (UID), so every
+# subprocess of that app is covered — including raw IPs that would otherwise
+# hit GEOIP,CN. This list must load before BanAD or AppsFlyer / push hosts
+# used to wake Android exchange services are REJECT.
 # -----------------------------------------------------------------------------
-# OKX
+# OKX (Play Store + official APK)
 PROCESS-NAME,OKX
 PROCESS-NAME,OKX.exe
 PROCESS-NAME,com.okinc.okex.gp
 PROCESS-NAME,com.okinc.okex
-# Binance
+# Binance (Play Store / official APK + Binance.US)
 PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
 PROCESS-NAME,com.binance.dev
+PROCESS-NAME,com.binance.us
 # Bybit
 PROCESS-NAME,Bybit
 PROCESS-NAME,Bybit.exe
@@ -31,9 +35,16 @@ PROCESS-NAME,com.bitget.exchange
 PROCESS-NAME,Gate
 PROCESS-NAME,Gate.exe
 PROCESS-NAME,com.gateio.gateio
+# Coinbase / KuCoin / HTX / Crypto.com / BingX
+PROCESS-NAME,com.coinbase.android
+PROCESS-NAME,com.kubi.kucoin
+PROCESS-NAME,pro.huobi
+PROCESS-NAME,co.mona.android
+PROCESS-NAME,pro.bingbon.app
 # TradingView
 PROCESS-NAME,TradingView
 PROCESS-NAME,TradingView.exe
+PROCESS-NAME,com.tradingview.tradingviewapp
 
 # -----------------------------------------------------------------------------
 # CEX
@@ -46,12 +57,19 @@ DOMAIN-SUFFIX,okx.com
 DOMAIN-KEYWORD,okx
 DOMAIN-SUFFIX,okex.com
 DOMAIN-SUFFIX,oklink.com
+DOMAIN-SUFFIX,okx-dns.com
+DOMAIN-SUFFIX,okx-dns1.com
+DOMAIN-SUFFIX,okx-dns2.com
+DOMAIN-SUFFIX,okx.ac
+DOMAIN-SUFFIX,okx.cab
 DOMAIN-SUFFIX,ouxyi.cash
+DOMAIN-SUFFIX,xlayer.tech
 DOMAIN-SUFFIX,coinbase.com
 DOMAIN-SUFFIX,bybit.com
 DOMAIN-SUFFIX,upbit.com
 DOMAIN-SUFFIX,kraken.com
 DOMAIN-SUFFIX,gate.io
+DOMAIN-SUFFIX,gate.ac
 DOMAIN-SUFFIX,htx.com
 DOMAIN-SUFFIX,bitfinex.com
 DOMAIN-SUFFIX,kucoin.com
@@ -117,14 +135,26 @@ DOMAIN-SUFFIX,binancezh.pro
 DOMAIN-SUFFIX,binancezh.sh
 DOMAIN-SUFFIX,binancezh.top
 DOMAIN-SUFFIX,bnappzh.co
+DOMAIN-SUFFIX,bnappzh.com
+DOMAIN-SUFFIX,bnappzh.mobi
+DOMAIN-SUFFIX,bnappweb.black
+DOMAIN-SUFFIX,bmwweb.solutions
 DOMAIN-SUFFIX,bnbstatic.com
+DOMAIN-SUFFIX,bnbchain.org
 DOMAIN-SUFFIX,bnbzh.ac
 DOMAIN-SUFFIX,bntrace.com
+DOMAIN-SUFFIX,bsappapi.cc
+DOMAIN-SUFFIX,bsappapi.com
+DOMAIN-SUFFIX,bscdnweb.com
 DOMAIN-SUFFIX,nftstatic.com
 DOMAIN-SUFFIX,saasexch.cc
 DOMAIN-SUFFIX,saasexch.co
 DOMAIN-SUFFIX,saasexch.io
 DOMAIN-SUFFIX,saasexch.com
+DOMAIN-SUFFIX,saasexch.info
+# Binance AppsFlyer tenant (BanAD DOMAIN-KEYWORD,appsflyer would REJECT these)
+DOMAIN,zftksc.cdn-settings.appsflyersdk.com
+DOMAIN,zftksc.launches.appsflyersdk.com
 DOMAIN-SUFFIX,yingwangtech.cloud
 DOMAIN-SUFFIX,yingwangtech.net
 DOMAIN-SUFFIX,yingwangtech.mobi
