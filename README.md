@@ -133,6 +133,7 @@ Do **not** add these (too broad or they fight the intended exit):
 - `DOMAIN-KEYWORD` — substring match (easy to over-capture)
 - `IP-CIDR` / `IP-CIDR6` — always append `,no-resolve`
 - `PROCESS-NAME` — desktop binary or Android package name (not DNS). On Clash Meta / Mihomo Android this matches the app UID, so every subprocess is covered. TUN + process matching must be enabled on the client.
+- `PROCESS-NAME-WILDCARD` — Mihomo wildcard (e.g. `com.okinc.okex*`) for Android `:push` / `:remote` subprocesses when exact `PROCESS-NAME` misses. OKX Android HTTPDNS then dials a raw CN IP; without a process hit the flow falls through to `GEOIP,CN` DIRECT.
 
 ## `scripts/check_rules.py`
 
