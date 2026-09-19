@@ -9,11 +9,17 @@
 # hit GEOIP,CN. This list must load before BanAD or AppsFlyer / push hosts
 # used to wake Android exchange services are REJECT.
 # -----------------------------------------------------------------------------
-# OKX (Play Store + official APK)
+# OKX (Play Store + official APK + Wallet)
+# Android resolves via HTTPDNS then dials the raw CN IP, so DOMAIN-SUFFIX,okx.com
+# never sees a hostname and GEOIP,CN steals the flow unless PROCESS-NAME hits.
+# Wildcard covers :push / :remote / :channel subprocesses that exact-match misses.
 PROCESS-NAME,OKX
 PROCESS-NAME,OKX.exe
 PROCESS-NAME,com.okinc.okex.gp
 PROCESS-NAME,com.okinc.okex
+PROCESS-NAME,com.okx.wallet
+PROCESS-NAME-WILDCARD,com.okinc.okex*
+PROCESS-NAME-WILDCARD,com.okx.wallet*
 # Binance (Play Store / official APK + Binance.US)
 PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
@@ -48,13 +54,15 @@ PROCESS-NAME,com.tradingview.tradingviewapp
 
 # -----------------------------------------------------------------------------
 # CEX
-# Brand-unique keywords kept only for binance / okx. Others are suffix-only.
+# Brand-unique keywords kept only for binance / okx / okex / ouxyi. Others are suffix-only.
 # DOMAIN-KEYWORD,gemini stays commented — conflicts with Google Gemini.
 # -----------------------------------------------------------------------------
 DOMAIN-SUFFIX,binance.com
 DOMAIN-KEYWORD,binance
 DOMAIN-SUFFIX,okx.com
 DOMAIN-KEYWORD,okx
+DOMAIN-KEYWORD,okex
+DOMAIN-KEYWORD,ouxyi
 DOMAIN-SUFFIX,okex.com
 DOMAIN-SUFFIX,oklink.com
 DOMAIN-SUFFIX,okx-dns.com
@@ -63,6 +71,10 @@ DOMAIN-SUFFIX,okx-dns2.com
 DOMAIN-SUFFIX,okx.ac
 DOMAIN-SUFFIX,okx.cab
 DOMAIN-SUFFIX,ouxyi.cash
+DOMAIN-SUFFIX,cnouyi.pizza
+DOMAIN-SUFFIX,coinall.ltd
+DOMAIN-SUFFIX,kjmte.com
+DOMAIN,d1w1p0smpsoh5j.cloudfront.net
 DOMAIN-SUFFIX,xlayer.tech
 DOMAIN-SUFFIX,coinbase.com
 DOMAIN-SUFFIX,bybit.com
