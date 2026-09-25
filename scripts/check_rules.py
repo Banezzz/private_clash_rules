@@ -119,6 +119,9 @@ def main() -> int:
         "Clash/Apple.list",
         "Clash/Ruleset/AppleTV.list",
         "Clash/Ruleset/Netflix.list",
+        "Clash/Ruleset/NetflixIP.list",
+        "Clash/Ruleset/Crypto.list",
+        "Clash/Ruleset/OpenAi.list",
         "Clash/Ruleset/Spotify.list",
         "Clash/Ruleset/TikTok.list",
         "Clash/Ruleset/Binance.list",
@@ -134,9 +137,6 @@ def main() -> int:
             findings.append(f"main.ini: missing upstream ruleset {name}")
     forbidden_upstream = (
         "SteamCN.list",
-        "NetflixIP.list",
-        "OpenAi.list",
-        "Crypto.list",
         "AppleNews.list",
     )
     for name in forbidden_upstream:
