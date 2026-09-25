@@ -1,0 +1,10 @@
+# YouTube app supplement (📹 油管视频), loaded before ACL4SSR YouTube.list
+# Upstream is domain-only. Process rules keep the whole app on one exit, including
+# googlevideo QUIC and shared Google hosts that would otherwise hit 🚀 节点选择.
+
+# Android
+PROCESS-NAME,com.google.android.youtube
+PROCESS-NAME,com.google.android.apps.youtube.music
+PROCESS-NAME,com.google.android.apps.youtube.kids
+PROCESS-NAME,com.google.android.apps.youtube.creator
+PROCESS-NAME,app.revanced.android.youtube

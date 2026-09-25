@@ -39,4 +39,7 @@ DOMAIN,spotify.map.fastlylb.net
 # Spotify clients
 PROCESS-NAME,Spotify.exe
 PROCESS-NAME,Spotify
+PROCESS-NAME,Spotify Helper
+PROCESS-NAME,Spotify Helper (Renderer)
 PROCESS-NAME,com.spotify.music
+PROCESS-NAME,com.spotify.tv.android

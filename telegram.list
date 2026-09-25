@@ -1,0 +1,21 @@
+# Telegram supplement (📲 电报消息), loaded before ACL4SSR Telegram.list
+# Upstream keeps its PROCESS-NAME lines commented out and misses some ranges from
+# https://core.telegram.org/resources/cidr.txt. Telegram clients dial raw DC IPs,
+# so the IP ranges and process rules are what actually route them.
+
+# Android
+PROCESS-NAME,org.telegram.messenger
+PROCESS-NAME,org.telegram.messenger.web
+PROCESS-NAME,org.thunderdog.challegram
+PROCESS-NAME,tw.nekomimi.nekogram
+PROCESS-NAME,org.telegram.plus
+
+# Desktop (Telegram Desktop / macOS Telegram)
+PROCESS-NAME,Telegram.exe
+PROCESS-NAME,Telegram
+
+# Official ranges missing upstream
+IP-CIDR,91.105.192.0/23,no-resolve
+IP-CIDR,185.76.151.0/24,no-resolve
+IP-CIDR6,2001:b28:f23c::/48,no-resolve
+IP-CIDR6,2a0a:f280::/32,no-resolve

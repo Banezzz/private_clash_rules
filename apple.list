@@ -1,0 +1,35 @@
+# Apple DIRECT supplement (🍎 苹果服务), loaded before ACL4SSR Apple.list
+# Upstream has no CN-only hosts beyond apple.com.cn / icloud.com.cn and no process
+# rules, so Apple apps on Android / Windows are matched by domain only there.
+# Region-gated services (TV+ / News / TestFlight / Private Relay) are in apple_proxy.list.
+
+# CN iCloud (GCBD) and CN-only Apple hosts
+DOMAIN-SUFFIX,icloud-content.com.cn
+DOMAIN-SUFFIX,apple.cn
+DOMAIN-SUFFIX,apple-livephotoskit.com
+DOMAIN,safebrowsing.apple
+
+# IPv6 (upstream Apple.list is IPv4-only)
+IP-CIDR6,2403:300::/32,no-resolve
+IP-CIDR6,2620:149::/32,no-resolve
+IP-CIDR6,2a01:b740::/32,no-resolve
+
+# Android
+PROCESS-NAME,com.apple.android.music
+
+# Windows: Apple Music / iTunes / Apple Devices / iCloud for Windows / push daemon
+PROCESS-NAME,AppleMusic.exe
+PROCESS-NAME,iTunes.exe
+PROCESS-NAME,AppleDevices.exe
+PROCESS-NAME,iCloud.exe
+PROCESS-NAME,iCloudServices.exe
+PROCESS-NAME,iCloudDrive.exe
+PROCESS-NAME,iCloudPhotos.exe
+PROCESS-NAME,ApplePhotoStreams.exe
+PROCESS-NAME,iCloudPasswords.exe
+PROCESS-NAME,APSDaemon.exe
+
+# macOS system daemons: push (APNs) / CloudKit / iCloud Drive
+PROCESS-NAME,apsd
+PROCESS-NAME,cloudd
+PROCESS-NAME,bird

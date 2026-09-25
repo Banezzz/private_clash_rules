@@ -41,8 +41,10 @@ DOMAIN,hammerandchisel.ssl.zendesk.com
 PROCESS-NAME,Discord.exe
 PROCESS-NAME,Discord
 PROCESS-NAME,DiscordCanary.exe
-PROCESS-NAME,DiscordCanary
 PROCESS-NAME,DiscordPTB.exe
-PROCESS-NAME,DiscordPTB
+# macOS: Electron traffic comes from the Helper processes, not the main binary
+PROCESS-NAME,Discord Helper
+PROCESS-NAME,Discord Helper (Renderer)
+PROCESS-NAME,Discord Canary
+PROCESS-NAME,Discord PTB
 PROCESS-NAME,com.discord
-PROCESS-NAME,com.hammerandchisel.discord

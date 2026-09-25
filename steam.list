@@ -4,10 +4,18 @@
 # downloads hit 游戏平台 (not later ChinaDomain DIRECT).
 
 # Process
+# Process names match case-insensitively; Linux steam / Windows .exe / macOS steam_osx + Helpers
 PROCESS-NAME,steam
-PROCESS-NAME,Steam
 PROCESS-NAME,steam.exe
 PROCESS-NAME,steamwebhelper.exe
+PROCESS-NAME,steamservice.exe
+PROCESS-NAME,steamwebhelper
+PROCESS-NAME,steam_osx
+PROCESS-NAME,Steam Helper
+PROCESS-NAME,Steam Helper (Renderer)
+# Android: Steam mobile (Steam Guard) / Steam Chat
+PROCESS-NAME,com.valvesoftware.android.steam.community
+PROCESS-NAME,com.valvesoftware.android.steam.friendsui
 
 # Store / community / first-party
 DOMAIN-SUFFIX,steampowered.com

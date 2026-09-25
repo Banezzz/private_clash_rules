@@ -78,4 +78,9 @@ DOMAIN-SUFFIX,bitbucket.org
 
 # GitHub Desktop
 PROCESS-NAME,GitHubDesktop.exe
-PROCESS-NAME,GitHubDesktop
+PROCESS-NAME,GitHub Desktop
+PROCESS-NAME,GitHub Desktop Helper
+PROCESS-NAME,GitHub Desktop Helper (Renderer)
+
+# GitHub mobile (Android)
+PROCESS-NAME,com.github.android

@@ -4,9 +4,10 @@
 # AWS / Akamai / ISP transit ranges and USER-AGENT are omitted (Clash ignores USER-AGENT).
 
 # Process
+# Android only: there is no macOS app, and the Windows Store app runs inside the
+# shared WWAHost.exe, so desktop Netflix is matched by domain.
 PROCESS-NAME,com.netflix.mediaclient
-PROCESS-NAME,Netflix
-PROCESS-NAME,Netflix.exe
+PROCESS-NAME,com.netflix.ninja
 
 # Keywords (API proxy / NTS / speedtest)
 DOMAIN-KEYWORD,apiproxy-device-prod-nlb-

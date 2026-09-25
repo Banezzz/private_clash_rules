@@ -12,12 +12,12 @@
 
 # -----------------------------------------------------------------------------
 # Process
-# Desktop binary + Windows .exe + Android package. PROCESS-NAME is the reliable
+# macOS (iOS app on Apple silicon) + Android package. The Windows Store app is a
+# PWA inside msedge.exe, so it is matched by domain. PROCESS-NAME is the reliable
 # fix for apps that dial raw IPs that would otherwise match GEOIP,CN / ChinaIp.
 # Douyin (com.ss.android.ugc.aweme) is omitted on purpose.
 # -----------------------------------------------------------------------------
 PROCESS-NAME,TikTok
-PROCESS-NAME,TikTok.exe
 PROCESS-NAME,com.zhiliaoapp.musically
 PROCESS-NAME,com.zhiliaoapp.musically.go
 PROCESS-NAME,com.ss.android.ugc.trill
