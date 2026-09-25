@@ -32,6 +32,8 @@ Local lists are referenced as:
 
 `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/<file>`
 
+Where a matching ACL4SSR list exists, `main.ini` loads the local file first and the upstream URL second, into the same group. Subconverter fetches upstream at conversion time, so new upstream rules arrive without editing this repo. A local rule wins only when it names the same host first. These upstream files are not loaded, because they override the customization or are too broad: `SteamCN.list`, `NetflixIP.list`, `OpenAi.list` (pulls in `stripe.com` / `sentry.io`), `Crypto.list`, `AppleNews.list` (`gspe1-ssl.ls.apple.com` is shared with Maps). Upstream `Apple.list` is loaded after Microsoft and after four inline guards (`crashlytics.com` and three non-Apple CIDRs → 🐟 漏网之鱼). Its `akadns.net` line never matches, because Microsoft already claimed that zone.
+
 ## Load order
 
 `main.ini` `ruleset=` lines are applied top to bottom.
