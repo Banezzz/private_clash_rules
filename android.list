@@ -1,0 +1,20 @@
+# Android platform services that need a reachable Google connection
+# PROCESS-NAME matches Android package names in Mihomo. These rules must load
+# before ad blocking and GoogleCN so Play Services can also reach raw IPs and
+# shared hosts without being rejected or forced DIRECT.
+
+# Google Play Store and system services
+PROCESS-NAME,com.android.vending
+PROCESS-NAME,com.google.android.gms
+PROCESS-NAME,com.google.android.gsf
+PROCESS-NAME,com.google.android.play.games
+
+# Play Store API and delivery hosts
+DOMAIN,android.clients.google.com
+DOMAIN,play-fe.googleapis.com
+DOMAIN,play.googleapis.com
+DOMAIN,play-lh.googleusercontent.com
+DOMAIN-SUFFIX,android.com
+DOMAIN-SUFFIX,googleplay.com
+DOMAIN-SUFFIX,gvt1.com
+DOMAIN-SUFFIX,gvt2.com

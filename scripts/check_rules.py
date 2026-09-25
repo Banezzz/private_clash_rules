@@ -1,24 +1,31 @@
 #!/usr/bin/env python3
-"""Check repo-root Clash *.list files and README mentions.
-
-Scans *.list in the repository root (not subdirectories) for:
-  1. Duplicate rule lines (comments and blank lines ignored)
-  2. IP-CIDR / IP-CIDR6 rules missing ,no-resolve
-  3. Dangerous DOMAIN-SUFFIX values that over-capture
-  4. README.md mentioning each existing *.list filename and main.ini
-
-Comments starting with # are allowed. Exit 1 if any finding is reported.
-"""
+"""Validate repository Clash rule lists and subconverter wiring."""
 
 from __future__ import annotations
 
+import ipaddress
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
+from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parent.parent
 README_PATH = ROOT / "README.md"
-MAIN_INI = "main.ini"
+MAIN_INI_PATH = ROOT / "main.ini"
+
+DOMAIN_RULES = {"DOMAIN", "DOMAIN-SUFFIX"}
+PROCESS_RULES = {"PROCESS-NAME", "PROCESS-NAME-WILDCARD"}
+SUPPORTED_RULES = DOMAIN_RULES | PROCESS_RULES | {
+    "DOMAIN-KEYWORD",
+    "IP-CIDR",
+    "IP-CIDR6",
+}
+DOMAIN_RE = re.compile(
+    r"^(?=.{1,253}\Z)(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*"
+    r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$",
+    re.IGNORECASE,
+)
 
 DANGEROUS_SUFFIXES = {
     "googleapis.com",
@@ -49,17 +56,57 @@ def scan_list(path: Path) -> list[str]:
         rule = rule_payload(raw)
         seen[rule].append(lineno)
 
-        kind, _, rest = rule.partition(",")
+        kind, separator, _ = rule.partition(",")
         kind = kind.strip().upper()
+        if not separator or kind not in SUPPORTED_RULES:
+            findings.append(
+                f"{path.name}:{lineno}: unsupported or malformed rule: {rule}"
+            )
+            continue
+
+        parts = [part.strip() for part in rule.split(",")]
+        expected_parts = 3 if kind in {"IP-CIDR", "IP-CIDR6"} else 2
+        if len(parts) != expected_parts or any(not part for part in parts):
+            findings.append(
+                f"{path.name}:{lineno}: {kind} expects {expected_parts} "
+                f"comma-separated fields: {rule}"
+            )
+            continue
+
+        payload = parts[1]
+        if kind in DOMAIN_RULES and not DOMAIN_RE.fullmatch(payload):
+            findings.append(
+                f"{path.name}:{lineno}: invalid domain payload ({payload}): {rule}"
+            )
+
+        if kind == "PROCESS-NAME-WILDCARD":
+            if "*" not in payload and "?" not in payload:
+                findings.append(
+                    f"{path.name}:{lineno}: wildcard rule has no wildcard: {rule}"
+                )
+
         if kind in {"IP-CIDR", "IP-CIDR6"}:
-            parts = [p.strip() for p in rest.split(",")]
             if "no-resolve" not in parts:
                 findings.append(
                     f"{path.name}:{lineno}: {kind} missing ,no-resolve: {rule}"
                 )
+            try:
+                network = ipaddress.ip_network(payload, strict=True)
+            except ValueError as error:
+                findings.append(
+                    f"{path.name}:{lineno}: invalid {kind} network "
+                    f"({error}): {rule}"
+                )
+            else:
+                expected_version = 4 if kind == "IP-CIDR" else 6
+                if network.version != expected_version:
+                    findings.append(
+                        f"{path.name}:{lineno}: {kind} contains IPv"
+                        f"{network.version}: {rule}"
+                    )
 
         if kind == "DOMAIN-SUFFIX":
-            suffix = rest.split(",", 1)[0].strip().lower()
+            suffix = payload.lower()
             if suffix in DANGEROUS_SUFFIXES:
                 findings.append(
                     f"{path.name}:{lineno}: dangerous DOMAIN-SUFFIX ({suffix}): {rule}"
@@ -73,13 +120,86 @@ def scan_list(path: Path) -> list[str]:
     return findings
 
 
+def check_main_ini(list_files: list[Path]) -> list[str]:
+    """Check local rule references and policy group definitions."""
+    if not MAIN_INI_PATH.is_file():
+        return ["main.ini: file is missing"]
+
+    findings: list[str] = []
+    ruleset_groups: list[tuple[int, str]] = []
+    defined_groups: set[str] = set()
+    referenced_local_lists: dict[str, list[int]] = defaultdict(list)
+
+    for lineno, raw in enumerate(
+        MAIN_INI_PATH.read_text(encoding="utf-8").splitlines(), 1
+    ):
+        line = raw.strip()
+        if not line or line.startswith(";"):
+            continue
+
+        if line.startswith("ruleset="):
+            value = line.removeprefix("ruleset=")
+            group, separator, source = value.partition(",")
+            if not separator or not group.strip() or not source.strip():
+                findings.append(f"main.ini:{lineno}: malformed ruleset: {line}")
+                continue
+            ruleset_groups.append((lineno, group.strip()))
+            source = source.strip()
+            if source.startswith("http://"):
+                findings.append(
+                    f"main.ini:{lineno}: remote ruleset must use HTTPS: {source}"
+                )
+            if "Banezzz/private_clash_rules/main/" in source:
+                filename = Path(urlparse(source).path).name
+                referenced_local_lists[filename].append(lineno)
+
+        if line.startswith("custom_proxy_group="):
+            value = line.removeprefix("custom_proxy_group=")
+            group, separator, _ = value.partition("`")
+            if not separator or not group.strip():
+                findings.append(
+                    f"main.ini:{lineno}: malformed custom_proxy_group: {line}"
+                )
+            else:
+                defined_groups.add(group.strip())
+            if "http://" in line:
+                findings.append(
+                    f"main.ini:{lineno}: health-check URL must use HTTPS"
+                )
+
+    for lineno, group in ruleset_groups:
+        if group not in defined_groups:
+            findings.append(
+                f"main.ini:{lineno}: ruleset policy group is undefined: {group}"
+            )
+
+    expected_local_lists = {path.name for path in list_files}
+    referenced_names = set(referenced_local_lists)
+    for filename in sorted(expected_local_lists - referenced_names):
+        findings.append(f"main.ini: local list is not referenced: {filename}")
+    for filename in sorted(referenced_names - expected_local_lists):
+        lines = ", ".join(f"L{line}" for line in referenced_local_lists[filename])
+        findings.append(
+            f"main.ini: references missing local list ({lines}): {filename}"
+        )
+    for filename, lines in sorted(referenced_local_lists.items()):
+        if len(lines) > 1:
+            locations = ", ".join(f"L{line}" for line in lines)
+            findings.append(
+                f"main.ini: local list referenced more than once "
+                f"({locations}): {filename}"
+            )
+
+    return findings
+
+
 def check_readme(list_files: list[Path]) -> list[str]:
     findings: list[str] = []
     if not README_PATH.is_file():
         return ["README.md: file is missing"]
 
     text = README_PATH.read_text(encoding="utf-8")
-    required = [MAIN_INI] + [p.name for p in list_files]
+    required = [MAIN_INI_PATH.name] + [p.name for p in list_files]
     missing = [name for name in required if name not in text]
     if missing:
         findings.append(
@@ -98,6 +218,7 @@ def main() -> int:
     findings: list[str] = []
     for path in list_files:
         findings.extend(scan_list(path))
+    findings.extend(check_main_ini(list_files))
     findings.extend(check_readme(list_files))
 
     if findings:
@@ -106,8 +227,7 @@ def main() -> int:
             print(f"  [FAIL] {item}")
         return 1
 
-    print("OK: no duplicate rules, missing no-resolve flags,")
-    print("    dangerous DOMAIN-SUFFIX values, or README filename gaps.")
+    print("OK: rule syntax, CIDRs, main.ini wiring, and documentation are valid.")
     return 0
 
 

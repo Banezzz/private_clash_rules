@@ -1,7 +1,7 @@
 # Content: Steam
 # Count: 30
 # Valve store / community / download hosts. steamcontent stays here so game
-# downloads hit 游戏平台 (not later ChinaDomain DIRECT).
+# downloads hit the Game Platform group (not later ChinaDomain DIRECT).
 
 # Process
 PROCESS-NAME,steam

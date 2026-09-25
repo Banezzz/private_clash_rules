@@ -5,7 +5,7 @@
 # AppsFlyer and other shared attribution hosts are omitted.
 #
 # Why this list exists:
-# ACL4SSR ProxyMedia only has a short TikTok block and loads late as 🌍 国外媒体.
+# ACL4SSR ProxyMedia only has a short TikTok block and loads late as Foreign Media.
 # Android also dials snssdk.com / isnssdk.com and raw IPs; snssdk.com sits in
 # ChinaDomain (DIRECT) and raw IPs hit GEOIP,CN — same class of leak as Binance.
 # PROCESS-NAME forces the Play Store / Trill packages through this group.

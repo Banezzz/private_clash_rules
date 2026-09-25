@@ -9,6 +9,8 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | File | Policy group | Notes |
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
+| `apple.list` | 🍎 苹果服务 | Apple account, iCloud, APNs, updates, media, IPv4/IPv6, plus Windows and Android clients |
+| `android.list` | 🤖 Android 服务 | Google Play and core Android services; loads before ad blocking and GoogleCN |
 | `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
@@ -32,35 +34,36 @@ Local lists are referenced as:
 
 1. 🎯 LocalAreaNetwork
 2. 🎯 UnBan
-3. 📈 `trading.list` (local) — **before BanAD** so exchange Android `PROCESS-NAME` and first-party hosts win over AppsFlyer / push REJECT
-4. 🛑 BanAD
-5. 🫡 `selfbuilt.list` (local overlay)
-6. 🍃 BanProgramAD
-7. 📢 GoogleFCM
-8. 🎯 GoogleCN
-9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
-10. Ⓜ️ Bing / OneDrive / Microsoft
-11. 🍎 Apple
-12. 📲 Telegram
-13. 💬 `discord.list` (local)
-14. 🤖 `ai.list` (local)
-15. 🛠️ `github.list` (local)
-16. 🎶 NetEaseMusic
-17. 🎮 Epic / Origin / Sony / `steam.list` / `riot.list` / Nintendo
-18. 📹 YouTube
-19. 🎥 `Netflix.list` (local)
-20. 🎵 `spotify.list` (local)
-21. 📱 `tiktok.list` (local) — before ChinaMedia / ChinaDomain so `snssdk.com` is not DIRECT
-22. 📺 Bahamut / BilibiliHMT / Bilibili
-23. 🌏 ChinaMedia
-24. 🌍 ProxyMedia
-25. 🚀 ProxyGFWlist
-26. 🎯 ChinaIp (enabled)
-27. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
-28. 🎯 ChinaCompanyIp / Download
-29. 🎯 `[]GEOIP,LAN`
-30. 🎯 `[]GEOIP,CN`
-31. 🐟 `[]FINAL`
+3. 🤖 `android.list` (local) — **before BanAD and GoogleCN** so Play Services process rules cover shared hosts and raw IPs
+4. 📈 `trading.list` (local) — **before BanAD** so exchange Android `PROCESS-NAME` and first-party hosts win over AppsFlyer / push REJECT
+5. 🛑 BanAD
+6. 🫡 `selfbuilt.list` (local overlay)
+7. 🍃 BanProgramAD
+8. 📢 GoogleFCM
+9. 🎯 GoogleCN
+10. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
+11. Ⓜ️ Bing / OneDrive / Microsoft
+12. 🍎 `apple.list` (local)
+13. 📲 Telegram
+14. 💬 `discord.list` (local)
+15. 🤖 `ai.list` (local)
+16. 🛠️ `github.list` (local)
+17. 🎶 NetEaseMusic
+18. 🎮 Epic / Origin / Sony / `steam.list` / `riot.list` / Nintendo
+19. 📹 YouTube
+20. 🎥 `Netflix.list` (local)
+21. 🎵 `spotify.list` (local)
+22. 📱 `tiktok.list` (local) — before ChinaMedia / ChinaDomain so `snssdk.com` is not DIRECT
+23. 📺 Bahamut / BilibiliHMT / Bilibili
+24. 🌏 ChinaMedia
+25. 🌍 ProxyMedia
+26. 🚀 ProxyGFWlist
+27. 🎯 ChinaIp (enabled)
+28. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
+29. 🎯 ChinaCompanyIp / Download
+30. 🎯 `[]GEOIP,LAN`
+31. 🎯 `[]GEOIP,CN`
+32. 🐟 `[]FINAL`
 
 Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets. `trading.list` also sits above `BanAD`: otherwise Binance / OKX Android init (AppsFlyer tenant, vendor push) is REJECT and the app never wakes those services.
 
@@ -81,6 +84,7 @@ The **first** item of each `select` group is the Clash default.
 | 📱 TikTok | 🫡 自建节点 |
 | 📲 电报消息 | 🚀 节点选择 |
 | 💬 Discord | 🚀 节点选择 |
+| 🤖 Android 服务 | 🚀 节点选择 |
 | Ⓜ️ 微软云盘 / 微软服务 / 微软Bing | 🚀 节点选择 |
 | 📢 谷歌FCM | 🚀 节点选择 |
 | 🎮 游戏平台 | 🚀 节点选择 |
@@ -95,6 +99,42 @@ The **first** item of each `select` group is the Clash default.
 | 🛑 广告拦截 / 🍃 应用净化 | REJECT |
 
 Function groups use short menus (自建 / 节点选择 / 手动切换 / DIRECT) instead of repeating every region group.
+
+## Platform compatibility
+
+Use a maintained Mihomo-based client on Android, macOS, and Windows. Domain
+and IP rules behave the same on all three platforms. Process rules require TUN
+mode and process detection:
+
+| Platform | Coverage | Client requirement |
+|----------|----------|--------------------|
+| Android | Domains, IPs, and package names | Mihomo core with TUN and process matching enabled |
+| macOS | Domains, IPs, and executable names | Mihomo core; grant the network-extension/TUN permission if process rules are needed |
+| Windows | Domains, IPs, and `.exe` names | Mihomo core; run the service/TUN mode if process rules are needed |
+| iOS/iPadOS | Apple domains and IPv4/IPv6 ranges | Domain/IP rules work; package-level `PROCESS-NAME` matching is not expected |
+
+Older Clash cores may reject Mihomo-only rules such as
+`PROCESS-NAME-WILDCARD`. Use domain/IP coverage only on those clients, or use a
+current Mihomo-based client.
+
+## Apple service coverage
+
+`apple.list` replaces the older generic upstream Apple list and follows
+Apple's published enterprise-network requirements. It covers:
+
+- Apple Account, App Store, APNs, device activation, software updates, and
+  certificate validation through the `apple.com` and `cdn-apple.com` families.
+- iCloud, CloudKit, Private Relay, Maps, Apple Music, and Apple TV domains.
+- Apple-owned IPv4 space and all three Apple-published IPv6 ranges.
+- Apple Music, Apple TV, and iCloud processes on Windows, plus the official
+  Apple Music Android package.
+- Narrowly scoped third-party hosts used by Apple Intelligence Private Cloud
+  Compute, without routing all of Cloudflare or Fastly.
+
+The default remains `DIRECT`, matching the existing China-oriented behavior.
+Select a proxy in 🍎 苹果服务 when an account region or media catalog requires
+one. Do not add broad shared suffixes such as `akadns.net`, `edgesuite.net`, or
+`crashlytics.com`; they also carry unrelated vendors.
 
 Helper groups:
 

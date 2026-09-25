@@ -1,0 +1,69 @@
+# Apple services across macOS, Windows, Android, and iOS
+# Sources:
+# - https://support.apple.com/en-us/101555
+# - https://support.apple.com/en-us/118290
+#
+# Domain and IP rules are the portable baseline. Process rules only add
+# coverage for Windows and Android clients when Mihomo process matching is
+# enabled; Apple platforms still use the domain and IP rules.
+
+# Windows and Android clients
+PROCESS-NAME,AppleMusic.exe
+PROCESS-NAME,AppleTV.exe
+PROCESS-NAME,iCloud.exe
+PROCESS-NAME,iCloudDrive.exe
+PROCESS-NAME,com.apple.android.music
+
+# Apple account, App Store, updates, APNs, iCloud, Maps, and first-party CDN
+DOMAIN-SUFFIX,aaplimg.com
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN-SUFFIX,apple-livephotoskit.com
+DOMAIN-SUFFIX,apple-mapkit.com
+DOMAIN-SUFFIX,apple.co
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,apple.com.cn
+DOMAIN-SUFFIX,apple.news
+DOMAIN-SUFFIX,appstore.com
+DOMAIN-SUFFIX,apzones.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,icloud-content.com
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,icloud.com.cn
+DOMAIN-SUFFIX,itunes.com
+DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,mzstatic.com
+
+# Apple media services used outside Apple platforms
+DOMAIN-SUFFIX,applemusic.co
+DOMAIN-SUFFIX,applemusic.com
+DOMAIN-SUFFIX,appletv.com
+DOMAIN-SUFFIX,musickit.net
+
+# Apple-owned top-level domains used by platform security and universal links
+DOMAIN-SUFFIX,appletvapp.apple
+DOMAIN-SUFFIX,networking.apple
+DOMAIN-SUFFIX,safebrowsing.apple
+
+# Apple Intelligence Private Cloud Compute uses these narrowly scoped hosts
+DOMAIN,apple-relay.cloudflare.com
+DOMAIN,apple-relay.fastly-edge.com
+DOMAIN,cp4.cloudflare.com
+
+# Apple software and carrier updates may expose this documented CNAME directly
+DOMAIN,appldnld.apple.com.edgesuite.net
+
+# Apple-owned and service address ranges
+IP-CIDR,17.0.0.0/8,no-resolve
+IP-CIDR,63.92.224.0/19,no-resolve
+IP-CIDR,65.199.22.0/23,no-resolve
+IP-CIDR,139.178.128.0/18,no-resolve
+IP-CIDR,144.178.0.0/19,no-resolve
+IP-CIDR,144.178.36.0/22,no-resolve
+IP-CIDR,144.178.48.0/20,no-resolve
+IP-CIDR,192.35.50.0/24,no-resolve
+IP-CIDR,198.183.17.0/24,no-resolve
+IP-CIDR,205.180.175.0/24,no-resolve
+IP-CIDR6,2403:300::/32,no-resolve
+IP-CIDR6,2620:149::/32,no-resolve
+IP-CIDR6,2a01:b740::/32,no-resolve

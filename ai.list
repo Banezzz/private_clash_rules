@@ -2,7 +2,7 @@
 # Shared SaaS (Stripe / Auth0 / Sentry / Intercom / captcha / whole googleapis.com) is intentionally omitted.
 # GitHub Copilot hosts live in github.list. Discord / Spotify are separate lists.
 # Domestic-China AI (DeepSeek / Moonshot / Kimi / Qwen / MiniMax / Zhipu / Doubao / Tongyi / Cici / Dola) omitted.
-# Microsoft Copilot on *.microsoft.com stays with 微软服务 (that ruleset loads before AI Suite).
+# Microsoft Copilot on *.microsoft.com stays with the Microsoft Services group, which loads before AI Suite.
 # Not synced from geosite:category-ai-chat-!cn: Envato / ThemeForest, LivePerson, CN brands, ads/telemetry, githubcopilot (github.list).
 
 # OpenAI / ChatGPT / Sora
@@ -196,7 +196,7 @@ DOMAIN-SUFFIX,youmind.site
 DOMAIN-SUFFIX,ai.azure.com
 DOMAIN-SUFFIX,openai.azure.com
 
-# Microsoft Copilot (standalone hosts; copilot.microsoft.com is claimed by 微软服务)
+# Microsoft Copilot (standalone hosts; copilot.microsoft.com is claimed by Microsoft Services)
 DOMAIN-SUFFIX,copilot.com
 DOMAIN-SUFFIX,copilot-stg.com
 
