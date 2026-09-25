@@ -6,6 +6,10 @@
 # Process — desktop binary + Windows .exe + Android package
 PROCESS-NAME,RiotClientServices
 PROCESS-NAME,RiotClientServices.exe
+PROCESS-NAME,Riot Client.exe
+PROCESS-NAME,Riot Client
+PROCESS-NAME,Riot Client Helper
+PROCESS-NAME,Riot Client Helper (Renderer)
 PROCESS-NAME,RiotClientUx
 PROCESS-NAME,RiotClientUx.exe
 PROCESS-NAME,RiotClientUxRender.exe
@@ -22,8 +26,9 @@ PROCESS-NAME,2XKO
 PROCESS-NAME,2XKO.exe
 PROCESS-NAME,2XKO-Win64-Shipping.exe
 PROCESS-NAME,com.riotgames.league.wildrift
-PROCESS-NAME,com.riotgames.leagueoflegends
 PROCESS-NAME,com.riotgames.league.teamfighttactics
+PROCESS-NAME,com.riotgames.mobile.leagueconnect
+PROCESS-NAME,com.riotgames.legendsofruneterra
 
 # Riot identity / client / CDN / auth
 DOMAIN-SUFFIX,riotgames.com

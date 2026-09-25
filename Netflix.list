@@ -5,6 +5,7 @@
 
 # Process
 PROCESS-NAME,com.netflix.mediaclient
+PROCESS-NAME,com.netflix.ninja
 PROCESS-NAME,Netflix
 PROCESS-NAME,Netflix.exe
 

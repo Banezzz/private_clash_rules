@@ -1,0 +1,15 @@
+# Telegram supplement, loaded before ACL4SSR Telegram.list.
+# Upstream leaves PROCESS-NAME commented out. Clients also dial raw DC IPs.
+
+PROCESS-NAME,org.telegram.messenger
+PROCESS-NAME,org.telegram.messenger.web
+PROCESS-NAME,org.thunderdog.challegram
+PROCESS-NAME,tw.nekomimi.nekogram
+PROCESS-NAME,org.telegram.plus
+PROCESS-NAME,Telegram.exe
+PROCESS-NAME,Telegram
+
+IP-CIDR,91.105.192.0/23,no-resolve
+IP-CIDR,185.76.151.0/24,no-resolve
+IP-CIDR6,2001:b28:f23c::/48,no-resolve
+IP-CIDR6,2a0a:f280::/32,no-resolve

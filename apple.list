@@ -1,0 +1,76 @@
+# Apple system services (Mac, Windows, Android, iOS)
+# Replaces ACL4SSR Apple.list. A later remote ruleset cannot punch holes in
+# DOMAIN-SUFFIX,akadns.net / crashlytics.com, so those lines are not inherited.
+#
+# Dropped from upstream on purpose:
+#   DOMAIN,apple.comscoreresearch.com  (glued token, NXDOMAIN, not a host)
+#   DOMAIN-SUFFIX,crashlytics.com       (Firebase / Google, not Apple)
+#   DOMAIN-SUFFIX,akadns.net            (Akamai zone; Clash matches the requested name)
+#   IP-CIDR,205.180.175.0/24            (Level 3 / AS3356, not an Apple assignment)
+#   IP-CIDR,192.35.50.0/24              (Claris corporate)
+#   IP-CIDR,198.183.17.0/24             (Claris corporate)
+#
+# iOS cannot match PROCESS-NAME for other apps. Domain and IP-CIDR lines are
+# what cover iPhone / iPad. Fake-IP mode does not consult no-resolve CIDRs
+# until the connection already has a real destination IP.
+#
+# Mac system daemons (nsurlsessiond, trustd, apsd, Finder, Music, TV) are
+# omitted. Their names are too broad; apple.com / icloud.com already cover them.
+
+# Apple-owned suffixes (Apple enterprise host list + existing first-party zones)
+DOMAIN-SUFFIX,aaplimg.com
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN-SUFFIX,apple-livephotoskit.com
+DOMAIN-SUFFIX,apple-mapkit.com
+DOMAIN-SUFFIX,apzones.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,icloud-content.com
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,icloud.com.cn
+DOMAIN-SUFFIX,itunes.com
+DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,shazam.com
+DOMAIN-SUFFIX,apple.co
+DOMAIN-SUFFIX,apple.com.cn
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,appstore.com
+
+# Hosts outside apple.com. The .apple TLD is not matched by DOMAIN-SUFFIX,apple.com.
+DOMAIN,token.safebrowsing.apple
+DOMAIN,app-site-association.networking.apple
+# Carrier-bundle host Apple documents as a connection target, not a CNAME-only name.
+DOMAIN,appldnld.apple.com.edgesuite.net
+# Apple CDN names that Microsoft.list would otherwise claim via akadns.net / edgesuite.net.
+# The whole zones stay out of this file.
+DOMAIN-KEYWORD,apple.com.akadns.net
+DOMAIN-KEYWORD,cdn-apple.com.akadns.net
+DOMAIN-KEYWORD,mzstatic.com.akadns.net
+DOMAIN-KEYWORD,aaplimg.com.akadns.net
+DOMAIN-KEYWORD,icloud.com.akadns.net
+DOMAIN-KEYWORD,apple.com.edgesuite.net
+DOMAIN-KEYWORD,mzstatic.com.edgesuite.net
+
+# Windows iCloud / Devices / push. Streaming apps live in apple-media.list.
+PROCESS-NAME,iTunes.exe
+PROCESS-NAME,iCloud.exe
+PROCESS-NAME,iCloudHome.exe
+PROCESS-NAME,iCloudServices.exe
+PROCESS-NAME,iCloudDrive.exe
+PROCESS-NAME,iCloudPhotos.exe
+PROCESS-NAME,APSDaemon.exe
+PROCESS-NAME,AppleDevices.exe
+PROCESS-NAME,AMPDevicesAgent.exe
+PROCESS-NAME,com.shazam.android
+
+# Apple-registered ranges. 139.178.128.0/17 and 144.178.0.0/18 replace the
+# narrower upstream fragments that left announced Apple space uncovered.
+IP-CIDR,17.0.0.0/8,no-resolve
+IP-CIDR,63.92.224.0/19,no-resolve
+IP-CIDR,65.199.22.0/23,no-resolve
+IP-CIDR,139.178.128.0/17,no-resolve
+IP-CIDR,144.178.0.0/18,no-resolve
+IP-CIDR6,2403:300::/32,no-resolve
+IP-CIDR6,2620:149::/32,no-resolve
+IP-CIDR6,2a01:b740::/32,no-resolve

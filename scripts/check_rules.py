@@ -27,6 +27,10 @@ DANGEROUS_SUFFIXES = {
     "stripe.com",
     "challenges.cloudflare.com",
     "us-west-2.amazonaws.com",
+    # Inherited from ACL4SSR Apple.list and intentionally not copied locally.
+    "akadns.net",
+    "crashlytics.com",
+    "edgesuite.net",
 }
 
 
@@ -57,6 +61,12 @@ def scan_list(path: Path) -> list[str]:
                 findings.append(
                     f"{path.name}:{lineno}: {kind} missing ,no-resolve: {rule}"
                 )
+
+        if kind in {"PROCESS-NAME-WILDCARD", "PROCESS-PATH-REGEX", "PROCESS-NAME-REGEX"}:
+            findings.append(
+                f"{path.name}:{lineno}: {kind} is not portable "
+                f"(Mihomo-only; older cores reject the profile): {rule}"
+            )
 
         if kind == "DOMAIN-SUFFIX":
             suffix = rest.split(",", 1)[0].strip().lower()
@@ -99,6 +109,9 @@ def main() -> int:
     for path in list_files:
         findings.extend(scan_list(path))
     findings.extend(check_readme(list_files))
+    ini = (ROOT / MAIN_INI).read_text(encoding="utf-8")
+    if "ACL4SSR/ACL4SSR/master/Clash/Apple.list" in ini:
+        findings.append("main.ini: still loads upstream Apple.list")
 
     if findings:
         print(f"Found {len(findings)} issue(s):")

@@ -3,31 +3,35 @@
 
 # -----------------------------------------------------------------------------
 # Process
-# Desktop binary + Windows .exe + Android package. On Mihomo / Clash Meta
-# Android, PROCESS-NAME matches the Play Store package (UID), so every
-# subprocess of that app is covered — including raw IPs that would otherwise
-# hit GEOIP,CN. This list must load before BanAD or AppsFlyer / push hosts
-# used to wake Android exchange services are REJECT.
+# macOS binary + Electron Helper + Windows .exe + Android package.
+# On Mihomo Android, PROCESS-NAME is the package of the app UID, so :push
+# subprocesses are covered without PROCESS-NAME-WILDCARD. That rule type
+# makes Mihomo older than v1.19.19 reject the whole profile.
+# This list must load before BanAD or AppsFlyer / push hosts are REJECT.
 # -----------------------------------------------------------------------------
 # OKX (Play Store + official APK + Wallet)
 # Android resolves via HTTPDNS then dials the raw CN IP, so DOMAIN-SUFFIX,okx.com
 # never sees a hostname and GEOIP,CN steals the flow unless PROCESS-NAME hits.
-# Wildcard covers :push / :remote / :channel subprocesses that exact-match misses.
 PROCESS-NAME,OKX
 PROCESS-NAME,OKX.exe
+PROCESS-NAME,OKX_Launcher.exe
+PROCESS-NAME,OKX Helper
+PROCESS-NAME,OKX Helper (Renderer)
 PROCESS-NAME,com.okinc.okex.gp
 PROCESS-NAME,com.okinc.okex
 PROCESS-NAME,com.okx.wallet
-PROCESS-NAME-WILDCARD,com.okinc.okex*
-PROCESS-NAME-WILDCARD,com.okx.wallet*
 # Binance (Play Store / official APK + Binance.US)
 PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
+PROCESS-NAME,Binance Helper
+PROCESS-NAME,Binance Helper (Renderer)
 PROCESS-NAME,com.binance.dev
 PROCESS-NAME,com.binance.us
 # Bybit
 PROCESS-NAME,Bybit
 PROCESS-NAME,Bybit.exe
+PROCESS-NAME,Bybit Helper
+PROCESS-NAME,Bybit Helper (Renderer)
 PROCESS-NAME,com.bybit.app
 # MEXC
 PROCESS-NAME,MEXC
@@ -47,10 +51,32 @@ PROCESS-NAME,com.kubi.kucoin
 PROCESS-NAME,pro.huobi
 PROCESS-NAME,co.mona.android
 PROCESS-NAME,pro.bingbon.app
+PROCESS-NAME,com.kraken.trade
+PROCESS-NAME,com.kraken.invest.app
+PROCESS-NAME,com.bitfinex.mobileapp
+PROCESS-NAME,net.bitstamp.app
+PROCESS-NAME,com.gemini.android.app
+PROCESS-NAME,app.backpack.mobile
+PROCESS-NAME,com.bitmart.bitmarket
+PROCESS-NAME,com.dunamu.exchange
+PROCESS-NAME,com.btckorea.bithumb
+PROCESS-NAME,xyz.hyperliquid.app
+PROCESS-NAME,com.polymarket.android
 # TradingView
 PROCESS-NAME,TradingView
 PROCESS-NAME,TradingView.exe
+PROCESS-NAME,TradingView Helper
+PROCESS-NAME,TradingView Helper (Renderer)
 PROCESS-NAME,com.tradingview.tradingviewapp
+PROCESS-NAME,io.metamask
+PROCESS-NAME,app.phantom
+PROCESS-NAME,com.wallet.crypto.trustapp
+PROCESS-NAME,com.bitkeep.wallet
+PROCESS-NAME,vip.mytokenpocket
+PROCESS-NAME,im.token.app
+PROCESS-NAME,com.tronlinkpro.wallet
+PROCESS-NAME,org.toshi
+PROCESS-NAME,com.debank.rabbymobile
 
 # -----------------------------------------------------------------------------
 # CEX
@@ -400,6 +426,9 @@ DOMAIN-SUFFIX,myetherwallet.com
 DOMAIN-SUFFIX,jaxx.io
 DOMAIN-SUFFIX,trustwalletapp.com
 DOMAIN-SUFFIX,walletconnect.com
+DOMAIN-SUFFIX,walletconnect.org
+DOMAIN-SUFFIX,metamask.io
+DOMAIN-SUFFIX,rabby.io
 
 # -----------------------------------------------------------------------------
 # Explorers

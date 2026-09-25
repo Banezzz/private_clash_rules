@@ -1,0 +1,20 @@
+# Apple Music and Podcasts (🍎 苹果媒体).
+# Loaded before apple.list so these names beat DOMAIN-SUFFIX,apple.com.
+# Default is DIRECT, so a China Apple ID keeps working. Point this group at a
+# node only when the catalog should follow another storefront.
+# TV+ and News are in apple-proxy.list. Mac process names Music / TV / Podcasts
+# are omitted; they are generic words.
+
+DOMAIN-SUFFIX,music.apple.com
+DOMAIN-SUFFIX,podcasts.apple.com
+DOMAIN,amp-api.media.apple.com
+DOMAIN,audio.itunes.apple.com
+DOMAIN,audio-ssl.itunes.apple.com
+DOMAIN,aod.itunes.apple.com
+DOMAIN,aod-ssl.itunes.apple.com
+DOMAIN,mvod.itunes.apple.com
+DOMAIN,streamingaudio.itunes.apple.com
+
+PROCESS-NAME,AppleMusic.exe
+PROCESS-NAME,AMPLibraryAgent.exe
+PROCESS-NAME,com.apple.android.music

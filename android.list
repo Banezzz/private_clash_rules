@@ -1,0 +1,10 @@
+# Play Store only. The whole of com.google.android.gms is not listed: that
+# package is Play Services for every app on the phone. DOMAIN-SUFFIX,android.com
+# is omitted for the same reason.
+
+PROCESS-NAME,com.android.vending
+DOMAIN,android.clients.google.com
+DOMAIN,play-fe.googleapis.com
+DOMAIN,play.googleapis.com
+DOMAIN,play-lh.googleusercontent.com
+DOMAIN-SUFFIX,googleplay.com

@@ -37,12 +37,14 @@ DOMAIN-SUFFIX,bigbeans.solutions
 DOMAIN-SUFFIX,watchanimeattheoffice.com
 DOMAIN,hammerandchisel.ssl.zendesk.com
 
-# Discord clients
+# Discord clients. Mac Electron sockets belong to the Helper binaries.
+# com.hammerandchisel.discord is the iOS bundle id, not an Android package.
 PROCESS-NAME,Discord.exe
 PROCESS-NAME,Discord
+PROCESS-NAME,Discord Helper
+PROCESS-NAME,Discord Helper (Renderer)
+PROCESS-NAME,Discord Canary
 PROCESS-NAME,DiscordCanary.exe
-PROCESS-NAME,DiscordCanary
+PROCESS-NAME,Discord PTB
 PROCESS-NAME,DiscordPTB.exe
-PROCESS-NAME,DiscordPTB
 PROCESS-NAME,com.discord
-PROCESS-NAME,com.hammerandchisel.discord
