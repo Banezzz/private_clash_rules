@@ -45,7 +45,7 @@ Local lists are referenced as:
 7. 📢 GoogleFCM
 8. 🎯 GoogleCN
 9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
-10. 🍏 `apple-proxy.list`, 🍎 `apple-media.list`, 🍎 `apple.list`, 🎥 `Netflix.list`, 🎵 `spotify.list` — **before Microsoft**, because `Microsoft.list` claims all of `akadns.net` and `edgesuite.net`
+10. 🍏 `apple-proxy.list` then upstream `AppleTV.list`, 🍎 `apple-media.list`, 🍎 `apple.list`, 🎥 `Netflix.list` then upstream `Netflix.list`, 🎵 `spotify.list` then upstream `Spotify.list` — **before Microsoft**, because `Microsoft.list` claims all of `akadns.net` and `edgesuite.net`
 11. Ⓜ️ Bing / OneDrive / Microsoft
 12. 📲 `telegram.list` then upstream Telegram
 13. 💬 `discord.list` (local)

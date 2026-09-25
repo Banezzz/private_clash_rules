@@ -109,9 +109,41 @@ def main() -> int:
     for path in list_files:
         findings.extend(scan_list(path))
     findings.extend(check_readme(list_files))
-    ini = (ROOT / MAIN_INI).read_text(encoding="utf-8")
-    if "ACL4SSR/ACL4SSR/master/Clash/Apple.list" in ini:
-        findings.append("main.ini: still loads upstream Apple.list")
+    ini_lines = [
+        line.strip()
+        for line in (ROOT / MAIN_INI).read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.strip().startswith(";")
+    ]
+    ini_active = "\n".join(ini_lines)
+    required_upstream = (
+        "Clash/Apple.list",
+        "Clash/Ruleset/AppleTV.list",
+        "Clash/Ruleset/Netflix.list",
+        "Clash/Ruleset/Spotify.list",
+        "Clash/Ruleset/TikTok.list",
+        "Clash/Ruleset/Binance.list",
+        "Clash/Ruleset/Discord.list",
+        "Clash/Ruleset/Github.list",
+        "Clash/Ruleset/Steam.list",
+        "Clash/Ruleset/YouTube.list",
+        "Clash/Ruleset/YouTubeMusic.list",
+        "Clash/Telegram.list",
+    )
+    for name in required_upstream:
+        if name not in ini_active:
+            findings.append(f"main.ini: missing upstream ruleset {name}")
+    forbidden_upstream = (
+        "SteamCN.list",
+        "NetflixIP.list",
+        "OpenAi.list",
+        "Crypto.list",
+        "AppleNews.list",
+    )
+    for name in forbidden_upstream:
+        if name in ini_active:
+            findings.append(f"main.ini: must not load upstream {name}")
+    if "DOMAIN-SUFFIX,crashlytics.com" not in ini_active:
+        findings.append("main.ini: missing crashlytics guard before upstream Apple.list")
 
     if findings:
         print(f"Found {len(findings)} issue(s):")
