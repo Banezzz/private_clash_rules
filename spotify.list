@@ -37,6 +37,8 @@ DOMAIN,spotify.map.fastly.net
 DOMAIN,spotify.map.fastlylb.net
 
 # Spotify clients
+# Mac renderer/GPU sockets belong to "Spotify Helper", not "Spotify".
 PROCESS-NAME,Spotify.exe
 PROCESS-NAME,Spotify
 PROCESS-NAME,com.spotify.music
+PROCESS-PATH-REGEX,(?i)/Spotify\.app/

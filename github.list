@@ -77,5 +77,8 @@ DOMAIN-SUFFIX,gitlab.com
 DOMAIN-SUFFIX,bitbucket.org
 
 # GitHub Desktop
+# Windows image is GitHubDesktop.exe. The Mac basename has a space and the
+# renderer is "GitHub Desktop Helper (Renderer)", so the bare name misses it.
 PROCESS-NAME,GitHubDesktop.exe
-PROCESS-NAME,GitHubDesktop
+PROCESS-NAME,GitHub Desktop
+PROCESS-PATH-REGEX,(?i)/GitHub Desktop\.app/

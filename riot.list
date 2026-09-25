@@ -6,6 +6,8 @@
 # Process — desktop binary + Windows .exe + Android package
 PROCESS-NAME,RiotClientServices
 PROCESS-NAME,RiotClientServices.exe
+PROCESS-NAME,Riot Client
+PROCESS-PATH-REGEX,(?i)/Riot Client\.app/
 PROCESS-NAME,RiotClientUx
 PROCESS-NAME,RiotClientUx.exe
 PROCESS-NAME,RiotClientUxRender.exe

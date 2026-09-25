@@ -15,6 +15,7 @@
 # Wildcard covers :push / :remote / :channel subprocesses that exact-match misses.
 PROCESS-NAME,OKX
 PROCESS-NAME,OKX.exe
+PROCESS-PATH-REGEX,(?i)/OKX\.app/
 PROCESS-NAME,com.okinc.okex.gp
 PROCESS-NAME,com.okinc.okex
 PROCESS-NAME,com.okx.wallet
@@ -23,6 +24,7 @@ PROCESS-NAME-WILDCARD,com.okx.wallet*
 # Binance (Play Store / official APK + Binance.US)
 PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
+PROCESS-PATH-REGEX,(?i)/Binance\.app/
 PROCESS-NAME,com.binance.dev
 PROCESS-NAME,com.binance.us
 # Bybit
@@ -50,6 +52,7 @@ PROCESS-NAME,pro.bingbon.app
 # TradingView
 PROCESS-NAME,TradingView
 PROCESS-NAME,TradingView.exe
+PROCESS-PATH-REGEX,(?i)/TradingView\.app/
 PROCESS-NAME,com.tradingview.tradingviewapp
 
 # -----------------------------------------------------------------------------

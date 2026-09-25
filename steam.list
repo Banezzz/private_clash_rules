@@ -4,10 +4,16 @@
 # downloads hit 游戏平台 (not later ChinaDomain DIRECT).
 
 # Process
+# Mac client basename is steam_osx, not Steam. The store UI process is
+# "Steam Helper" under Steam.AppBundle (not steamwebhelper.exe).
 PROCESS-NAME,steam
 PROCESS-NAME,Steam
 PROCESS-NAME,steam.exe
 PROCESS-NAME,steamwebhelper.exe
+PROCESS-NAME,steam_osx
+PROCESS-NAME,Steam Helper
+PROCESS-PATH-REGEX,(?i)/Steam\.app/
+PROCESS-PATH-REGEX,(?i)/Steam\.AppBundle/
 
 # Store / community / first-party
 DOMAIN-SUFFIX,steampowered.com

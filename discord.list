@@ -38,11 +38,15 @@ DOMAIN-SUFFIX,watchanimeattheoffice.com
 DOMAIN,hammerandchisel.ssl.zendesk.com
 
 # Discord clients
+# Mac Electron helpers are separate basenames (Discord Helper, Discord Helper
+# (Renderer)). PROCESS-NAME,Discord does not match them. The path regex covers
+# every executable inside the .app bundle on Mihomo.
 PROCESS-NAME,Discord.exe
 PROCESS-NAME,Discord
+PROCESS-NAME,Discord Canary
 PROCESS-NAME,DiscordCanary.exe
-PROCESS-NAME,DiscordCanary
+PROCESS-NAME,Discord PTB
 PROCESS-NAME,DiscordPTB.exe
-PROCESS-NAME,DiscordPTB
 PROCESS-NAME,com.discord
 PROCESS-NAME,com.hammerandchisel.discord
+PROCESS-PATH-REGEX,(?i)/Discord( Canary| PTB)?\.app/

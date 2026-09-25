@@ -27,6 +27,10 @@ DANGEROUS_SUFFIXES = {
     "stripe.com",
     "challenges.cloudflare.com",
     "us-west-2.amazonaws.com",
+    # Inherited from ACL4SSR Apple.list and intentionally not copied locally.
+    "akadns.net",
+    "crashlytics.com",
+    "edgesuite.net",
 }
 
 
