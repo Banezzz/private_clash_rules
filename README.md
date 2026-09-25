@@ -11,7 +11,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
 | `apple-proxy.list` | 🍏 苹果代理 | TV+, News, Private Cloud Compute, TestFlight. Default is 🚀 节点选择. Loaded before Microsoft so Akamai names are not stolen |
 | `apple-media.list` | 🍎 苹果媒体 | Apple Music and Podcasts only. Default stays DIRECT |
-| `apple.list` | 🍎 苹果服务 | Local replacement for ACL4SSR `Apple.list`. System, iCloud, App Store, Shazam. Drops `akadns.net`, `crashlytics.com`, and the glued `apple.comscoreresearch.com` token |
+| `apple.list` | 🍎 苹果服务 | Local Apple services, loaded before upstream `Apple.list`. System, iCloud, App Store, Shazam. Upstream `akadns.net` / `crashlytics.com` do not enter this group |
 | `android.list` | 🤖 Android 服务 | Play Store package and Play API hosts only. Not Play Services, not `android.com` |
 | `telegram.list` | 📲 电报消息 | Process names and official CIDRs missing from ACL4SSR Telegram |
 | `youtube.list` | 📹 油管视频 | Android YouTube package names, loaded before the upstream YouTube list |
