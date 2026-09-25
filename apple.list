@@ -7,11 +7,16 @@
 # coverage for Windows and Android clients when Mihomo process matching is
 # enabled; Apple platforms still use the domain and IP rules.
 
-# Windows and Android clients
+# Windows clients and Android Apple Music
 PROCESS-NAME,AppleMusic.exe
 PROCESS-NAME,AppleTV.exe
+PROCESS-NAME,AppleDevices.exe
+PROCESS-NAME,AMPDevicesAgent.exe
+PROCESS-NAME,iTunes.exe
 PROCESS-NAME,iCloud.exe
 PROCESS-NAME,iCloudDrive.exe
+PROCESS-NAME,iCloudServices.exe
+PROCESS-NAME,iCloudPhotos.exe
 PROCESS-NAME,com.apple.android.music
 
 # Apple account, App Store, updates, APNs, iCloud, Maps, and first-party CDN
@@ -50,10 +55,7 @@ DOMAIN,apple-relay.cloudflare.com
 DOMAIN,apple-relay.fastly-edge.com
 DOMAIN,cp4.cloudflare.com
 
-# Apple software and carrier updates may expose this documented CNAME directly
-DOMAIN,appldnld.apple.com.edgesuite.net
-
-# Apple-owned and service address ranges
+# Apple-owned and legacy service address ranges
 IP-CIDR,17.0.0.0/8,no-resolve
 IP-CIDR,63.92.224.0/19,no-resolve
 IP-CIDR,65.199.22.0/23,no-resolve

@@ -9,7 +9,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | File | Policy group | Notes |
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
-| `apple.list` | 🍎 苹果服务 | Apple account, iCloud, APNs, updates, media, IPv4/IPv6, plus Windows and Android clients |
+| `apple.list` | 🍎 苹果服务 | Apple platform services, Windows Apple apps, and Android Apple Music |
 | `android.list` | 🤖 Android 服务 | Google Play and core Android services; loads before ad blocking and GoogleCN |
 | `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
@@ -119,28 +119,32 @@ current Mihomo-based client.
 
 ## Apple service coverage
 
-`apple.list` replaces the older generic upstream Apple list and follows
+`apple.list` replaces the older generic upstream Apple list and is based on
 Apple's published enterprise-network requirements. It covers:
 
 - Apple Account, App Store, APNs, device activation, software updates, and
-  certificate validation through the `apple.com` and `cdn-apple.com` families.
+  Apple-hosted certificate validation endpoints through the `apple.com` and
+  `cdn-apple.com` families.
 - iCloud, CloudKit, Private Relay, Maps, Apple Music, and Apple TV domains.
-- Apple-owned IPv4 space and all three Apple-published IPv6 ranges.
-- Apple Music, Apple TV, and iCloud processes on Windows, plus the official
-  Apple Music Android package.
+- Apple's published `17.0.0.0/8` IPv4 range and all three published IPv6
+  ranges, plus legacy service ranges retained from the previous ACL4SSR list.
+- Apple Music, Apple TV, Apple Devices, iTunes, and iCloud processes on
+  Windows, plus the official Apple Music Android package.
 - Narrowly scoped third-party hosts used by Apple Intelligence Private Cloud
   Compute, without routing all of Cloudflare or Fastly.
 
 The default remains `DIRECT`, matching the existing China-oriented behavior.
 Select a proxy in 🍎 苹果服务 when an account region or media catalog requires
 one. Do not add broad shared suffixes such as `akadns.net`, `edgesuite.net`, or
-`crashlytics.com`; they also carry unrelated vendors.
+`crashlytics.com`; they also carry unrelated vendors. Shared DigiCert
+CRL/OCSP hosts likewise remain under the general routing policy. Apple ad and
+telemetry hosts can still be rejected by the earlier ad-blocking rules.
 
 Helper groups:
 
 - 🎥 奈飞节点 — `select` `.*` (same as 手动切换: every available node)
 - 💸 交易节点 — `select` `.*` (manual pick; 📈 交易相关 defaults here)
-- 🔀 双入口LB — `load-balance` on `腾讯云内网`, **round-robin**
+- 🔀 双入口LB — `load-balance` on `腾讯云内网`, **consistent-hashing**
 - 🔮 负载均衡 — full-set `load-balance`, **consistent-hashing** (same destination sticks)
 
 ## `selfbuilt.list` is an overlay hook
@@ -161,6 +165,7 @@ Helper groups:
 Do **not** add these (too broad or they fight the intended exit):
 
 - `DOMAIN-SUFFIX,googleapis.com` (and similarly `googleusercontent.com` / `goog`)
+- Shared CDN suffixes such as `gvt1.com`, `gvt2.com`, `akadns.net`, and `edgesuite.net`
 - Netflix AWS `IP-CIDR` `/12`–`/16` blocks
 - Enabling ACL4SSR `SteamCN.list` (that would DIRECT Steam downloads)
 - Wholesale blackmatrix7 Crypto dumps into `trading.list`
@@ -183,4 +188,8 @@ Python 3, no extra deps. From the repo root:
 python3 scripts/check_rules.py
 ```
 
-It scans every `*.list` in the repo root for duplicate rules, `IP-CIDR`/`IP-CIDR6` missing `,no-resolve`, a dangerous `DOMAIN-SUFFIX` blacklist, and whether `README.md` mentions each existing list plus `main.ini`. Exit code `1` on findings, `0` when clean.
+It scans every `*.list` in the repo root for duplicate or malformed rules,
+invalid CIDRs, missing `,no-resolve`, and dangerous broad suffixes. It also
+checks that `main.ini` defines every referenced policy group, references every
+local list exactly once, uses HTTPS health checks, and that `README.md`
+mentions every list. Exit code `1` on findings, `0` when clean.

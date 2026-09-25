@@ -28,9 +28,14 @@ DOMAIN_RE = re.compile(
 )
 
 DANGEROUS_SUFFIXES = {
+    "akadns.net",
+    "crashlytics.com",
+    "edgesuite.net",
     "googleapis.com",
     "googleusercontent.com",
     "goog",
+    "gvt1.com",
+    "gvt2.com",
     "stripe.com",
     "challenges.cloudflare.com",
     "us-west-2.amazonaws.com",
