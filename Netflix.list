@@ -6,6 +6,7 @@
 # Process — phone + Android TV + desktop
 PROCESS-NAME,com.netflix.mediaclient
 PROCESS-NAME,com.netflix.ninja
+PROCESS-NAME-WILDCARD,com.netflix.mediaclient*
 PROCESS-NAME,Netflix
 PROCESS-NAME,Netflix.exe
 

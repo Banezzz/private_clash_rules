@@ -1,18 +1,37 @@
 # Overlay for 🍎 苹果服务 (system Apple: App Store, iCloud, APNs, updates).
 # Domains and 17.0.0.0/8 still come from upstream ACL4SSR Apple.list.
-# This file only adds Mac / Windows process names so iCloud-for-Windows and
-# Apple Devices still hit DIRECT when they dial raw Apple IPs.
+# This file must load BEFORE Microsoft.list: that list claims akadns.net and
+# edgesuite.net, which would otherwise steal Apple Akamai CDN to 微软服务.
 #
 # Music / TV / News / Android Apple Music live in apple_media.list (proxy).
-# Do not add those processes here.
+# Do not add those processes here. Do not add DOMAIN-SUFFIX,akadns.net.
+
+# Apple CDN on Akamai — Microsoft.list has DOMAIN-SUFFIX,akadns.net / edgesuite.net
+DOMAIN-KEYWORD,apple.com.akadns.net
+DOMAIN-KEYWORD,apple.com.edgesuite.net
+DOMAIN-KEYWORD,apple.com.edgekey.net
+DOMAIN-KEYWORD,mzstatic.com.akadns.net
+DOMAIN-KEYWORD,icloud.com.akadns.net
+DOMAIN-KEYWORD,cdn-apple.com.akadns.net
+DOMAIN,appldnld.apple.com.edgesuite.net
+DOMAIN,ls.apple.com.edgesuite.net
+DOMAIN,store.apple.com.edgekey.net
+
+# Standalone TLDs missing from ACL4SSR Apple.list
+DOMAIN-SUFFIX,appleid.com
+DOMAIN-SUFFIX,facetime.net
 
 # Windows iCloud / Photos / Push / device sync
 PROCESS-NAME,iCloud
 PROCESS-NAME,iCloud.exe
 PROCESS-NAME,iCloudServices
 PROCESS-NAME,iCloudServices.exe
+PROCESS-NAME,iCloudDrive
+PROCESS-NAME,iCloudDrive.exe
 PROCESS-NAME,iCloudPhotos
 PROCESS-NAME,iCloudPhotos.exe
+PROCESS-NAME,iCloudCKKS
+PROCESS-NAME,iCloudCKKS.exe
 PROCESS-NAME,ApplePhotoStreams
 PROCESS-NAME,ApplePhotoStreams.exe
 PROCESS-NAME,APSDaemon
@@ -23,6 +42,8 @@ PROCESS-NAME,AppleMobileDeviceProcess
 PROCESS-NAME,AppleMobileDeviceProcess.exe
 PROCESS-NAME,AppleMobileDeviceHelper
 PROCESS-NAME,AppleMobileDeviceHelper.exe
+PROCESS-NAME,AppleMobileDeviceService
+PROCESS-NAME,AppleMobileDeviceService.exe
 
 # macOS system daemons that should stay with 苹果服务 (DIRECT)
 PROCESS-NAME,apsd
@@ -30,3 +51,8 @@ PROCESS-NAME,cloudd
 PROCESS-NAME,bird
 PROCESS-NAME,fmfd
 PROCESS-NAME,findmydevice-user-agent
+PROCESS-NAME,softwareupdated
+PROCESS-NAME,storedownloadd
+PROCESS-NAME,identityservicesd
+PROCESS-NAME,imagent
+PROCESS-NAME,com.apple.Maps

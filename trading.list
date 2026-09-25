@@ -25,11 +25,13 @@ PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
 PROCESS-NAME,com.binance.dev
 PROCESS-NAME,com.binance.us
+PROCESS-NAME,com.binance.android
 PROCESS-NAME-WILDCARD,com.binance.*
 # Bybit
 PROCESS-NAME,Bybit
 PROCESS-NAME,Bybit.exe
 PROCESS-NAME,com.bybit.app
+PROCESS-NAME-WILDCARD,com.bybit.app*
 # MEXC
 PROCESS-NAME,MEXC
 PROCESS-NAME,MEXC.exe

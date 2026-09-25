@@ -6,7 +6,8 @@ Scans *.list in the repository root (not subdirectories) for:
   2. IP-CIDR / IP-CIDR6 rules missing ,no-resolve
   3. Dangerous DOMAIN-SUFFIX values that over-capture
   4. README.md mentioning each existing *.list filename and main.ini
-  5. main.ini loading apple_media.list before upstream ACL4SSR Apple.list
+  5. main.ini load order: apple overlays before Microsoft / ACL4SSR Apple;
+     tiktok.list and discord.list before BanAD
 
 Comments starting with # are allowed. Exit 1 if any finding is reported.
 """
@@ -31,6 +32,7 @@ DANGEROUS_SUFFIXES = {
     # Whole apple.com / Akamai DNS belong on upstream 🍎 苹果服务, not a local list
     "apple.com",
     "akadns.net",
+    "edgesuite.net",
 }
 
 
@@ -92,34 +94,54 @@ def check_readme(list_files: list[Path]) -> list[str]:
     return findings
 
 
-def check_main_ini_apple_order() -> list[str]:
-    """apple_media.list must be referenced before ACL4SSR Apple.list."""
+def _first_active_line(lines: list[str], needle: str) -> int | None:
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith(";"):
+            continue
+        if needle in stripped:
+            return i
+    return None
+
+
+def check_main_ini_order() -> list[str]:
+    """Local overlays must win over BanAD / Microsoft / ACL4SSR Apple."""
     ini_path = ROOT / MAIN_INI
     if not ini_path.is_file():
         return [f"{MAIN_INI}: file is missing"]
 
     lines = ini_path.read_text(encoding="utf-8").splitlines()
-    media_idx = None
-    apple_idx = None
-    for i, line in enumerate(lines):
-        stripped = line.strip()
-        if stripped.startswith(";"):
-            continue
-        if "apple_media.list" in stripped:
-            media_idx = i
-        if "ACL4SSR/ACL4SSR/master/Clash/Apple.list" in stripped:
-            apple_idx = i
+    media_idx = _first_active_line(lines, "apple_media.list")
+    apple_overlay_idx = _first_active_line(lines, "private_clash_rules/main/apple.list")
+    apple_idx = _first_active_line(lines, "ACL4SSR/ACL4SSR/master/Clash/Apple.list")
+    microsoft_idx = _first_active_line(lines, "ACL4SSR/ACL4SSR/master/Clash/Microsoft.list")
+    banad_idx = _first_active_line(lines, "ACL4SSR/ACL4SSR/master/Clash/BanAD.list")
+    tiktok_idx = _first_active_line(lines, "private_clash_rules/main/tiktok.list")
+    discord_idx = _first_active_line(lines, "private_clash_rules/main/discord.list")
 
     findings: list[str] = []
-    if media_idx is None:
-        findings.append(f"{MAIN_INI}: apple_media.list ruleset is missing")
-    if apple_idx is None:
-        findings.append(f"{MAIN_INI}: upstream ACL4SSR Apple.list ruleset is missing")
-    if media_idx is not None and apple_idx is not None and media_idx > apple_idx:
-        findings.append(
-            f"{MAIN_INI}: apple_media.list (L{media_idx + 1}) must load before "
-            f"ACL4SSR Apple.list (L{apple_idx + 1})"
-        )
+    required = {
+        "apple_media.list": media_idx,
+        "apple.list overlay": apple_overlay_idx,
+        "upstream ACL4SSR Apple.list": apple_idx,
+        "upstream Microsoft.list": microsoft_idx,
+        "upstream BanAD.list": banad_idx,
+        "tiktok.list": tiktok_idx,
+        "discord.list": discord_idx,
+    }
+    for label, idx in required.items():
+        if idx is None:
+            findings.append(f"{MAIN_INI}: {label} ruleset is missing")
+
+    def before(earlier: int | None, later: int | None, msg: str) -> None:
+        if earlier is not None and later is not None and earlier > later:
+            findings.append(f"{MAIN_INI}: {msg} (L{earlier + 1} vs L{later + 1})")
+
+    before(media_idx, apple_idx, "apple_media.list must load before ACL4SSR Apple.list")
+    before(apple_overlay_idx, microsoft_idx, "apple.list must load before Microsoft.list")
+    before(media_idx, microsoft_idx, "apple_media.list must load before Microsoft.list")
+    before(tiktok_idx, banad_idx, "tiktok.list must load before BanAD.list")
+    before(discord_idx, banad_idx, "discord.list must load before BanAD.list")
     return findings
 
 
@@ -134,7 +156,7 @@ def main() -> int:
     for path in list_files:
         findings.extend(scan_list(path))
     findings.extend(check_readme(list_files))
-    findings.extend(check_main_ini_apple_order())
+    findings.extend(check_main_ini_order())
 
     if findings:
         print(f"Found {len(findings)} issue(s):")

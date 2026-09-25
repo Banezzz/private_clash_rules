@@ -10,7 +10,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
 | `apple_media.list` | 🍎 苹果媒体 | Apple TV+ / Music / News / Arcade / Fitness+ / Intelligence relays / Developer / TestFlight. Loads **before** ACL4SSR `Apple.list` so `DOMAIN-SUFFIX,apple.com` cannot steal them to DIRECT. Mac / Windows / Android process names included |
-| `apple.list` | 🍎 苹果服务 | Overlay only: Windows iCloud / Apple Devices / APNs process names. Domains still come from upstream ACL4SSR `Apple.list` |
+| `apple.list` | 🍎 苹果服务 | Overlay: Apple Akamai CDN keywords (must beat `Microsoft.list` `akadns.net` / `edgesuite.net`), `appleid.com` / `facetime.net`, plus Windows iCloud / Apple Devices / macOS daemon process names. Domains / `17.0.0.0/8` still come from upstream ACL4SSR `Apple.list` |
 | `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS). Desktop + Android process names included |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
@@ -35,17 +35,17 @@ Local lists are referenced as:
 1. 🎯 LocalAreaNetwork
 2. 🎯 UnBan
 3. 📈 `trading.list` (local) — **before BanAD** so exchange Android `PROCESS-NAME` and first-party hosts win over AppsFlyer / push REJECT
-4. 🛑 BanAD
-5. 🫡 `selfbuilt.list` (local overlay)
-6. 🍃 BanProgramAD
-7. 📢 GoogleFCM
-8. 🎯 GoogleCN
-9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
-10. Ⓜ️ Bing / OneDrive / Microsoft
-11. 🍎 `apple_media.list` (local) — **before** ACL4SSR Apple so TV+ / Music / News / Intelligence / Developer are not swallowed by `DOMAIN-SUFFIX,apple.com` → DIRECT
-12. 🍎 `apple.list` (local overlay) + ACL4SSR `Apple.list` (system Apple, default DIRECT)
-13. 📲 Telegram
-14. 💬 `discord.list` (local)
+4. 📱 `tiktok.list` / 💬 `discord.list` (local) — **before BanAD** so Android process rules win over AppsFlyer / Branch REJECT (same class as trading)
+5. 🛑 BanAD
+6. 🫡 `selfbuilt.list` (local overlay)
+7. 🍃 BanProgramAD
+8. 📢 GoogleFCM
+9. 🎯 GoogleCN
+10. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
+11. 🍎 `apple_media.list` + `apple.list` (local) — **before Microsoft** so `apple.com.akadns.net` / `edgesuite.net` are not stolen by `Microsoft.list`, and **before** ACL4SSR Apple so TV+ / Music / News / Intelligence / Developer are not swallowed by `DOMAIN-SUFFIX,apple.com` → DIRECT
+12. Ⓜ️ Bing / OneDrive / Microsoft
+13. 🍎 ACL4SSR `Apple.list` (system Apple, default DIRECT)
+14. 📲 Telegram
 15. 🤖 `ai.list` (local)
 16. 🛠️ `github.list` (local)
 17. 🎶 NetEaseMusic
@@ -53,19 +53,18 @@ Local lists are referenced as:
 19. 📹 YouTube
 20. 🎥 `Netflix.list` (local)
 21. 🎵 `spotify.list` (local)
-22. 📱 `tiktok.list` (local) — before ChinaMedia / ChinaDomain so `snssdk.com` is not DIRECT
-23. 📺 Bahamut / BilibiliHMT / Bilibili
-24. 🌏 ChinaMedia
-25. 🌍 ProxyMedia
-26. 🚀 ProxyGFWlist
-27. 🎯 ChinaIp (enabled)
-28. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
-29. 🎯 ChinaCompanyIp / Download
-30. 🎯 `[]GEOIP,LAN`
-31. 🎯 `[]GEOIP,CN`
-32. 🐟 `[]FINAL`
+22. 📺 Bahamut / BilibiliHMT / Bilibili
+23. 🌏 ChinaMedia
+24. 🌍 ProxyMedia
+25. 🚀 ProxyGFWlist
+26. 🎯 ChinaIp (enabled)
+27. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
+28. 🎯 ChinaCompanyIp / Download
+29. 🎯 `[]GEOIP,LAN`
+30. 🎯 `[]GEOIP,CN`
+31. 🐟 `[]FINAL`
 
-Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets. `trading.list` also sits above `BanAD`: otherwise Binance / OKX Android init (AppsFlyer tenant, vendor push) is REJECT and the app never wakes those services.
+Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets. `trading.list`, `tiktok.list`, and `discord.list` also sit above `BanAD`: otherwise Android init (AppsFlyer / Branch / vendor push) is REJECT and the app never wakes those services. `tiktok.list` still sits above ChinaDomain so `snssdk.com` is not DIRECT.
 
 ## Default exits
 
@@ -93,7 +92,7 @@ The **first** item of each `select` group is the Clash default.
 | 📺 哔哩哔哩 | 🎯 全球直连 |
 | 🌏 国内媒体 | DIRECT |
 | 🎶 网易音乐 | DIRECT (unlock-name filter kept) |
-| 🍎 苹果媒体 | 🚀 节点选择 |
+| 🍎 苹果媒体 | 🇺🇲 美国节点 |
 | 🍎 苹果服务 | DIRECT |
 | 🎯 全球直连 | DIRECT |
 | 🛑 广告拦截 / 🍃 应用净化 | REJECT |
@@ -132,10 +131,13 @@ Do **not** add these (too broad or they fight the intended exit):
 - Wholesale blackmatrix7 `Apple.list` / `ibook` / `iphoto` dumps into `apple_media.list`
 - `gspe1-ssl.ls.apple.com` into `apple_media.list` (shared by Apple News **and** China Maps / eSIM / Wi-Fi Calling)
 - `DOMAIN-SUFFIX,apple.com` or `IP-CIDR,17.0.0.0/8` into `apple_media.list` (that is the system Apple bucket)
+- `DOMAIN-SUFFIX,akadns.net` or `edgesuite.net` into any local list (too broad; use Apple-specific `DOMAIN-KEYWORD` instead)
 
 ## Apple on Mac / Windows / Android / iOS
 
 ACL4SSR `Apple.list` treats **all** of `*.apple.com` plus Apple's `17.0.0.0/8` as 🍎 苹果服务 and this profile defaults that group to **DIRECT**. That is correct for App Store, iCloud, APNs, and macOS/iOS updates in China. It is **not** correct for Apple TV+, Apple News, Apple Intelligence relays, Developer / TestFlight, or unlocked Apple Music — those hosts never reached `ProxyMedia` because `DOMAIN-SUFFIX,apple.com` already matched.
+
+ACL4SSR `Microsoft.list` also claims `akadns.net` and `edgesuite.net`. If it loads first, Apple update / store CDN hostnames (`*.apple.com.akadns.net`, `appldnld.apple.com.edgesuite.net`) go to Ⓜ️ 微软服务 (default **proxy**). `apple.list` therefore sits **above** Microsoft and pins those Apple-specific Akamai names back to 🍎 苹果服务.
 
 | Client | System Apple (DIRECT) | Media / Intelligence / Developer (🍎 苹果媒体) |
 |--------|------------------------|------------------------------------------------|
@@ -144,7 +146,7 @@ ACL4SSR `Apple.list` treats **all** of `*.apple.com` plus Apple's `17.0.0.0/8` a
 | **Windows** | iCloud / Apple Devices / APSDaemon / Mobile Device in `apple.list` | `AppleMusic.exe` / `iTunes.exe` / `AppleTV.exe` |
 | **Android** | No official iCloud app. Browser `icloud.com` stays DIRECT via ACL4SSR | `com.apple.android.music` / Apple TV Android TV packages |
 
-If you only use licensed Apple Music in China and do not want it proxied, set 🍎 苹果媒体 → DIRECT (TV+ / News / Intelligence will follow). Leave it on 🚀 节点选择 and pick a US/HK/TW/SG node for TV+.
+If you only use licensed Apple Music in China and do not want it proxied, set 🍎 苹果媒体 → DIRECT (TV+ / News / Intelligence will follow). The default is 🇺🇲 美国节点 for TV+ / News unlock.
 
 ## Rule format
 
@@ -163,4 +165,4 @@ Python 3, no extra deps. From the repo root:
 python3 scripts/check_rules.py
 ```
 
-It scans every `*.list` in the repo root for duplicate rules, `IP-CIDR`/`IP-CIDR6` missing `,no-resolve`, a dangerous `DOMAIN-SUFFIX` blacklist, and whether `README.md` mentions each existing list plus `main.ini`. Exit code `1` on findings, `0` when clean.
+It scans every `*.list` in the repo root for duplicate rules, `IP-CIDR`/`IP-CIDR6` missing `,no-resolve`, a dangerous `DOMAIN-SUFFIX` blacklist, and whether `README.md` mentions each existing list plus `main.ini`. It also asserts `apple_media.list` / `apple.list` load before Microsoft and ACL4SSR Apple, and that `tiktok.list` / `discord.list` load before BanAD. Exit code `1` on findings, `0` when clean.

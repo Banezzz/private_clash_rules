@@ -8,11 +8,13 @@
 # Process — desktop binary + Windows .exe + Android package
 PROCESS-NAME,Cursor
 PROCESS-NAME,Cursor.exe
+PROCESS-NAME,Cursor Helper
 PROCESS-NAME,ChatGPT
 PROCESS-NAME,ChatGPT.exe
 PROCESS-NAME,com.openai.chatgpt
 PROCESS-NAME,Claude
 PROCESS-NAME,Claude.exe
+PROCESS-NAME,Claude Helper
 PROCESS-NAME,com.anthropic.claude
 PROCESS-NAME,Windsurf
 PROCESS-NAME,Windsurf.exe

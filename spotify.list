@@ -41,3 +41,4 @@ PROCESS-NAME,Spotify.exe
 PROCESS-NAME,Spotify
 PROCESS-NAME,com.spotify.music
 PROCESS-NAME,com.spotify.lite
+PROCESS-NAME-WILDCARD,com.spotify.music*
