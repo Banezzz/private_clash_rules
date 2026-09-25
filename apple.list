@@ -1,6 +1,8 @@
 # Apple system services (Mac, Windows, Android, iOS)
-# Replaces ACL4SSR Apple.list. A later remote ruleset cannot punch holes in
-# DOMAIN-SUFFIX,akadns.net / crashlytics.com, so those lines are not inherited.
+# Local Apple services. ACL4SSR Apple.list is still loaded later, into this
+# same group, so new upstream names are picked up. Its akadns.net line loses
+# to Microsoft.list (loaded first). crashlytics.com and three non-Apple
+# CIDRs are pinned to 漏网之鱼 before that upstream file.
 #
 # Dropped from upstream on purpose:
 #   DOMAIN,apple.comscoreresearch.com  (glued token, NXDOMAIN, not a host)

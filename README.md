@@ -11,7 +11,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
 | `apple-proxy.list` | 🍏 苹果代理 | TV+, News, Private Cloud Compute, TestFlight. Default is 🚀 节点选择. Loaded before Microsoft so Akamai names are not stolen |
 | `apple-media.list` | 🍎 苹果媒体 | Apple Music and Podcasts only. Default stays DIRECT |
-| `apple.list` | 🍎 苹果服务 | Local replacement for ACL4SSR `Apple.list`. System, iCloud, App Store, Shazam. Drops `akadns.net`, `crashlytics.com`, and the glued `apple.comscoreresearch.com` token |
+| `apple.list` | 🍎 苹果服务 | Local Apple services, loaded before upstream `Apple.list`. System, iCloud, App Store, Shazam. Upstream `akadns.net` / `crashlytics.com` do not enter this group |
 | `android.list` | 🤖 Android 服务 | Play Store package and Play API hosts only. Not Play Services, not `android.com` |
 | `telegram.list` | 📲 电报消息 | Process names and official CIDRs missing from ACL4SSR Telegram |
 | `youtube.list` | 📹 油管视频 | Android YouTube package names, loaded before the upstream YouTube list |
@@ -32,6 +32,8 @@ Local lists are referenced as:
 
 `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/<file>`
 
+Where a matching ACL4SSR list exists, `main.ini` loads the local file first and the upstream URL second, into the same group. Subconverter fetches upstream at conversion time, so new upstream rules arrive without editing this repo. A local rule wins only when it names the same host first. `NetflixIP.list` loads after the local Netflix list. Its shortest prefixes are `/17`, the same Netflix ranges already kept locally, not the AWS `/12`–`/16` blocks. `Crypto.list` loads after `trading.list` into the same group. `OpenAi.list` loads after `ai.list`; `stripe.com`, `sentry.io`, `auth0.com`, `intercom.io`, `identrust.com`, `challenges.cloudflare.com`, and `client-api.arkoselabs.com` are pinned to 🐟 漏网之鱼 first so shared SaaS does not follow AI Suite. Still not loaded: `SteamCN.list` (Steam downloads would go DIRECT) and `AppleNews.list` (its only host, `gspe1-ssl.ls.apple.com`, is shared with Maps, eSIM, and Wi-Fi Calling). Upstream `Apple.list` is loaded after Microsoft and after four inline guards (`crashlytics.com` and three non-Apple CIDRs → 🐟 漏网之鱼). Its `akadns.net` line never matches, because Microsoft already claimed that zone.
+
 ## Load order
 
 `main.ini` `ruleset=` lines are applied top to bottom.
@@ -45,7 +47,7 @@ Local lists are referenced as:
 7. 📢 GoogleFCM
 8. 🎯 GoogleCN
 9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
-10. 🍏 `apple-proxy.list`, 🍎 `apple-media.list`, 🍎 `apple.list`, 🎥 `Netflix.list`, 🎵 `spotify.list` — **before Microsoft**, because `Microsoft.list` claims all of `akadns.net` and `edgesuite.net`
+10. 🍏 `apple-proxy.list` then upstream `AppleTV.list`, 🍎 `apple-media.list`, 🍎 `apple.list`, 🎥 `Netflix.list` then upstream `Netflix.list`, 🎵 `spotify.list` then upstream `Spotify.list` — **before Microsoft**, because `Microsoft.list` claims all of `akadns.net` and `edgesuite.net`
 11. Ⓜ️ Bing / OneDrive / Microsoft
 12. 📲 `telegram.list` then upstream Telegram
 13. 💬 `discord.list` (local)
