@@ -79,3 +79,4 @@ DOMAIN-SUFFIX,bitbucket.org
 # GitHub Desktop
 PROCESS-NAME,GitHubDesktop.exe
 PROCESS-NAME,GitHubDesktop
+PROCESS-NAME,GitHub Desktop

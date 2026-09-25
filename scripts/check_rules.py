@@ -26,6 +26,15 @@ DOMAIN_RE = re.compile(
     r"[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$",
     re.IGNORECASE,
 )
+COUNT_RE = re.compile(r"^#\s*Count:\s*(\d+)\s*$", re.IGNORECASE)
+ORDER_REQUIREMENTS = (
+    ("android.list", "BanAD.list"),
+    ("trading.list", "BanAD.list"),
+    ("GoogleFCM.list", "GoogleCN.list"),
+    ("tiktok.list", "ChinaDomain.list"),
+    ("steam.list", "ChinaDomain.list"),
+    ("apple.list", "ProxyMedia.list"),
+)
 
 DANGEROUS_SUFFIXES = {
     "akadns.net",
@@ -54,8 +63,9 @@ def rule_payload(line: str) -> str:
 def scan_list(path: Path) -> list[str]:
     findings: list[str] = []
     seen: dict[str, list[int]] = defaultdict(list)
+    lines = path.read_text(encoding="utf-8").splitlines()
 
-    for lineno, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+    for lineno, raw in enumerate(lines, 1):
         if is_ignorable(raw):
             continue
         rule = rule_payload(raw)
@@ -117,10 +127,23 @@ def scan_list(path: Path) -> list[str]:
                     f"{path.name}:{lineno}: dangerous DOMAIN-SUFFIX ({suffix}): {rule}"
                 )
 
-    for rule, lines in sorted(seen.items(), key=lambda item: item[1][0]):
-        if len(lines) > 1:
-            loc = ", ".join(f"L{n}" for n in lines)
+    for rule, rule_lines in sorted(seen.items(), key=lambda item: item[1][0]):
+        if len(rule_lines) > 1:
+            loc = ", ".join(f"L{n}" for n in rule_lines)
             findings.append(f"{path.name}: duplicate rule ({loc}): {rule}")
+
+    declared_counts = [
+        (lineno, int(match.group(1)))
+        for lineno, raw in enumerate(lines, 1)
+        if (match := COUNT_RE.fullmatch(raw.strip()))
+    ]
+    actual_count = sum(len(rule_lines) for rule_lines in seen.values())
+    for lineno, declared_count in declared_counts:
+        if declared_count != actual_count:
+            findings.append(
+                f"{path.name}:{lineno}: declared count {declared_count} "
+                f"does not match {actual_count} rules"
+            )
 
     return findings
 
@@ -132,6 +155,7 @@ def check_main_ini(list_files: list[Path]) -> list[str]:
 
     findings: list[str] = []
     ruleset_groups: list[tuple[int, str]] = []
+    ruleset_sources: list[tuple[int, str]] = []
     defined_groups: set[str] = set()
     referenced_local_lists: dict[str, list[int]] = defaultdict(list)
 
@@ -150,6 +174,7 @@ def check_main_ini(list_files: list[Path]) -> list[str]:
                 continue
             ruleset_groups.append((lineno, group.strip()))
             source = source.strip()
+            ruleset_sources.append((lineno, source))
             if source.startswith("http://"):
                 findings.append(
                     f"main.ini:{lineno}: remote ruleset must use HTTPS: {source}"
@@ -176,6 +201,18 @@ def check_main_ini(list_files: list[Path]) -> list[str]:
         if group not in defined_groups:
             findings.append(
                 f"main.ini:{lineno}: ruleset policy group is undefined: {group}"
+            )
+
+    for earlier_name, later_name in ORDER_REQUIREMENTS:
+        earlier_lines = [
+            line for line, source in ruleset_sources if source.endswith(earlier_name)
+        ]
+        later_lines = [
+            line for line, source in ruleset_sources if source.endswith(later_name)
+        ]
+        if earlier_lines and later_lines and min(earlier_lines) >= min(later_lines):
+            findings.append(
+                f"main.ini: {earlier_name} must load before {later_name}"
             )
 
     expected_local_lists = {path.name for path in list_files}

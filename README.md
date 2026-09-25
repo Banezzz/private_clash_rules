@@ -9,7 +9,7 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | File | Policy group | Notes |
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
-| `apple.list` | 🍎 苹果服务 | Apple platform services, Windows Apple apps, and Android Apple Music |
+| `apple.list` | 🍎 苹果服务 | Apple platform services, Windows Apple apps, Android Apple Music/TV, and Shazam |
 | `android.list` | 🤖 Android 服务 | Google Play and core Android services; loads before ad blocking and GoogleCN |
 | `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
@@ -117,6 +117,10 @@ Older Clash cores may reject Mihomo-only rules such as
 `PROCESS-NAME-WILDCARD`. Use domain/IP coverage only on those clients, or use a
 current Mihomo-based client.
 
+The local process lists include platform-specific basenames where they differ,
+such as `GitHub Desktop` and `steam_osx` on macOS and Electron helper processes.
+Domain rules remain the fallback when process discovery is unavailable.
+
 ## Apple service coverage
 
 `apple.list` replaces the older generic upstream Apple list and is based on
@@ -129,7 +133,7 @@ Apple's published enterprise-network requirements. It covers:
 - Apple's published `17.0.0.0/8` IPv4 range and all three published IPv6
   ranges, plus legacy service ranges retained from the previous ACL4SSR list.
 - Apple Music, Apple TV, Apple Devices, iTunes, and iCloud processes on
-  Windows, plus the official Apple Music Android package.
+  Windows, plus official Apple Music/TV Android packages and Shazam.
 - Narrowly scoped third-party hosts used by Apple Intelligence Private Cloud
   Compute, without routing all of Cloudflare or Fastly.
 
@@ -171,6 +175,11 @@ Do **not** add these (too broad or they fight the intended exit):
 - Wholesale blackmatrix7 Crypto dumps into `trading.list`
 - ByteDance CN suffixes (`bytedance.com`, `pstatp.com`, `byteimg.com`, `douyin.com`) into `tiktok.list`
 
+`snssdk.com` is an intentional exception because international TikTok uses it
+and the upstream ChinaDomain list would otherwise force it DIRECT. It is shared
+with Douyin, so devices using both apps should expect that hostname to follow
+the TikTok policy; package rules cannot override an earlier domain match.
+
 ## Rule format
 
 - `DOMAIN` — exact host
@@ -189,7 +198,10 @@ python3 scripts/check_rules.py
 ```
 
 It scans every `*.list` in the repo root for duplicate or malformed rules,
-invalid CIDRs, missing `,no-resolve`, and dangerous broad suffixes. It also
+invalid CIDRs, stale `# Count:` metadata, missing `,no-resolve`, and dangerous
+broad suffixes. It also
 checks that `main.ini` defines every referenced policy group, references every
-local list exactly once, uses HTTPS health checks, and that `README.md`
-mentions every list. Exit code `1` on findings, `0` when clean.
+local list exactly once, preserves critical first-match ordering, uses HTTPS
+health checks, and that `README.md` mentions every list. Exit code `1` on
+findings, `0` when clean. GitHub Actions runs the same check on pushes and pull
+requests.

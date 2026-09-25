@@ -44,5 +44,6 @@ PROCESS-NAME,DiscordCanary.exe
 PROCESS-NAME,DiscordCanary
 PROCESS-NAME,DiscordPTB.exe
 PROCESS-NAME,DiscordPTB
+PROCESS-NAME-WILDCARD,Discord Helper*
 PROCESS-NAME,com.discord
 PROCESS-NAME,com.hammerandchisel.discord

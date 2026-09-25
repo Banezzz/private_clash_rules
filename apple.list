@@ -18,6 +18,9 @@ PROCESS-NAME,iCloudDrive.exe
 PROCESS-NAME,iCloudServices.exe
 PROCESS-NAME,iCloudPhotos.exe
 PROCESS-NAME,com.apple.android.music
+PROCESS-NAME,com.apple.atve.androidtv.appletv
+PROCESS-NAME,com.apple.atve.sony.appletv
+PROCESS-NAME,com.shazam.android
 
 # Apple account, App Store, updates, APNs, iCloud, Maps, and first-party CDN
 DOMAIN-SUFFIX,aaplimg.com
@@ -28,7 +31,12 @@ DOMAIN-SUFFIX,apple-mapkit.com
 DOMAIN-SUFFIX,apple.co
 DOMAIN-SUFFIX,apple.com
 DOMAIN-SUFFIX,apple.com.cn
+DOMAIN-SUFFIX,apple.net
 DOMAIN-SUFFIX,apple.news
+DOMAIN-SUFFIX,apple-dns.com
+DOMAIN-SUFFIX,apple-dns.cn
+DOMAIN-SUFFIX,apple-dns.com.cn
+DOMAIN-SUFFIX,appleid.com
 DOMAIN-SUFFIX,appstore.com
 DOMAIN-SUFFIX,apzones.com
 DOMAIN-SUFFIX,cdn-apple.com
@@ -37,7 +45,9 @@ DOMAIN-SUFFIX,icloud.com
 DOMAIN-SUFFIX,icloud.com.cn
 DOMAIN-SUFFIX,itunes.com
 DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,myappleid.com
 DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,shazam.com
 
 # Apple media services used outside Apple platforms
 DOMAIN-SUFFIX,applemusic.co
@@ -54,6 +64,7 @@ DOMAIN-SUFFIX,safebrowsing.apple
 DOMAIN,apple-relay.cloudflare.com
 DOMAIN,apple-relay.fastly-edge.com
 DOMAIN,cp4.cloudflare.com
+DOMAIN,h3.apis.apple.map.fastly.net
 
 # Apple-owned and legacy service address ranges
 IP-CIDR,17.0.0.0/8,no-resolve
