@@ -5,6 +5,34 @@
 # Microsoft Copilot on *.microsoft.com stays with 微软服务 (that ruleset loads before AI Suite).
 # Not synced from geosite:category-ai-chat-!cn: Envato / ThemeForest, LivePerson, CN brands, ads/telemetry, githubcopilot (github.list).
 
+# -----------------------------------------------------------------------------
+# PROCESS-NAME — desktop + Android apps (domains above stay decisive).
+# Browser-based usage (Gemini / AI Studio on desktop) has no dedicated process
+# and relies on domain rules; do not add chrome.exe here (too broad).
+# Cursor has no official Android app. Requires TUN + process matching.
+# -----------------------------------------------------------------------------
+# OpenAI / ChatGPT
+PROCESS-NAME,ChatGPT.exe
+PROCESS-NAME,ChatGPT
+PROCESS-NAME,com.openai.chatgpt
+# Anthropic / Claude
+PROCESS-NAME,Claude.exe
+PROCESS-NAME,Claude
+PROCESS-NAME,com.anthropic.claude
+# Cursor (desktop only)
+PROCESS-NAME,Cursor.exe
+PROCESS-NAME,Cursor
+# Google Gemini (Android app only; desktop is browser traffic)
+PROCESS-NAME,com.google.android.apps.bard
+# Microsoft Copilot standalone app (copilot.microsoft.com stays with 微软服务)
+PROCESS-NAME,Copilot.exe
+PROCESS-NAME,Copilot
+PROCESS-NAME,com.microsoft.copilot
+# Perplexity
+PROCESS-NAME,Perplexity.exe
+PROCESS-NAME,Perplexity
+PROCESS-NAME,ai.perplexity.app.android
+
 # OpenAI / ChatGPT / Sora
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com

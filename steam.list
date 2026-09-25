@@ -3,11 +3,18 @@
 # Valve store / community / download hosts. steamcontent stays here so game
 # downloads hit 游戏平台 (not later ChinaDomain DIRECT).
 
-# Process
+# Process — desktop binary + Windows .exe + Android package.
+# macOS main process is steam_osx (bare steam/Steam do not match, case-sensitive);
+# store/community web traffic runs in Steam Helper, Android in the Steam app.
 PROCESS-NAME,steam
 PROCESS-NAME,Steam
 PROCESS-NAME,steam.exe
 PROCESS-NAME,steamwebhelper.exe
+PROCESS-NAME,steamwebhelper
+PROCESS-NAME,steam_osx
+PROCESS-NAME,Steam Helper
+PROCESS-NAME-WILDCARD,Steam Helper*
+PROCESS-NAME,com.valvesoftware.android.steam.community
 
 # Store / community / first-party
 DOMAIN-SUFFIX,steampowered.com

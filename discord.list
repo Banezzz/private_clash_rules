@@ -37,9 +37,12 @@ DOMAIN-SUFFIX,bigbeans.solutions
 DOMAIN-SUFFIX,watchanimeattheoffice.com
 DOMAIN,hammerandchisel.ssl.zendesk.com
 
-# Discord clients
+# Discord clients — desktop binary + Windows .exe + Android package.
+# macOS voice/media traffic runs in Discord Helper subprocesses.
 PROCESS-NAME,Discord.exe
 PROCESS-NAME,Discord
+PROCESS-NAME,Discord Helper
+PROCESS-NAME-WILDCARD,Discord Helper*
 PROCESS-NAME,DiscordCanary.exe
 PROCESS-NAME,DiscordCanary
 PROCESS-NAME,DiscordPTB.exe

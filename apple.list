@@ -1,0 +1,93 @@
+# Apple services (first-party domains + three-platform clients)
+# Base domain/IP section mirrors upstream ACL4SSR Apple.list so behavior stays
+# identical to before; PROCESS-NAME sections below are the local addition.
+# Upstream: https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/Apple.list
+# Apple TV edge hosts come from upstream AppleTV.list (Ruleset/AppleTV.list).
+#
+# Why PROCESS-NAME matters:
+# Domain rules alone cover iOS/macOS web traffic, but desktop/Android apps also
+# dial CDN edge IPs outside 17.0.0.0/8. Without a process hit that traffic falls
+# through to later GEOIP / FINAL groups, so the same app ends up split between
+# DIRECT and proxy. PROCESS-NAME keeps one app in this group, especially after
+# the user switches the group away from DIRECT (e.g.外区 Apple ID).
+# iOS cannot match PROCESS-NAME; domain/IP rules below are the iOS coverage.
+# Requires TUN + process matching on the client (see README Client setup).
+# Default exit stays DIRECT (Mainland + 国区 ID friendly, Private Relay safe).
+
+# -----------------------------------------------------------------------------
+# PROCESS-NAME — macOS
+# storedownloadd handles App Store downloads; cloudd/bird handle iCloud sync.
+# -----------------------------------------------------------------------------
+PROCESS-NAME,storedownloadd
+PROCESS-NAME,Music
+PROCESS-NAME,TV
+PROCESS-NAME,Podcasts
+PROCESS-NAME,App Store
+PROCESS-NAME,iTunes
+PROCESS-NAME,cloudd
+PROCESS-NAME,bird
+
+# -----------------------------------------------------------------------------
+# PROCESS-NAME — Windows
+# Apple Music for Windows splits playback (AppleMusic.exe) and library sync
+# (AMPLibraryAgent.exe); iCloud for Windows and Apple Devices each add helpers.
+# -----------------------------------------------------------------------------
+PROCESS-NAME,AppleMusic.exe
+PROCESS-NAME,AMPLibraryAgent.exe
+PROCESS-NAME,iCloud.exe
+PROCESS-NAME,iCloudServices.exe
+PROCESS-NAME,iCloudCKKS.exe
+PROCESS-NAME,AMPDevicesAgent.exe
+PROCESS-NAME,AppleMobileDeviceHelper.exe
+PROCESS-NAME,AppleMobileDeviceService.exe
+PROCESS-NAME,iTunes.exe
+
+# -----------------------------------------------------------------------------
+# PROCESS-NAME — Android (package name / UID match covers all subprocesses)
+# -----------------------------------------------------------------------------
+PROCESS-NAME,com.apple.android.music
+PROCESS-NAME,com.apple.android.music.classical
+PROCESS-NAME,com.apple.atve.androidtv.appletv
+PROCESS-NAME,com.apple.android.sharedauth
+
+# -----------------------------------------------------------------------------
+# Domains — upstream ACL4SSR Apple.list (kept in sync, do not narrow lightly)
+# Broad entries (akadns.net, crashlytics.com) are inherited from upstream.
+# crashlytics.com also matches non-Apple Firebase apps; kept for parity.
+# -----------------------------------------------------------------------------
+DOMAIN,apple.comscoreresearch.com
+DOMAIN-SUFFIX,aaplimg.com
+DOMAIN-SUFFIX,akadns.net
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN-SUFFIX,apple-mapkit.com
+DOMAIN-SUFFIX,apple.co
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,apple.com.cn
+DOMAIN-SUFFIX,apple.news
+DOMAIN-SUFFIX,appstore.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,crashlytics.com
+DOMAIN-SUFFIX,icloud-content.com
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,icloud.com.cn
+DOMAIN-SUFFIX,itunes.com
+DOMAIN-SUFFIX,me.com
+DOMAIN-SUFFIX,mzstatic.com
+
+# Apple TV edge hosts (upstream AppleTV.list; mostly covered by suffixes above)
+DOMAIN,np-edge.itunes.apple.com
+DOMAIN,play-edge.itunes.apple.com
+DOMAIN-SUFFIX,tv.apple.com
+
+# Apple-owned IP ranges (upstream; APNs / Private Relay fallback)
+IP-CIDR,17.0.0.0/8,no-resolve
+IP-CIDR,63.92.224.0/19,no-resolve
+IP-CIDR,65.199.22.0/23,no-resolve
+IP-CIDR,139.178.128.0/18,no-resolve
+IP-CIDR,144.178.0.0/19,no-resolve
+IP-CIDR,144.178.36.0/22,no-resolve
+IP-CIDR,144.178.48.0/20,no-resolve
+IP-CIDR,192.35.50.0/24,no-resolve
+IP-CIDR,198.183.17.0/24,no-resolve
+IP-CIDR,205.180.175.0/24,no-resolve

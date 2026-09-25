@@ -76,6 +76,17 @@ DOMAIN-SUFFIX,npm.community
 DOMAIN-SUFFIX,gitlab.com
 DOMAIN-SUFFIX,bitbucket.org
 
-# GitHub Desktop
+# GitHub Desktop + daily-driver dev clients.
+# git clone/fetch/push and Copilot-in-VS-Code traffic runs under Code/git,
+# not GitHubDesktop, so those processes are listed here (domains stay decisive).
 PROCESS-NAME,GitHubDesktop.exe
 PROCESS-NAME,GitHubDesktop
+PROCESS-NAME,Code.exe
+PROCESS-NAME,Code
+PROCESS-NAME,Code Helper
+PROCESS-NAME,Code Helper (Plugin)
+PROCESS-NAME,git.exe
+PROCESS-NAME,git
+PROCESS-NAME,gh.exe
+PROCESS-NAME,gh
+PROCESS-NAME,com.github.android

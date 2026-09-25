@@ -9,15 +9,16 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | File | Policy group | Notes |
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
-| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
+| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS). Desktop + Android app `PROCESS-NAME` included |
+| `apple.list` | 🍎 苹果服务 | Upstream ACL4SSR Apple.list domains/IPs + AppleTV edge hosts, plus Mac / Windows / Android `PROCESS-NAME`. Default exit stays DIRECT |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
-| `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts |
-| `riot.list` | 🎮 游戏平台 | Riot Client plus first-party web (LoL / TFT / Valorant / Wild Rift / 2XKO). Tencent CN LoL omitted |
+| `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts. macOS `steam_osx` / `Steam Helper` + Android package included |
+| `riot.list` | 🎮 游戏平台 | Riot Client plus first-party web (LoL / TFT / Valorant / Wild Rift / 2XKO). Tencent CN LoL omitted. macOS `LeagueClientUx` covered; Vanguard omitted on purpose |
 | `selfbuilt.list` | 🫡 自建节点 | Overlay hook only — see below |
-| `discord.list` | 💬 Discord | Discord hosts |
-| `github.list` | 🛠️ GitHub | GitHub / git-related hosts |
-| `spotify.list` | 🎵 Spotify | Spotify hosts |
+| `discord.list` | 💬 Discord | Discord hosts + desktop / Android clients (macOS Helper included) |
+| `github.list` | 🛠️ GitHub | GitHub / git-related hosts + GitHub Desktop, VS Code, git CLI, Android app |
+| `spotify.list` | 🎵 Spotify | Spotify hosts + desktop / Android clients (macOS Helper included) |
 | `tiktok.list` | 📱 TikTok | International TikTok + Android packages. ByteDance CN (Douyin / Toutiao) omitted |
 
 There is **no** `ai_suite.list`, **no** `ACL4SSR_Online_Full_MultiMode.ini`, and **no** local `ChinaDomain.list`. China domains come from upstream ACL4SSR.
@@ -40,7 +41,7 @@ Local lists are referenced as:
 8. 🎯 GoogleCN
 9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
 10. Ⓜ️ Bing / OneDrive / Microsoft
-11. 🍎 Apple
+11. 🍎 `apple.list` (local, mirrors upstream Apple.list + AppleTV + three-platform `PROCESS-NAME`) — default exit stays DIRECT
 12. 📲 Telegram
 13. 💬 `discord.list` (local)
 14. 🤖 `ai.list` (local)
@@ -135,6 +136,18 @@ Do **not** add these (too broad or they fight the intended exit):
 - `PROCESS-NAME` — desktop binary or Android package name (not DNS). On Clash Meta / Mihomo Android this matches the app UID, so every subprocess is covered. TUN + process matching must be enabled on the client.
 - `PROCESS-NAME-WILDCARD` — Mihomo wildcard (e.g. `com.okinc.okex*`) for Android `:push` / `:remote` subprocesses when exact `PROCESS-NAME` misses. OKX Android HTTPDNS then dials a raw CN IP; without a process hit the flow falls through to `GEOIP,CN` DIRECT.
 
+## Client setup (Android / Mac / Windows)
+
+One subscription is shared by all three platforms, but `PROCESS-NAME` rules only work when the client can see processes. Without this, domain rules still apply while raw-IP / Helper-subprocess traffic silently falls through to `GEOIP,CN` / `🐟 漏网之鱼`.
+
+| Platform | Client | Required settings |
+|----------|--------|-------------------|
+| Android | Mihomo / Clash Meta for Android | Enable VPN service (not HTTP-proxy-only). `PROCESS-NAME` matches the app UID, so every subprocess is covered. Work-profile / dual-app clones may have different package names. 📢 谷歌FCM group should stay on proxy or push breaks. |
+| Windows | Clash Verge / Mihomo | Run service as admin, enable **TUN mode** + process finding (`find-process-mode: strict/always`). Do not force game anti-cheat processes (Vanguard `vgk`/`vgc`) through TUN — they are omitted from `riot.list` on purpose. |
+| Mac | Clash Verge / Mihomo Party | Enable **TUN** + process matching, allow the system extension. Sandboxed / Helper-subprocess traffic is why lists pin `* Helper` names. 🍎 苹果服务 defaults to DIRECT (Mainland + 国区 ID friendly, Private Relay safe); cross-region Apple IDs switch the group to a manual node. |
+
+Minimum kernel: **Mihomo** (Meta). `PROCESS-NAME-WILDCARD` (used in `trading` / `discord` / `spotify` / `steam`) is Mihomo-only — old Clash Premium skips those lines, and iOS Surge / Shadowrocket cannot use process rules at all (domain/IP rules still apply there).
+
 ## `scripts/check_rules.py`
 
 Python 3, no extra deps. From the repo root:
@@ -143,4 +156,4 @@ Python 3, no extra deps. From the repo root:
 python3 scripts/check_rules.py
 ```
 
-It scans every `*.list` in the repo root for duplicate rules, `IP-CIDR`/`IP-CIDR6` missing `,no-resolve`, a dangerous `DOMAIN-SUFFIX` blacklist, and whether `README.md` mentions each existing list plus `main.ini`. Exit code `1` on findings, `0` when clean.
+It scans every `*.list` in the repo root for duplicate rules, `IP-CIDR`/`IP-CIDR6` missing `,no-resolve`, a dangerous `DOMAIN-SUFFIX` blacklist, `main.ini` wiring (`trading.list` before BanAD, `tiktok.list` before ChinaDomain / ChinaMedia, no orphan or missing local lists, no upstream `Apple.list` reference), and whether `README.md` mentions each existing list plus `main.ini`. Exit code `1` on findings, `0` when clean. Mihomo-only `PROCESS-NAME-WILDCARD` usage and single-platform `PROCESS-NAME` coverage are reported as `[WARN]` without failing.
