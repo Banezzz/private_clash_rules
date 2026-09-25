@@ -79,10 +79,10 @@ DOMAIN-SUFFIX,fitness.apple.com
 # -----------------------------------------------------------------------------
 # Apple Intelligence / Private Cloud Compute relays
 # -----------------------------------------------------------------------------
-DOMAIN,apple-relay.apple.com
-DOMAIN,apple-relay.cloudflare.com
-DOMAIN,apple-relay.fastly-edge.com
-DOMAIN,apple-relay.mask.apple-dns.net
+DOMAIN-SUFFIX,apple-relay.apple.com
+DOMAIN-SUFFIX,apple-relay.cloudflare.com
+DOMAIN-SUFFIX,apple-relay.fastly-edge.com
+DOMAIN-SUFFIX,apple-relay.mask.apple-dns.net
 
 # -----------------------------------------------------------------------------
 # Developer / TestFlight / App Store Connect (blocked or slow on DIRECT in CN)
