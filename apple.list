@@ -1,0 +1,32 @@
+# Overlay for 🍎 苹果服务 (system Apple: App Store, iCloud, APNs, updates).
+# Domains and 17.0.0.0/8 still come from upstream ACL4SSR Apple.list.
+# This file only adds Mac / Windows process names so iCloud-for-Windows and
+# Apple Devices still hit DIRECT when they dial raw Apple IPs.
+#
+# Music / TV / News / Android Apple Music live in apple_media.list (proxy).
+# Do not add those processes here.
+
+# Windows iCloud / Photos / Push / device sync
+PROCESS-NAME,iCloud
+PROCESS-NAME,iCloud.exe
+PROCESS-NAME,iCloudServices
+PROCESS-NAME,iCloudServices.exe
+PROCESS-NAME,iCloudPhotos
+PROCESS-NAME,iCloudPhotos.exe
+PROCESS-NAME,ApplePhotoStreams
+PROCESS-NAME,ApplePhotoStreams.exe
+PROCESS-NAME,APSDaemon
+PROCESS-NAME,APSDaemon.exe
+PROCESS-NAME,AppleDevices
+PROCESS-NAME,AppleDevices.exe
+PROCESS-NAME,AppleMobileDeviceProcess
+PROCESS-NAME,AppleMobileDeviceProcess.exe
+PROCESS-NAME,AppleMobileDeviceHelper
+PROCESS-NAME,AppleMobileDeviceHelper.exe
+
+# macOS system daemons that should stay with 苹果服务 (DIRECT)
+PROCESS-NAME,apsd
+PROCESS-NAME,cloudd
+PROCESS-NAME,bird
+PROCESS-NAME,fmfd
+PROCESS-NAME,findmydevice-user-agent

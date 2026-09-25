@@ -6,6 +6,7 @@ Scans *.list in the repository root (not subdirectories) for:
   2. IP-CIDR / IP-CIDR6 rules missing ,no-resolve
   3. Dangerous DOMAIN-SUFFIX values that over-capture
   4. README.md mentioning each existing *.list filename and main.ini
+  5. main.ini loading apple_media.list before upstream ACL4SSR Apple.list
 
 Comments starting with # are allowed. Exit 1 if any finding is reported.
 """
@@ -27,6 +28,9 @@ DANGEROUS_SUFFIXES = {
     "stripe.com",
     "challenges.cloudflare.com",
     "us-west-2.amazonaws.com",
+    # Whole apple.com / Akamai DNS belong on upstream 🍎 苹果服务, not a local list
+    "apple.com",
+    "akadns.net",
 }
 
 
@@ -88,6 +92,37 @@ def check_readme(list_files: list[Path]) -> list[str]:
     return findings
 
 
+def check_main_ini_apple_order() -> list[str]:
+    """apple_media.list must be referenced before ACL4SSR Apple.list."""
+    ini_path = ROOT / MAIN_INI
+    if not ini_path.is_file():
+        return [f"{MAIN_INI}: file is missing"]
+
+    lines = ini_path.read_text(encoding="utf-8").splitlines()
+    media_idx = None
+    apple_idx = None
+    for i, line in enumerate(lines):
+        stripped = line.strip()
+        if stripped.startswith(";"):
+            continue
+        if "apple_media.list" in stripped:
+            media_idx = i
+        if "ACL4SSR/ACL4SSR/master/Clash/Apple.list" in stripped:
+            apple_idx = i
+
+    findings: list[str] = []
+    if media_idx is None:
+        findings.append(f"{MAIN_INI}: apple_media.list ruleset is missing")
+    if apple_idx is None:
+        findings.append(f"{MAIN_INI}: upstream ACL4SSR Apple.list ruleset is missing")
+    if media_idx is not None and apple_idx is not None and media_idx > apple_idx:
+        findings.append(
+            f"{MAIN_INI}: apple_media.list (L{media_idx + 1}) must load before "
+            f"ACL4SSR Apple.list (L{apple_idx + 1})"
+        )
+    return findings
+
+
 def main() -> int:
     list_files = sorted(p for p in ROOT.glob("*.list") if p.is_file())
     print(f"Scanning {len(list_files)} list file(s) in {ROOT}")
@@ -99,6 +134,7 @@ def main() -> int:
     for path in list_files:
         findings.extend(scan_list(path))
     findings.extend(check_readme(list_files))
+    findings.extend(check_main_ini_apple_order())
 
     if findings:
         print(f"Found {len(findings)} issue(s):")

@@ -9,7 +9,9 @@ Raw prefix: `https://raw.githubusercontent.com/Banezzz/private_clash_rules/main/
 | File | Policy group | Notes |
 |------|----------------|-------|
 | `main.ini` | — | Subconverter config: ruleset order + strategy groups |
-| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS) |
+| `apple_media.list` | 🍎 苹果媒体 | Apple TV+ / Music / News / Arcade / Fitness+ / Intelligence relays / Developer / TestFlight. Loads **before** ACL4SSR `Apple.list` so `DOMAIN-SUFFIX,apple.com` cannot steal them to DIRECT. Mac / Windows / Android process names included |
+| `apple.list` | 🍎 苹果服务 | Overlay only: Windows iCloud / Apple Devices / APNs process names. Domains still come from upstream ACL4SSR `Apple.list` |
+| `ai.list` | 🤖 AI Suite | OpenAI, Anthropic, Gemini, Cursor, Meta AI / Llama / Muse, and related international AI hosts (aligned with geosite `category-ai-chat-!cn`, minus CN brands and over-broad SaaS). Desktop + Android process names included |
 | `trading.list` | 📈 交易相关 | Exchanges and market-data hosts (curated). Android Play Store packages + Binance/OKX mobile-only hosts. Loads before BanAD |
 | `Netflix.list` | 🎥 奈飞视频 | Netflix hosts / keywords (no broad AWS CIDR) |
 | `steam.list` | 🎮 游戏平台 | Steam and Valve-related hosts |
@@ -40,27 +42,28 @@ Local lists are referenced as:
 8. 🎯 GoogleCN
 9. ~~SteamCN~~ **commented out** — Steam downloads must stay on 🎮 游戏平台 (proxy), not DIRECT
 10. Ⓜ️ Bing / OneDrive / Microsoft
-11. 🍎 Apple
-12. 📲 Telegram
-13. 💬 `discord.list` (local)
-14. 🤖 `ai.list` (local)
-15. 🛠️ `github.list` (local)
-16. 🎶 NetEaseMusic
-17. 🎮 Epic / Origin / Sony / `steam.list` / `riot.list` / Nintendo
-18. 📹 YouTube
-19. 🎥 `Netflix.list` (local)
-20. 🎵 `spotify.list` (local)
-21. 📱 `tiktok.list` (local) — before ChinaMedia / ChinaDomain so `snssdk.com` is not DIRECT
-22. 📺 Bahamut / BilibiliHMT / Bilibili
-23. 🌏 ChinaMedia
-24. 🌍 ProxyMedia
-25. 🚀 ProxyGFWlist
-26. 🎯 ChinaIp (enabled)
-27. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
-28. 🎯 ChinaCompanyIp / Download
-29. 🎯 `[]GEOIP,LAN`
-30. 🎯 `[]GEOIP,CN`
-31. 🐟 `[]FINAL`
+11. 🍎 `apple_media.list` (local) — **before** ACL4SSR Apple so TV+ / Music / News / Intelligence / Developer are not swallowed by `DOMAIN-SUFFIX,apple.com` → DIRECT
+12. 🍎 `apple.list` (local overlay) + ACL4SSR `Apple.list` (system Apple, default DIRECT)
+13. 📲 Telegram
+14. 💬 `discord.list` (local)
+15. 🤖 `ai.list` (local)
+16. 🛠️ `github.list` (local)
+17. 🎶 NetEaseMusic
+18. 🎮 Epic / Origin / Sony / `steam.list` / `riot.list` / Nintendo
+19. 📹 YouTube
+20. 🎥 `Netflix.list` (local)
+21. 🎵 `spotify.list` (local)
+22. 📱 `tiktok.list` (local) — before ChinaMedia / ChinaDomain so `snssdk.com` is not DIRECT
+23. 📺 Bahamut / BilibiliHMT / Bilibili
+24. 🌏 ChinaMedia
+25. 🌍 ProxyMedia
+26. 🚀 ProxyGFWlist
+27. 🎯 ChinaIp (enabled)
+28. 🎯 ACL4SSR `ChinaDomain.list` (upstream URL, not a repo file)
+29. 🎯 ChinaCompanyIp / Download
+30. 🎯 `[]GEOIP,LAN`
+31. 🎯 `[]GEOIP,CN`
+32. 🐟 `[]FINAL`
 
 Local lists sit above ACL4SSR `ProxyMedia` / `ProxyGFWlist`, so a domain listed here wins over the generic media/GFW sets. `trading.list` also sits above `BanAD`: otherwise Binance / OKX Android init (AppsFlyer tenant, vendor push) is REJECT and the app never wakes those services.
 
@@ -90,6 +93,7 @@ The **first** item of each `select` group is the Clash default.
 | 📺 哔哩哔哩 | 🎯 全球直连 |
 | 🌏 国内媒体 | DIRECT |
 | 🎶 网易音乐 | DIRECT (unlock-name filter kept) |
+| 🍎 苹果媒体 | 🚀 节点选择 |
 | 🍎 苹果服务 | DIRECT |
 | 🎯 全球直连 | DIRECT |
 | 🛑 广告拦截 / 🍃 应用净化 | REJECT |
@@ -125,6 +129,22 @@ Do **not** add these (too broad or they fight the intended exit):
 - Enabling ACL4SSR `SteamCN.list` (that would DIRECT Steam downloads)
 - Wholesale blackmatrix7 Crypto dumps into `trading.list`
 - ByteDance CN suffixes (`bytedance.com`, `pstatp.com`, `byteimg.com`, `douyin.com`) into `tiktok.list`
+- Wholesale blackmatrix7 `Apple.list` / `ibook` / `iphoto` dumps into `apple_media.list`
+- `gspe1-ssl.ls.apple.com` into `apple_media.list` (shared by Apple News **and** China Maps / eSIM / Wi-Fi Calling)
+- `DOMAIN-SUFFIX,apple.com` or `IP-CIDR,17.0.0.0/8` into `apple_media.list` (that is the system Apple bucket)
+
+## Apple on Mac / Windows / Android / iOS
+
+ACL4SSR `Apple.list` treats **all** of `*.apple.com` plus Apple's `17.0.0.0/8` as 🍎 苹果服务 and this profile defaults that group to **DIRECT**. That is correct for App Store, iCloud, APNs, and macOS/iOS updates in China. It is **not** correct for Apple TV+, Apple News, Apple Intelligence relays, Developer / TestFlight, or unlocked Apple Music — those hosts never reached `ProxyMedia` because `DOMAIN-SUFFIX,apple.com` already matched.
+
+| Client | System Apple (DIRECT) | Media / Intelligence / Developer (🍎 苹果媒体) |
+|--------|------------------------|------------------------------------------------|
+| **iOS** | Domain + `17.0.0.0/8` from ACL4SSR. No `PROCESS-NAME` on most Clash iOS / Stash builds — keep the specific media hosts in `apple_media.list` | `tv.apple.com`, Music/News/relay/developer hosts |
+| **macOS** | `apsd` / `cloudd` / `bird` / Find My in `apple.list` | `Music` / `TV` / `News` process names + the same hosts |
+| **Windows** | iCloud / Apple Devices / APSDaemon / Mobile Device in `apple.list` | `AppleMusic.exe` / `iTunes.exe` / `AppleTV.exe` |
+| **Android** | No official iCloud app. Browser `icloud.com` stays DIRECT via ACL4SSR | `com.apple.android.music` / Apple TV Android TV packages |
+
+If you only use licensed Apple Music in China and do not want it proxied, set 🍎 苹果媒体 → DIRECT (TV+ / News / Intelligence will follow). Leave it on 🚀 节点选择 and pick a US/HK/TW/SG node for TV+.
 
 ## Rule format
 
@@ -132,8 +152,8 @@ Do **not** add these (too broad or they fight the intended exit):
 - `DOMAIN-SUFFIX` — host and all subdomains
 - `DOMAIN-KEYWORD` — substring match (easy to over-capture)
 - `IP-CIDR` / `IP-CIDR6` — always append `,no-resolve`
-- `PROCESS-NAME` — desktop binary or Android package name (not DNS). On Clash Meta / Mihomo Android this matches the app UID, so every subprocess is covered. TUN + process matching must be enabled on the client.
-- `PROCESS-NAME-WILDCARD` — Mihomo wildcard (e.g. `com.okinc.okex*`) for Android `:push` / `:remote` subprocesses when exact `PROCESS-NAME` misses. OKX Android HTTPDNS then dials a raw CN IP; without a process hit the flow falls through to `GEOIP,CN` DIRECT.
+- `PROCESS-NAME` — desktop binary or Android package name (not DNS). On Clash Meta / Mihomo Android this matches the app UID, so every subprocess is covered. TUN + process matching must be enabled on the client. macOS binaries have no `.exe`; Windows needs the `.exe` form; both are listed where a desktop app exists.
+- `PROCESS-NAME-WILDCARD` — Mihomo wildcard (e.g. `com.okinc.okex*`) for Android `:push` / `:remote` subprocesses when exact `PROCESS-NAME` misses. OKX Android HTTPDNS then dials a raw CN IP; without a process hit the flow falls through to `GEOIP,CN` DIRECT. Same pattern is used for TikTok, Binance, and Apple Music Android.
 
 ## `scripts/check_rules.py`
 

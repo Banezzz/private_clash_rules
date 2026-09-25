@@ -40,3 +40,4 @@ DOMAIN,spotify.map.fastlylb.net
 PROCESS-NAME,Spotify.exe
 PROCESS-NAME,Spotify
 PROCESS-NAME,com.spotify.music
+PROCESS-NAME,com.spotify.lite

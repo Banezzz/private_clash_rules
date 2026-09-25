@@ -5,6 +5,23 @@
 # Microsoft Copilot on *.microsoft.com stays with 微软服务 (that ruleset loads before AI Suite).
 # Not synced from geosite:category-ai-chat-!cn: Envato / ThemeForest, LivePerson, CN brands, ads/telemetry, githubcopilot (github.list).
 
+# Process — desktop binary + Windows .exe + Android package
+PROCESS-NAME,Cursor
+PROCESS-NAME,Cursor.exe
+PROCESS-NAME,ChatGPT
+PROCESS-NAME,ChatGPT.exe
+PROCESS-NAME,com.openai.chatgpt
+PROCESS-NAME,Claude
+PROCESS-NAME,Claude.exe
+PROCESS-NAME,com.anthropic.claude
+PROCESS-NAME,Windsurf
+PROCESS-NAME,Windsurf.exe
+PROCESS-NAME,Trae
+PROCESS-NAME,Trae.exe
+PROCESS-NAME,Perplexity
+PROCESS-NAME,Perplexity.exe
+PROCESS-NAME,com.perplexity.app
+
 # OpenAI / ChatGPT / Sora
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com

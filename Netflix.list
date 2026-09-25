@@ -3,8 +3,9 @@
 # First-party Netflix domains + conservative Netflix-owned / ACL4SSR-safe CIDRs.
 # AWS / Akamai / ISP transit ranges and USER-AGENT are omitted (Clash ignores USER-AGENT).
 
-# Process
+# Process — phone + Android TV + desktop
 PROCESS-NAME,com.netflix.mediaclient
+PROCESS-NAME,com.netflix.ninja
 PROCESS-NAME,Netflix
 PROCESS-NAME,Netflix.exe
 

@@ -25,6 +25,7 @@ PROCESS-NAME,Binance
 PROCESS-NAME,Binance.exe
 PROCESS-NAME,com.binance.dev
 PROCESS-NAME,com.binance.us
+PROCESS-NAME-WILDCARD,com.binance.*
 # Bybit
 PROCESS-NAME,Bybit
 PROCESS-NAME,Bybit.exe
@@ -42,10 +43,20 @@ PROCESS-NAME,Gate
 PROCESS-NAME,Gate.exe
 PROCESS-NAME,com.gateio.gateio
 # Coinbase / KuCoin / HTX / Crypto.com / BingX
+PROCESS-NAME,Coinbase
+PROCESS-NAME,Coinbase.exe
 PROCESS-NAME,com.coinbase.android
+PROCESS-NAME,KuCoin
+PROCESS-NAME,KuCoin.exe
 PROCESS-NAME,com.kubi.kucoin
+PROCESS-NAME,HTX
+PROCESS-NAME,HTX.exe
 PROCESS-NAME,pro.huobi
+PROCESS-NAME,Crypto.com
+PROCESS-NAME,Crypto.com.exe
 PROCESS-NAME,co.mona.android
+PROCESS-NAME,BingX
+PROCESS-NAME,BingX.exe
 PROCESS-NAME,pro.bingbon.app
 # TradingView
 PROCESS-NAME,TradingView

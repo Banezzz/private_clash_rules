@@ -8,12 +8,17 @@ PROCESS-NAME,RiotClientServices
 PROCESS-NAME,RiotClientServices.exe
 PROCESS-NAME,RiotClientUx
 PROCESS-NAME,RiotClientUx.exe
+PROCESS-NAME,RiotClientUxRender
 PROCESS-NAME,RiotClientUxRender.exe
+PROCESS-NAME,RiotClientCrashHandler
 PROCESS-NAME,RiotClientCrashHandler.exe
 PROCESS-NAME,LeagueClient
 PROCESS-NAME,LeagueClient.exe
+PROCESS-NAME,LeagueClientUx
 PROCESS-NAME,LeagueClientUx.exe
+PROCESS-NAME,LeagueClientUxRender
 PROCESS-NAME,LeagueClientUxRender.exe
+PROCESS-NAME,League of Legends
 PROCESS-NAME,League of Legends.exe
 PROCESS-NAME,VALORANT
 PROCESS-NAME,VALORANT.exe

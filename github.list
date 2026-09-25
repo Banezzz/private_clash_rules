@@ -76,6 +76,8 @@ DOMAIN-SUFFIX,npm.community
 DOMAIN-SUFFIX,gitlab.com
 DOMAIN-SUFFIX,bitbucket.org
 
-# GitHub Desktop
+# GitHub Desktop + Android
 PROCESS-NAME,GitHubDesktop.exe
 PROCESS-NAME,GitHubDesktop
+PROCESS-NAME,GitHub
+PROCESS-NAME,com.github.android
