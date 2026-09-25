@@ -42,12 +42,18 @@ DOMAIN,token.safebrowsing.apple
 DOMAIN,app-site-association.networking.apple
 # Carrier-bundle host Apple documents as a connection target, not a CNAME-only name.
 DOMAIN,appldnld.apple.com.edgesuite.net
-# Private Cloud Compute relays (exact names from Apple's enterprise host list).
-DOMAIN,apple-relay.cloudflare.com
-DOMAIN,apple-relay.fastly-edge.com
-DOMAIN,cp4.cloudflare.com
+# Apple CDN names that Microsoft.list would otherwise claim via akadns.net / edgesuite.net.
+# The whole zones stay out of this file.
+DOMAIN-KEYWORD,apple.com.akadns.net
+DOMAIN-KEYWORD,cdn-apple.com.akadns.net
+DOMAIN-KEYWORD,mzstatic.com.akadns.net
+DOMAIN-KEYWORD,aaplimg.com.akadns.net
+DOMAIN-KEYWORD,icloud.com.akadns.net
+DOMAIN-KEYWORD,apple.com.edgesuite.net
+DOMAIN-KEYWORD,mzstatic.com.edgesuite.net
 
 # Windows iCloud / Devices / push. Streaming apps live in apple-media.list.
+PROCESS-NAME,iTunes.exe
 PROCESS-NAME,iCloud.exe
 PROCESS-NAME,iCloudHome.exe
 PROCESS-NAME,iCloudServices.exe

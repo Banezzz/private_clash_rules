@@ -5,6 +5,25 @@
 # Microsoft Copilot on *.microsoft.com stays with 微软服务 (that ruleset loads before AI Suite).
 # Not synced from geosite:category-ai-chat-!cn: Envato / ThemeForest, LivePerson, CN brands, ads/telemetry, githubcopilot (github.list).
 
+# Desktop apps. Cursor is omitted: its extension host would pull marketplace traffic in.
+PROCESS-NAME,ChatGPT.exe
+PROCESS-NAME,ChatGPT
+PROCESS-NAME,claude.exe
+PROCESS-NAME,Claude
+PROCESS-NAME,Claude Helper
+PROCESS-NAME,Claude Helper (Renderer)
+PROCESS-NAME,com.openai.chatgpt
+PROCESS-NAME,com.anthropic.claude
+PROCESS-NAME,com.google.android.apps.bard
+PROCESS-NAME,com.google.android.apps.labs.language.tailwind
+PROCESS-NAME,ai.perplexity.app.android
+PROCESS-NAME,ai.x.grok
+PROCESS-NAME,com.poe.android
+PROCESS-NAME,ai.character.app
+PROCESS-NAME,com.microsoft.copilot
+PROCESS-NAME,com.facebook.stella
+PROCESS-NAME,ai.mistral.chat
+
 # OpenAI / ChatGPT / Sora
 DOMAIN-SUFFIX,openai.com
 DOMAIN-SUFFIX,chatgpt.com

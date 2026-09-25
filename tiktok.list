@@ -21,9 +21,6 @@ PROCESS-NAME,TikTok.exe
 PROCESS-NAME,com.zhiliaoapp.musically
 PROCESS-NAME,com.zhiliaoapp.musically.go
 PROCESS-NAME,com.ss.android.ugc.trill
-# :push / :remote cmdline tokens miss an exact package match on Mihomo Android.
-PROCESS-NAME-WILDCARD,com.zhiliaoapp.musically*
-PROCESS-NAME-WILDCARD,com.ss.android.ugc.trill*
 
 # Keywords (Akamai / Fastly hosts like p16-tiktokcdn-com.akamaized.net)
 DOMAIN-KEYWORD,tiktokcdn
