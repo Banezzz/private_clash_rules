@@ -108,7 +108,7 @@ Helper groups:
 
 - 🎥 奈飞节点 — `select` `.*` (same as 手动切换: every available node)
 - 💸 交易节点 — `select` `.*` (manual pick; 📈 交易相关 defaults here)
-- 🔀 双入口LB — `load-balance` on `腾讯云内网`. The group uses `!!strategy=round-robin`, which the asdlokj1qpi233 subconverter fork honors. tindy2013 ignores that filter and emits **consistent-hashing**. A trailing `,round-robin` field is dropped by both.
+- 🔀 双入口LB — `load-balance` over nodes whose names contain `腾讯云内网`, `Tencent GZ`, or `Tencent SH`. The group uses `!!strategy=round-robin`, which the asdlokj1qpi233 subconverter fork honors. tindy2013 ignores that filter and emits **consistent-hashing**. A trailing `,round-robin` field is dropped by both.
 - 🔮 负载均衡 — full-set `load-balance`, **consistent-hashing** (same destination sticks)
 
 ## `selfbuilt.list` is an overlay hook
@@ -154,7 +154,7 @@ Rules stay on `PROCESS-NAME` so a core older than Mihomo v1.19.19 can still load
 
 Under fake-ip, `IP-CIDR,...,no-resolve` does not see `17.0.0.0/8` until the connection already uses a real Apple address.
 
-Android must use the VPN/TUN stack. An airport base that sets `find-process-mode: off` disables every `PROCESS-NAME` line. If no node name contains `腾讯云内网`, 🫡 自建节点 falls through to DIRECT.
+Android must use the VPN/TUN stack. An airport base that sets `find-process-mode: off` disables every `PROCESS-NAME` line. If no node name contains `腾讯云内网`, `Tencent GZ`, or `Tencent SH`, 🫡 自建节点 only lists 🔀 双入口LB, and that load-balance group falls through to DIRECT.
 
 ## Apple on Mac, Windows, Android, and iOS
 
